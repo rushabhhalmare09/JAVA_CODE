@@ -150,3 +150,60 @@ public class Four {
         System.out.println("Output: " + Four.calcExponent(b,p));
     }
 }
+
+Q. 5] //Given an array of integers arr, the task is to find maximum element of that array using recursion.
+
+class Five {
+
+        public static int findMax(int[] arr, int i) {
+
+            //returns the Integer min value: -2147483648 for comparing at last with the current element
+            if (i >= arr.length) {
+                return Integer.MIN_VALUE; // return the minimum possible value if the index is out of bounds
+            }
+
+            //In each call holding the current element
+            int currentElement = arr[i];
+            //recursive call till equal to arr.length
+            int maxSoFar = findMax(arr, i + 1);
+
+            //Comparing and returning
+            return Math.max(currentElement, maxSoFar);
+        }
+
+        public static void main(String[] args) {
+            int[] arr = {1, 4, 45, 6, 10, -8};
+            int maxElement = Five.findMax(arr, 0);
+
+            System.out.println("Maximum element: " + maxElement);
+        }
+
+
+}
+
+Q. 6] /*
+Given first term (a), common difference (d) and a integer N of the Arithmetic Progression series,
+The task is to find Nth term of the series.
+*/
+
+
+public class Six {
+    public static int findNthTerm(int a, int d, int N) {
+        //Base Termination condition
+        if (N == 1) {
+            return a;
+        } else {
+            return findNthTerm(a + d, d, N - 1);
+        }
+    }
+
+    public static void main(String[] args) {
+
+        int a = 5; // First term
+        int d = 2; // Common difference
+        int N = 10; // Desired term
+
+        int nthTerm = findNthTerm(a, d, N);
+        System.out.println("Nth term: " + nthTerm);
+    }
+}
