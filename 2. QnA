@@ -69,3 +69,87 @@ The compiler in Java, such as the javac compiler, converts high-level Java sourc
 
                                 
 ________________________________________________________________________________________________________________________________________________
+Q6.What is a compiler in Java?
+
+The compiler in Java, such as the javac compiler, converts high-level Java source code into bytecode, which is an intermediate representation of the program. The bytecode is then executed by the JVM, which may further optimize it using a JIT compiler.
+
+_________________________________________________________________________________________________________________________________________________
+
+Q7. Explain the types of variables in Java?
+
+Types of variables in java:
+
+Local Variables: Local variables are declared within a method or block, have limited scope, and hold temporary values for the duration of the block's execution.
+
+Instance Variables: Instance variables are declared within a class, each instance of the class has its own copy, they hold values associated with the object's state, and exist as long as the object exists.
+
+Class Variables: Class variables are declared with the static keyword, associated with the class itself rather than instances, shared among all instances of the class, and retain their values throughout the program's execution.
+
+Parameters: Parameters are declared in method or constructor signatures, receive values passed during invocation, behave like local variables within the method or constructor, and have scope limited to the respective method or constructor.
+
+________________________________________________________________________________________________________________________________________________
+
+Q8. What are the Datatypes in Java?
+
+There are two types of Datatypes in Java:
+1) Primitive Datatypes (built-in dtattype)
+- byte: 1 byte
+- short: 8 byte
+- int: 32bit
+- char: 2 byte
+- long: 8 byte
+- float: 4 byte
+- double: 8 byte
+- boolean: True or False
+
+2) Non-primitive (Reference Data Types):
+
+- class: A reference to an object of a class.
+- interface: A reference to an interface type.
+- array: A reference to an array object.
+- enum: A reference to an enumerated type.
+- String: A sequence of characters
+
+________________________________________________________________________________________________________________________________________________
+
+
+Q9. What are the identifiers in java?
+
+- identifer is a name in java program.
+- identifer can be classname,methodname,variablename,labelname.
+
+Eg:
+
+class Demo
+{
+  public static void main(String[] args)
+  {
+    int x = 10;
+  }
+}
+
+
+Demo: classname
+main: methodName
+String: className
+args : variablename
+x : variableName
+
+Note: The only character allowed for java identifiers is a to z, A to Z, 0 to 9, $, _
+
+________________________________________________________________________________________________________________________________________________
+
+Q10. Explain the architecture of JVM 
+
+
+- Class Loader Subsystem: Loads Java class files into memory from various sources.
+
+- Runtime Data Areas: Includes the method area, heap, Java stack, and PC register to store class-level data, objects, method frames, and execution information.
+
+- Execution Engine: Interprets bytecode or dynamically compiles it to native code using a JIT compiler for efficient execution.
+
+- Garbage Collector: Manages memory by reclaiming unused objects in the heap through automatic garbage collection.
+
+- Native Method Interface (JNI): Enables interaction between Java code and native code written in other languages.
+
+These components work together to provide platform independence, memory management, bytecode interpretation/compilation, and integration with native code in the JVM.
