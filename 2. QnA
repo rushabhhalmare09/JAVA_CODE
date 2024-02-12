@@ -34,6 +34,7 @@ JVM (Java Virtual Machine): The JVM is a virtual machine that executes Java byte
 ___________________________________________________________________________________________________________________________________________________
 
 
+
 Q3. How many types of memory areas are allocated by JVM?
 
 1) Method Area: It contains the class structures, method information and class variables(a.k.a static variables).
@@ -153,3 +154,86 @@ Q10. Explain the architecture of JVM
 - Native Method Interface (JNI): Enables interaction between Java code and native code written in other languages.
 
 These components work together to provide platform independence, memory management, bytecode interpretation/compilation, and integration with native code in the JVM.
+
+
+=============================
+
+Assignment-2: https://pwskills.notion.site/Assignment-Questions-2-7a8614badb9945afba95ee7f1041c571
+
+
+Q1. What are the Conditional Operators in Java?
+
+
+In Java, there are several conditional operators used for making decisions and performing conditional evaluations.
+
+1) Equality Operators:
+   == Checks for equality between two values.
+   != Checks for inequality between two values.
+
+2. Relational Operators:
+   < Checks if the left operand is less than the right operand.
+   > Checks if the left operand is greater than the right operand.
+   < Checks if the left operand is less than or equal to the right operand.
+   > Checks if the left operand is greater than or equal to the right operand.
+   >=, <= 
+
+3. Conditional Operators:
+   && (Logical AND): Performs a conditional AND operation.
+   || (Logical OR): Performs a conditional OR operation.
+
+4. Ternary Operator:
+   ? : Evaluates a condition and returns one of two expressions based on the condition.
+   Ex: (2>4) ? "yes" : "false"; //output: false
+
+________________________________________________________________________________________________________________________________________________
+
+Q2. What are the types of operators based on the number of operands?
+
+1) Unary Operator:
+-Unary operators work with a single operand.
+
+-Examples include unary plus (+), unary minus (-), increment (++), decrement (--), logical complement (!), and bitwise complement (~).
+Binary Operators:
+
+2) Binary Operator: 
+- Binary operators work with two operands.
+
+- Examples include arithmetic operators (+, -, *, /, %), relational operators (>, <, >=, <=, ==, !=), logical operators (&&, ||), and assignment operators (=, +=, -=, *=, /=, %=).
+
+3) Ternary Operator:
+- The ternary operator is the only operator that takes three operands.
+
+-It is represented as "condition ? expression1 : expression2" and is used for making decisions based on a condition.
+
+_______________________________________________________________________________________________________________________________________________
+
+Q3.What is the use of Switch case in Java programming?
+
+The switch case statement in Java is used to control program flow based on multiple possible values of a variable. It provides a concise and efficient way to handle different cases, improving code readability and maintainability by avoiding repetitive if-else statements.
+
+_______________________________________________________________________________________________________________________________________________
+
+
+Q4.What are the conditional Statements and use of conditional statements in Java?
+
+There are 3 types of conditional Statements:
+
+1) if statement: It evaluates a condition and executes a block of code if the condition is true. If the condition is false, the code block is skipped.
+
+2) if-else statement: It extends the if statement by providing an alternative block of code to execute when the condition is false. If the condition is true, the if block is executed; otherwise, the else block is execute
+
+3) switch case: It allows for multiple branching based on different values of a variable or expression. It compares the value of the variable against different case labels and executes the corresponding block of code.
+
+_______________________________________________________________________________________________________________________________________________
+
+
+Q5.What is the syntax of if else statement?
+
+if(boolean condition){
+   //body
+}
+else{
+}
+
+* It True if block will be executed or False then else block will be executed.
+_______________________________________________________________________________________________________________________________________________
