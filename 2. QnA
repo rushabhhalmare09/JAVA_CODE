@@ -237,3 +237,120 @@ else{
 
 * It True if block will be executed or False then else block will be executed.
 _______________________________________________________________________________________________________________________________________________
+
+
+Q6.How do you compare two strings in Java?
+In Java, you can compare two strings using the equals() method to check for content equality or the compareTo() method to compare lexicographically. equals() is case-sensitive, while compareTo() returns an integer indicating the relationship between the strings.
+
+_______________________________________________________________________________________________________________________________________________
+
+Q7. What is Mutable String in Java Explain with an example?
+
+
+In Java, a mutable string refers to a string that can be modified after it is created. The standard String class in Java is immutable, meaning its value cannot be changed once it is assigned. However, StringBuffer and StringBuilder classes provide mutable string implementations.
+
+1) String Buffer
+
+- StringBuffer is a mutable string class in Java. It provides various methods to modify the string, such as append(), delete(), insert(), replace(), and more. These methods enable you to change the length and content of the string.
+
+eg:: StringBuffer sb=new StringBuffer("sachinrameshtendulkar");
+     sb.delete(6,12);
+     System.out.println(sb);//sachintendulkar
+     sb.deleteCharAt(13);
+     System.out.println(sb);//sachintndulkar
+     
+     * It is Thread safe.
+     
+2) String Builder
+
+- StringBuilder is similar to StringBuffer and provides the same set of methods for modifying strings. It is also a mutable string class, but unlike StringBuffer, it is not thread-safe.
+
+eg:: StringBuilder sb=new StringBuilder("sachinrameshtendulkar");
+     sb.delete(6,12);
+     System.out.println(sb);//sachintendulkar
+     sb.deleteCharAt(13);
+     System.out.println(sb);//sachintndulkar
+     
+* The key difference between StringBuffer and StringBuilder is their thread-safety behavior, with StringBuffer being thread-safe and StringBuilder being more efficient but non-thread-safe. 
+
+________________________________________________________________________________________________________________________________________________
+
+Q8. Write a program to sort a String Alphabetically
+
+import java.util.Arrays;
+
+public class Test1 {
+    public static void main(String[] args) {
+        String str = "ineuron";
+        char[] ch = str.toCharArray();
+        Arrays.sort(ch);
+        String sorted = new String(ch);
+        System.out.println("Original String: " + str);
+        System.out.println("Sorted String: " + sorted);
+    }
+}
+
+________________________________________________________________________________________________________________________________________________
+
+Q9.Write a program to check if the letter 'e' is present in the word 'Umbrella'?
+
+public class LetterCheckExample {
+    public static void main(String[] args) {
+        String word = "Umbrella";
+        boolean isPresent = false;
+
+        for (int i = 0; i < word.length(); i++) {
+            if (word.charAt(i) == 'e') {
+                isPresent = true;
+                break;
+            }
+        }
+
+        if (isPresent) {
+            System.out.println("The letter 'e' is present in the word 'Umbrella'.");
+        } else {
+            System.out.println("The letter 'e' is not present in the word 'Umbrella'.");
+        }
+    }
+}
+
+_________________________________________________________________________________________________________________________________________________
+
+
+Q10.Where exactly is the string constant pool located in the memory?
+
+String Constant Pool is a concept related to the storage of string literals in Java, and its location has evolved over different versions of the JVM:
+
+Prior to Java 7: 
+________________
+
+The SCP was indeed a part of the Java heap memory. String literals and other interned strings were stored in the heap memory alongside other objects.
+
+Java 7 and Java 8:
+__________________
+
+The SCP was moved out of the heap memory and became a part of the "permanent generation" (permgen) space. The permgen space was a separate area within the JVM's non-heap memory.
+
+Java 8 and later:
+_________________
+
+The concept of permgen was replaced by the "Metaspace," which is also a part of the non-heap memory. Class metadata, including the SCP, is stored in the Metaspace.
+
+________________________________________________________________________________________________________________________________________________
+
+
+
+
+
+
+Other reference:
+________________
+
+String str1 = "Hello";
+String str2 = new String("Hello").intern();
+
+The line String str1 = "Hello"; creates a string literal "Hello" in the String Constant Pool (SCP). String literals are automatically interned by the JVM, so when you assign "Hello" to str1, it refers to the interned string object in the SCP.
+
+The line String str2 = new String("Hello").intern(); creates a new string object using the new keyword, which allocates memory in the heap for the string. However, the subsequent call to intern() returns a reference to the interned string object in the SCP if it already exists. So in this case, str2 will refer to the same interned "Hello" string object in the SCP rather than creating a new one in the heap.
+
+* This demonstrates how using the intern() method  helps optimize memory usage by avoiding the creation of duplicate string objects.
