@@ -550,3 +550,82 @@ class Main5{
 _____________________________________________________________________________________________________________________________________________
 
 
+
+
+Q6. What is the benefit of encapsulation in java?
+
+- In Object Oriented Programming (OOP), data and associated behavior forms a single unit, which is referred to as a class. The term encapsulation refers to combining data and associated functions as a single unit. 
+
+- Encapsulation is the technique of making the field in a class private and providing access to those fields using getter and setter methods.
+
+- To hide the internal implementation details of the class.
+
+
+______________________________________________________________________________________________________________________________________________
+
+
+Q7.Is java a 100% Object oriented Programming language? If no why ?
+
+No, java is not 100% Object oriented programming language. Because it support primtive datatypes (like byte,short, int, long, float, double, char, boolean) which is not Object Type. Inspite of that java also have wrapper classes via which we can craete object of all primitive datatypes.
+
+_____________________________________________________________________________________________________________________________________________
+
+
+Q8. What are the advantages of abstraction in java?
+
+
+Advantages of Abstarction is following:
+_______________________________________
+
+1) It reduces the complexity of viewing things.
+2) Avoids code duplication and increases reusability.
+3) Helps to increase the security of an application or program as only essential details are provided to the user.
+4) It improves the maintainability of the application. 
+
+_____________________________________________________________________________________________________________________________________________
+
+Q9. What is an abstraction explained with an Example?
+
+Abstraction is one of the main Pillar of OOP. It is mechanism displays or show us only relevant state and behaviour of object and hides the unnecessary details about it.
+
+Ex:
+___
+
+when we are driving a car, we are only concerned about driving the car like start/stop the car, accelerate, break, etc. We are not concerned about how the actual start/stop mechanism or accelerate/brake process works internally.  We are just not interested in those details.
+
+
+//abstract class
+abstract class Car{  
+    abstract void accelerate();  
+}
+  
+//concrete class
+class Suzuki extends Car{  
+    void accelerate(){
+        System.out.println("Suzuki::accelerate");
+     
+    }
+}
+
+
+class Main{
+    public static void main(String args[]){  
+        Car obj = new Suzuki();  
+        obj.accelerate();       
+    }   
+}  
+
+______________________________________________________________________________________________________________________________________________
+
+
+Q10. What is the final class in Java?
+
+- A final is a keyword can be used with class, variable and method name.
+
+- A final keyword is also used to make a variable as constant once var value is declared constant the value can't be changed later.
+
+- If a method is made as final the subclass can inherit the method but cannot override.
+
+- If a class is made as final then we can't extend that class.
+
+______________________________________________________________________________________________________________________________________________
