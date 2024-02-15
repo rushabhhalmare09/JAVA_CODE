@@ -354,3 +354,199 @@ The line String str1 = "Hello"; creates a string literal "Hello" in the String C
 The line String str2 = new String("Hello").intern(); creates a new string object using the new keyword, which allocates memory in the heap for the string. However, the subsequent call to intern() returns a reference to the interned string object in the SCP if it already exists. So in this case, str2 will refer to the same interned "Hello" string object in the SCP rather than creating a new one in the heap.
 
 * This demonstrates how using the intern() method  helps optimize memory usage by avoiding the creation of duplicate string objects.
+
+
+########
+
+Assignment-3: https://pwskills.notion.site/Assignment-Questions-3-fa3c114f562d47698d21a5cbe1f9af77
+
+
+Q1. Write a simple Banking System program by using OOPs concept where you can get account Holder name balance
+
+
+import java.util.Scanner;
+
+class Bank {
+
+    private String accountHolderName;
+    private double bal;
+
+    public void setAccountHolderName(String name) {
+        this.accountHolderName = name;
+    }
+
+    public String getAccountHolderName() {
+        return accountHolderName;
+    }
+
+    public void setBalance(Double bal) {
+        this.bal= bal;
+    }
+
+    public double getBalance() {
+        return bal;
+    }
+
+
+    public static void main(String[] args) {
+
+        Bank b = new Bank();
+
+        //Setting default values for the user
+        b.setAccountHolderName("Avatar");
+        b.setBalance(100.50);
+
+        //Getting the name and bal
+        System.out.print("Account Holder Name is " + b.getAccountHolderName());
+        System.out.println(" and his balance is: " + b.getBalance());
+
+    }
+}
+
+
+________________________________________________________________________________________________________________________________________________
+
+
+Q2. Write a Program where you inherit method from parent class and show method Overridden Concept?
+
+
+//This showcases the concept of method overriding, where a subclass provides its own implementation of a method defined in its superclass.
+
+class Parent{
+
+    //The overridden method
+    public void bornPlace(){
+        System.out.println("Parents were born in Jharkhand.");
+    }
+}
+
+class Child extends Parent{
+
+    //Overriding the parent method
+    @Override
+    public void bornPlace(){
+        System.out.println("Child was born in Bengaluru");
+    }
+
+}
+
+public class Main2 {
+
+    public static void main(String[] args) {
+
+        Child c = new Child();
+        c.bornPlace();
+    }
+}
+
+
+________________________________________________________________________________________________________________________________________________
+
+
+Q3. Write a program to show run time polymorphism in java?
+
+
+
+// Base class
+class Shape {
+    void draw() {
+        System.out.println("Shape not confirmed yet");
+    }
+}
+
+// Implementation subclasses
+class Rectangle extends Shape {
+    // Run time polymorphism (Method overriding happening)
+    @Override
+    void draw() {
+        System.out.println("Shape is Rectangle");
+    }
+
+    void drawParent() {
+        super.draw(); // Calling the parent's draw() method
+    }
+}
+
+class Circle extends Shape {
+    void draw() {
+        System.out.println("Shape is Circle");
+    }
+}
+
+public class Main3 {
+    public static void main(String[] args) {
+        Shape s = new Rectangle();
+        // Rectangle
+        s.draw();
+
+        Rectangle r = (Rectangle) s;
+        r.drawParent(); // Accessing the parent's draw() method using super.draw()
+
+        s = new Circle();
+        // Circle
+        s.draw();
+    }
+}
+
+
+______________________________________________________________________________________________________________________________________________
+
+
+Q4. Write a program to show Compile time polymorphism in java?
+
+
+public class Main4 {
+
+    //Method overloading (Compile Time Polymorphism)
+    static void method(String a){
+        System.out.println("I have 2" + a);
+    }
+
+    static void method(int a, String b  ){
+        System.out.println("I have " + a + b);
+    }
+
+    public static void main(String[] args) {
+        method(5, " Apples.");
+        method(" Grapes.");
+    }
+
+}
+
+_____________________________________________________________________________________________________________________________________________
+
+
+Q5. Achieve loose coupling in java by using OOP concept?
+
+
+interface Music{
+    public void play();
+}
+
+class JazzMusic implements Music{
+    public void play(){
+        System.out.println("Jazz music playing.");
+    }
+}
+
+class RockMusic implements Music{
+    public void play()
+    {
+        System.out.println("Rock music playing.");
+    }
+}
+
+class Main5{
+    public static void main(String[] args){
+        //loose coupling happening
+        Music m = new RockMusic();
+        m.play();
+        m = new JazzMusic();
+        m.play();
+    }
+}
+
+
+_____________________________________________________________________________________________________________________________________________
+
+
