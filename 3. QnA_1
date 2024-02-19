@@ -1,0 +1,153 @@
+Assignment-4: https://pwskills.notion.site/Assignment-Questions-4-9e78b64127ce4690b45ef26860b88773
+
+
+Q1. Write a program to show Interface Example in java?
+
+
+- An interface in Java is a language construct that defines a contract or a set of rules that a class must adhere to if it implements that interface.
+- The use of interfaces primarily focuses on defining contracts, achieving abstraction, and enabling loose coupling between components.
+
+Ex:
+___
+
+
+interface Animal{
+
+    //by default it has public static final
+    int a=10;
+
+    //by default public abstract is there
+    void makeSound();
+
+    //we can use default keyword to give a body in interface
+    default void sound(){
+        //Default implementation
+        System.out.println("Generic Sound");
+    }
+}
+
+//This class is which will give the body implementation of the abstract class present in Animal interface
+public class Test3 implements Animal{
+
+    public void makeSound () {
+        System.out.println("sound sound...");
+    }
+
+    public static void main(String[] args) {
+
+        Animal animal = new Test3();
+        animal.sound();
+        animal.makeSound();
+
+    }
+}
+
+
+_______________________________________________________________________________________________________________________________________________
+
+
+Q2. Write a program with 2 concrete method and 2 abstract method in java ?
+
+
+An abstract class is a class that can contain both abstract and concrete methods. It serves as a blueprint for other classes to inherit from. The subclass that extends an abstract class is required to provide implementations for all the abstract methods defined in the abstract class.
+
+
+Ex:
+___
+
+abstract class methods{
+
+    //Abstract methods
+    abstract void amethod1();
+    abstract void amethod2();
+
+    //Concrete methods
+    void cmethod1(){
+        System.out.println("Concrete method 1");
+    }
+
+    void cmethod2(){
+        System.out.println("Concrete method 2");
+    }
+
+}
+
+//Implementation class
+public class Test4 extends methods{
+
+    @Override
+    void amethod1() {
+        System.out.println("Abstract method 1");
+    }
+
+    @Override
+    void amethod2() {
+        System.out.println("Abstract method 2");
+    }
+
+    public static void main(String[] args) {
+
+        Test4 t4 = new Test4();
+        t4.amethod1();
+        t4.cmethod1();
+        t4.amethod2();
+        t4.cmethod2();
+
+    }
+}
+
+
+______________________________________________________________________________________________________________________________________________
+
+
+Q3. Write a program  to show the use of functional interface in java?
+
+
+A Functional interface will contain only one abstract method basically any interface which consist of 1 abstract method qualifies for being an Functional interface.
+
+
+interface Demo
+{
+    int calc(int a, int b);
+}
+
+class Main{
+    public static void main(String[] args){
+        Demo d = (a,b) ->  a * b;
+        System.out.println(d.calc(5,10));
+    }
+}
+
+
+_____________________________________________________________________________________________________________________________________________
+
+
+Q4. What is an interface in Java?
+
+1) An interface in Java is a language construct that defines a contract or a set of rules that a class must adhere to if it implements that interface. It enables loose coupling, abstraction, and defines a common behavior.
+
+2) Methods declared in an interface are by default public and abstract. Starting from Java 8, interfaces can also have default and static methods with method body implementations.
+
+3) A class can implement multiple interfaces, allowing for multiple inheritance of type. This enables a class to inherit and define behavior from multiple interfaces.
+
+4) Interfaces are commonly used in Java's collections framework, where core classes like List, Set, and Map implement specific interfaces such as Collection and Iterable. This allows for consistent interaction and generic programming.
+
+5) Java interfaces promote loose coupling between components, providing a way to program to interfaces rather than concrete classes. This facilitates flexibility, scalability, and easier swapping of implementations.
+
+_____________________________________________________________________________________________________________________________________________
+
+
+Q5. What is the use of interface in Java?
+
+1) Interfaces enable multiple inheritance of type, allowing a class to implement multiple interfaces and inherit their behavior.
+
+2) Interfaces define constants that can be shared across classes, providing a convenient way to declare and access public static final variables.
+
+3) Interfaces promote abstraction by specifying behavior without implementation details, enhancing code modularity and flexibility.
+
+4) Interfaces are crucial in Java's collections framework, enabling consistent interaction and generic code for working with different collection types.
+
+5) Interfaces facilitate loose coupling between components, allowing for easy swapping of implementations and promoting flexibility and scalability in software design.
+
+______________________________________________________________________________________________________________________________________________
+
