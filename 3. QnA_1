@@ -151,3 +151,56 @@ Q5. What is the use of interface in Java?
 
 ______________________________________________________________________________________________________________________________________________
 
+
+Q6. What is the lambda expression of Java 8?
+
+1) In Java 8, lambda expressions were introduced to make code more concise and expressive.
+
+2) Lambda expressions work well with interfaces that have only one method, called functional interfaces.
+
+3) Lambda expressions allow you to write code in a shorter and more straightforward way by skipping some unnecessary syntax.
+
+4) Lambda expressions enable you to pass behavior as arguments and work with functional interfaces more easily.
+
+______________________________________________________________________________________________________________________________________________
+
+
+Q7. Can you pass lambda expressions to a method? When?
+
+- Yes, in Java, lambda expressions can be passed as arguments to methods. This is possible when the method parameter is of a functional interface type, i.e., an interface with a single abstract method
+
+- By passing a lambda expression as an argument, you can provide a concise implementation of the abstract method directly at the call site, without the need to create a separate class or write a lengthy method implementation.
+
+
+______________________________________________________________________________________________________________________________________________
+
+
+Q8. What is the functional interface in Java 8?
+
+
+A functional interface in Java 8 is an interface that contains a single abstract method, which represents a specific behavior. It can also have default methods and can be annotated with @FunctionalInterface for clarity and documentation purposes.
+
+______________________________________________________________________________________________________________________________________________
+
+
+Q9. What is the benefit of lambda expressions in Java 8?
+
+1) Concise and expressive: Lambda expressions provide a compact syntax, reducing boilerplate code and improving code readability.
+
+2) Functional programming support: Lambda expressions enable powerful functional programming concepts, such as treating behavior as data and using higher-order functions.
+
+3) Simplified API design: Lambda expressions make APIs more intuitive by allowing behavior to be passed directly, simplifying the usage and understanding of APIs.
+
+4) Efficient parallel processing: Lambda expressions can be used with parallel streams to leverage multi-core processors, enabling faster and efficient processing of large datasets.
+
+5) Increased productivity: The concise syntax and expressive nature of lambda expressions lead to more productive development, allowing developers to write code more quickly and focus on the core logic.
+
+______________________________________________________________________________________________________________________________________________
+
+
+Q10. Is it mandatory for a lambda expression to have parameters?
+
+
+No, Lambda expressions in Java can be parameterless or have parameters based on the functional interface requirements. If no parameters are needed, they can be omitted. However, if the functional interface expects parameters, they must be included in the lambda expression declaration.
+
+______________________________________________________________________________________________________________________________________________
