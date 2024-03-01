@@ -261,3 +261,189 @@ if (b)
 System.out.println("sachin");
 else
 System.out.println("dhoni");
+
+Snippets
+========
+Given code of Test.java file:
+public class Test { 
+ public static void main(String[] args){ 
+ args[1] = "Day!";
+ System.out.println(args[0] + " " + args[1]);
+ }
+}
+And the commands:
+javac Test.java
+java Test Good
+What is the result?
+A. Good
+B. Good Day!
+C. Compilation Error
+D. JVM would create a problem during execution
+Answer: D ( Array size can't be increase at the runtime)
+8. 
+Consider below code of Test.java file:
+public class Test { 
+ public static void main(String[] args){ 
+ System.out.println("Welcome " + args[0] +"!");
+ }
+}
+And the commands:
+javac Test.java
+java Test "James Gosling" "Bill Joy"
+What is the result?
+A. Welcome James Gosling!
+B. Welcome Bill Joy!
+C. Welcome "James Gosling"!
+D. Welcome "Bill Joy"!
+E. Welcome James!
+F. Welcome Gosling!
+G. Welcome Bill!
+H. Welcome Joy!
+Answer: A
+Consider below code of Test.java file:
+public class Test {
+ public static void main(String[] args) {
+ boolean b1 = 0;
+ boolean b2 = 1;
+ System.out.println(b1 + b2);
+ }
+}
+What is the result of compiling and executing Test class?
+A. 0
+B. 1
+C. true
+D. false
+E. compilation error
+Answer: E
+10.
+Given:
+35. String #name = "Jane Doe";
+36. int $age = 24;
+37. Double _height = 123.5;
+38. double ~temp = 37.5;
+Which two statements are true? (Choose two.)
+A. Line 35 will not compile.
+B. Line 36 will not compile.
+C. Line 37 will not compile.
+D. Line 38 will not compile.
+Answer: A and D
+11.
+What will be the result of compiling and executing Test class?
+public class Test { 
+ public static void main(String[] args){ 
+ byte b1 = ( byte ) ( 127 + 21 ); 
+ System.out.println(b1);
+ }
+}
+A. 148
+B. Compilation Error
+C. -108
+D. -128
+Answer :: C [minRange + (value-MaxRange) - 1]
+ [Reslut = -128 + 148 - 127-1]
+ = -108
+12.
+class Test 
+{
+public static void main(String[] args) 
+{
+byte b[] = new byte[0];
+System.out.println(b[0]);
+}
+}
+A. NullPointerException
+B. ArrayIndexOutOfBoundsException
+C. Compilation Error
+D. 0
+Answer: B
+13.
+class Test 
+{
+public static void main(String[] args) 
+{
+System.out.println("Hello" + 1 + 2 + 3 + 4);
+}
+}
+A. Hello1234
+B. Hello9
+C. Hello10
+D. Hello 10
+Answer: A
+14.
+class Test 
+{
+public static void main(String[] args) 
+{
+System.out.println("Hello" + (1 + 2 + 3 + 4));
+}
+}
+A. Hello1234
+B. Hello9
+C. Hello10
+D. Hello 10
+Answer: C
+15.
+class Test 
+{
+public static void main(String[] args) 
+{
+String msg = "hello";
+boolean flag[] =new boolean[1];//flag[0] = false
+if (flag[0])
+{
+msg = "welcome";
+}
+System.out.println(msg);
+}
+}
+A. ArrayIndexOutOfBoundsException
+B. Welcome
+C. hello
+D. NullPointerException
+Answer: C
+16.
+class Test 
+{
+public static void main(String[] args) 
+{
+String msg = "hello";
+Boolean flag[] =new Boolean[1];//flag[0] = null
+if (flag[0])
+{
+msg = "welcome";
+}
+System.out.println(msg);
+}
+}
+A. ArrayIndexOutOfBoundsException
+B. Welcome
+C. hello
+D. NullPointerException
+E. CompileTimeError
+F. None of the above
+17.
+Q>
+class Fork {
+public static void main(String[] args) {
+if(args.length == 1 | args[1].equals("test")) {
+System.out.println("test case");
+} else {
+System.out.println("production " + args[0]);
+}
+}
+}
+ And the command-line invocation:
+ java Fork live2
+args[0] = "live2";
+args.length = 1
+ What is the result?
+ A. test case
+ B. production live2
+ C. test case live2
+ D. Compilation fails
+ E. An exception is thrown at runtime
+Answer:: E(args[1] :: doesnot exists so problem at the runtime)
+What is the difference b/w "||" and "|"?
+ "||" => short circuit operator
+ "|" => Bitwise operator
+Tommo questions will be on :: Operator, control statements and oops concepts.
