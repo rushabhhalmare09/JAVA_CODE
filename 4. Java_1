@@ -447,3 +447,70 @@ What is the difference b/w "||" and "|"?
  "||" => short circuit operator
  "|" => Bitwise operator
 Tommo questions will be on :: Operator, control statements and oops concepts.
+
+
+Operators
+========
+ 1. increment and decrement operator
+ 2. arithmetic operator
+ 3. String concatination operators
+ 4. Relational operator
+ 5. Equality operator
+ 6. instance operator
+ 7. bitwise operator
+ 8. shortciruit operator
+ 9. typecast operator
+ 10. conditional operator
+ 11. assignement operator
+increment
+ a. pre-increment(y=++x)[increment and use]
+ b. post-increment(y=x++)[use and increment]
+decrement
+ a. pre-decrement(y=--x)[decrement and use]
+ b. post-decrement(y=x--)[use and decrement]
+int x = 10;
+y = ++x;(x = 11 , y =11)
+y = x++;(x = 11 , y =10)
+y = --x;(x = 9 , y =9)
+y = x--;(x = 9 , y =10)
+eg::
+int x= 4;
+int y=++x;
+print x;//5
+print y;//5
+eg::
+int x= 4;
+int y=++4;//CE: increment can be applied only on variables not on direct literals.
+print x;
+print y;
+eg::
+int x= 4;
+int y=++(++x);//CE: increment can be applied only on variables not on direct 
+literals.
+print x;
+print y;
+eg:: 
+final int x = 4
+print x;
+Note:: We can use final access modifiers on
+a. variable :: If we mark variable as final, the it would treated as 
+"CompiletimeConstant"
+ CompileTimeConstant -> value will be known to compiler and these
+values should not be changed
+ through out the program.
+b. class :: If we mark class as final, the those classes would not 
+participate in "inheritance".
+c. method :: If we mark method as final, the those methods cannot be 
+"Overriden".
+eg::
+boolean b = true;
+ b++;//CE: ++ operator won't work w.r.t boolean types. 
+print b;
+What is the difference b/w b++ and b=b+1?
+byte b = 5;
+b++; //b = (byte)(b + 1); 
+print b;//6
+byte b = 5;
+b = b+1;//CE
+print b;
+
