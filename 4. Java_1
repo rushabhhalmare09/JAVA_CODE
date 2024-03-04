@@ -514,3 +514,82 @@ byte b = 5;
 b = b+1;//CE
 print b;
 
+Q> 
+class Test 
+{
+public static void main(String[] args) 
+{
+int a=100;
+System.out.println(-a++);
+}
+}
+A. -101
+B. 99
+c. Compilation error
+d. -100
+e. -99
+Q>
+class Test 
+{
+public static void main(String[] args) 
+{
+int a = 20;
+int var= --a * a++ + a-- - --a;
+System.out.println("a = " + a);
+System.out.println("var = " + var);
+}
+}
+A. 
+ a = 18
+ var=363
+B. 
+ a = 363
+ var=363
+C. Compilation Error
+D.
+ a = 25
+var= 363
+answer A
+Q>
+class Test 
+{
+public static void main(String[] args) 
+{
+int i = 5;
+if (i++ < 6)
+{
+System.out.println(i++);
+}
+}
+}
+A. 5
+B. 6
+C. Program executes succesfully but nothing is printed on to console
+D. 7
+Answer: B
+
+
+String concatination
+====================
+ => On String '+' operator is used for concatination
+ => if one operand is String and other operand is other type like int,float,double 
+then it perform concatination.
+ => if both operands are of number type then only '+' operator performs "Addition".
+ String a = "sachin";
+ int b= 10,c=20,d=30;
+ System.out.println(a+b+c+d);//sachin102030
+ System.out.println(b+c+d+a);//60sachin
+ System.out.println(b+c+a+d);//30sachin30
+ System.out.println(b+a+c+d);//10sachin2030
+ String a = "sachin";
+ int b= 10,c=20,d=30;
+ a=b+c+d;//CE
+ print a;
+ String a = "sachin";
+ int b= 10,c=20,d=30;
+ b=a+c+d;//CE
+ print b;
+ String a = "sachin";
+ int b= 10,c=20,d=30;
+ b=b+c+d;
+ print b;//60
