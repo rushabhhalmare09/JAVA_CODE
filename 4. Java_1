@@ -593,3 +593,67 @@ then it perform concatination.
  int b= 10,c=20,d=30;
  b=b+c+d;
  print b;//60
+
+
+
+RelationalOperator
+=================
+ <,<=
+ >,>=
+Output of relational operator is boolean type.
+eg::
+ System.out.println("sachin"< "kohli");//CE
+ System.out.println(true<true); //CE
+ System.out.println(10<10.5);//true
+Note: Nesting of relational operator is not possible.
+ System.out.println(10<20<30);//CE
+Equality operator
+=================
+ a. ==(It is also called as comparison operator)
+ b. !=
+System.out.println(false == false);//true
+System.out.println('a' == 97);//true
+System.out.println(10 == 20);//false
+Q> == operator on reference type would always compare the reference.
+ It is used to check whethere both the reference are ponting to same object or
+not
+ If both are ponting to same object,then it would return true otherwise it 
+would return false.
+Thread t1 =new Thread();
+Thread t2 =new Thread();
+Thread t3 = t1;
+ System.out.println(t1 == t2);//false
+ System.out.println(t1 == t3);//true
+Note: To compare the reference of the object, there should be a relationship b/w 2 
+objects,if relationship doesnot exists
+ then it would result in "CompiletimeError".
+Thread t = new Thread();
+ Object o = new Object();
+ String s = new String("sachin");
+ System.out.println(t == o);//false
+ System.out.println(o == s);//false
+ System.out.println(s == t);//CE
+ System.out.println(o == t);//false
+
+ Object
+ |
+String,StringBuilder,StringBuffer,Number,Thread
+String name = new String("sachin");
+System.out.println(name == null);//false
+System.out.println(null == null);//true
+bitwise operator
+===============
+1. &(if both arguments are true,then result is true)
+2. |(if atleast one argument is true,then result is true)
+3. ^(if both are different arguments,then result is true otherwise it is false)
+System.out.println(true&false);//false
+System.out.println(true|false);//true
+System.out.println(true^false);//true
+System.out.println(4&5);//4
+System.out.println(4|5);//5
+System.out.println(4^5);//1
+4 ===> 100
+5 ===> 101
+4&5 ==>100
+4|5 ==>101 
+4^5 ==>001
