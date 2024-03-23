@@ -1,0 +1,72 @@
+Short circuit operator
+=====================
+ &&
+ ||
+These operators are exactly same as bitwise operators,but the difference is as 
+follows
+&,|
+---
+=> Both the arguments will be evaluated
+=> performance is low
+=>Applicable for both boolean and integral types.
+&&,||
+=====
+=> Evaluation of second argument is optional
+=> performance is high
+=> Applicable only for boolean type ,but not for integral type.
+eg::
+ int x= 10,y=15;
+ if(++x < 10 && ++y>15) //x=11 
+ x++; 
+ else
+ y++;//y=16
+System.out.println(x);//12
+System.out.println(y);//16
+case1:: || => x = 12,y=16
+case2:: | => x = 12,y=16
+case3:: && => x = 11,y=16
+case4:: & => x = 11,y=17
+eg::
+ int x=10;
+ if(++x<10 && ((x/0)<10)
+ System.out.println("hello");
+ else
+ System.out.println("hiee");
+output:: hiee
+case2: replace && with '&'
+output:: java.lang.ArithmeticException:/ by zero
+
+
+q>
+Boolean b1 = true;
+boolean b2 = false;
+boolean b3 = true;
+if ((b1 & b2) | (b2 & b3) & b3)
+ System.out.print("alpha ");
+if ((b1 = false) | (b1 & b3) | (b1 | b2))
+ System.out.print("beta ");
+What is the result?
+A. beta
+B. alpha
+C. alpha beta
+D. Compilation fails.
+E. No output is produced.
+F. An exception is thrown at runtime.
+53.
+1. class Maybe {
+2. public static void main(String[] args) {
+3. boolean b1 = true;
+4. boolean b2 = false;
+5. System.out.print(!false ^ false); //true
+6. System.out.print(" " + (!b1 & (b2 = true))); //false & true => false
+7. System.out.println(" " + (b2 ^ b1));//true ^ true => false
+8. }
+9. }
+Which are true?
+A. Line 5 produces true.
+B. Line 5 produces false.
+C. Line 6 produces true.
+D. Line 6 produces false.
+E. Line 7 produces true.
+F. Line 7 produces false.
+Answer :: A,D,F
