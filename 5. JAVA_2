@@ -70,3 +70,88 @@ D. Line 6 produces false.
 E. Line 7 produces true.
 F. Line 7 produces false.
 Answer :: A,D,F
+
+
+Q>
+Given.
+class Foozit {
+public static void main(String[] args) {
+Integer x = 0;
+Integer y = 0;
+for(Short z = 0; z < 5; z++)
+if((++x > 2) || (++y > 2))
+x++;
+System.out.println(x + " " + y);
+} 
+}
+What is the result?
+A. 5 1 
+B. 5 2 
+C. 5 3 
+D. 8 1
+E. 8 2 
+F. 8 3 
+G. 10 2 
+H. 10 3
+Answer: E
+Given
+3. public class Spock {
+4. public static void main(String[] args) {
+5. int mask = 0;
+6. int count = 0;
+7. if( ((5<7) || (++count < 10)) | mask++ < 10 ) mask = mask + 1;
+8. if( (6 > 8) ^ false) mask = mask + 10;
+9. if(!(mask > 1) && ++count > 1) mask = mask + 100;
+10. System.out.println(mask + " " + count);
+11. }
+12. }
+
+
+Which two are true about the value of mask and the value of count at line 10?
+(Choose two.)
+A. mask is 0
+B. mask is 1
+C. mask is 2
+D. mask is 10
+E. mask is greater than 10
+F. count is 0
+G. count is greater than 0
+Answer:: C,F
+Q>
+What will be the result of compiling and executing Test class? 
+public class Test {
+ public static void main(String[] args) {
+ int a = 7;
+ boolean res = a++ == 7 && ++a == 9 || a++ == 9;
+ System.out.println("a = " + a);
+ System.out.println("res = " + res);
+ }
+}
+A. a=10
+ res=true
+B. a=9
+ res=true
+C. a=10
+ res=false
+D. compilation error
+Answer: B
+
+
+Q>
+public class SpecialOps {
+ public static void main(String[] args) {
+String s = "";
+Boolean b1 = true;
+boolean b2 = false;
+if((b2 = false) | (21%5) > 2) s += "x";
+if(b1 || (b2 == true)) s += "y";
+if(b2 == true) s += "z";
+System.out.println(s);
+ }
+ }
+Which are true? (Choose all that apply.)
+A. Compilation fails
+B. x will be included in the output
+C. y will be included in the output
+D. z will be included in the output
+E. An exception is thrown at runtime
