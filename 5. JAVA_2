@@ -155,3 +155,62 @@ B. x will be included in the output
 C. y will be included in the output
 D. z will be included in the output
 E. An exception is thrown at runtime
+
+Conditional Operator
+====================
+ ?:(Ternary operator)
+eg::
+int x = (10>20) ? 30 : 40;
+System.out.println(x);//40
+eg::
+ int x = (10>20) ? 30 : (100>20) ? 40 : 50;
+System.out.println(x);//40
+eg::
+ int a =10,b=20;
+ byte c1 = (10>20) ? 30 : 40; //40
+ byte c2 = (10<20) ? 30 : 40; //30
+ System.out.println(c1);//40
+ System.out.println(c2);//30
+eg::
+ int a =10,b=20;
+ byte c1 = (a>b) ? 30 : 40;//CE
+ byte c2 = (a<b) ? 30 : 40;//CE
+ System.out.println(c1);
+ System.out.println(c2);
+Answer: Since value of a and value of b is not know, compiler can't keep true or 
+false associated value in variabel
+ by default those values will be treated as 'int',since 'int' can't be 
+stored in byte it would result in "CompileTimeError".
+
+55.
+Given
+class Hexy {
+public static void main(String[] args) {
+Integer i = 42;
+String s = (i<40)? "life": (i>50) ? "universe" :"everything";
+System.out.println(s);
+} 
+}
+What is the result?
+A. null
+B. life
+C. universe
+D. everything
+E. Compilation fails.
+F. An exception is thrown at runtime.
+Answer : D
+Q>
+For the given code what is the output?
+ int x=100;
+ int a=x++;
+ int b= ++x;
+ int c= x++;
+ int d= (a<b) ? (a<c) ? a: (b<c)? b: c :x;
+ System.out.println(d);
+ 
+A. 100
+B. 101
+C. 102
+D. 103
+E. compilation fails
+Answer:: A
