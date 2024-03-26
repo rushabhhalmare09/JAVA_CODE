@@ -214,3 +214,95 @@ C. 102
 D. 103
 E. compilation fails
 Answer:: A
+
+
+Control statements
+==================
+ 1. if
+ 2. else
+ 3. switch
+ 4. while
+ 5. dowhile
+ 6. for
+ 7. foreach
+ 9. break
+ 10. continue
+ 11. return
+ 12. exit
+Q> 
+Give
+int i=10;
+int j=20;
+int k= (j+=i)/5;
+System.out.println(i+":"+j+":"+k);
+A.10:30:6
+B.10:22:22
+C.10:22:20
+D.10:22:6
+Answer : A
+Q> 
+ int x =10;
+ if(x){
+System.out.println("hello");
+ }else{
+System.out.println("hiee");
+}
+A. hello
+B. hiee
+C. CompileTime Error
+D. Some problem by jvm at the execution
+E. None of the above
+Answer: C
+Q> 
+int x =10;
+if(x=20){
+System.out.println("hello");
+ }else{
+System.out.println("hiee");
+}
+A. hello
+B. hiee
+C. CompileTime Error
+D. Some problem by jvm at the execution
+E. None of the above
+Answer: C
+Q>
+int x =10;
+if(x==20){
+System.out.println("hello");
+ }else{
+System.out.println("hiee");
+}
+A. hello
+B. hiee
+C. CompileTime Error
+D. Some problem by jvm at the execution
+E. None of the above
+Answer: B
+Q> 
+boolean b= false;
+if(b=true){
+System.out.println("hello");
+ }else{
+System.out.println("hiee");
+}
+A. hello
+B. hiee
+C. CompileTime Error
+D. Some problem by jvm at the execution
+E. None of the above
+Answer: A
+Q> 
+boolean b= false;
+if(b==true){
+System.out.println("hello");
+ }else{
+System.out.println("hiee");
+}
+A. hello
+B. hiee
+C. CompileTime Error
+D. Some problem by jvm at the execution
+E. None of the above
+Answer: B
+
