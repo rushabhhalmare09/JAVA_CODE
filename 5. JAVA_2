@@ -306,3 +306,77 @@ D. Some problem by jvm at the execution
 E. None of the above
 Answer: B
 
+Q> 
+ if(true)
+System.out.println("hello");
+A. Compile Time Error
+B. hello
+C. Some problem by jvm at the execution
+D. None of the above
+Answer: B
+Q>.
+public class Test{ 
+public static void main(String args[]){ 
+if(true); 
+}
+} 
+A. Compile Time Error
+B. hello
+C. Some problem by jvm at the execution
+D. No Output
+Answer: D
+Q.
+public class Test{ 
+public static void main(String args[]){ 
+if(true) 
+int x=10; 
+}
+} 
+A. Compile Time Error
+B. hello
+C. Some problem by jvm at the execution
+D. No Output
+Answer: A
+42.
+public class Test{ 
+public static void main(String args[]){ 
+if(true) {
+int x=10; 
+}
+}
+} 
+A. Compile Time Error
+B. hello
+C. Some problem by jvm at the execution
+D. No Output
+Answer: D
+Q.
+public class Test{ 
+public static void main(String args[]){ 
+if(true) 
+System.out.println("hello");
+System.out.println("hiee");
+}
+} 
+How many statements are independent of if?
+A. 0-stmt
+B. 1-stmt
+C. 2-stmt
+D. 3-stmt
+Answer:B
+Q>
+public class Test {
+public static void main(String[] args) {
+int i = 5;
+System.out.print(i+++"");//5, i = 6
+System.out.print(i+"");// 6
+System.out.print(++i+"");//i=7
+System.out.print(++i+i+++"");//i=8+8 i = 9 
+}
+}
+Predict the Output?
+A. 56716
+B. 66616
+C. 57817
+D. 67817 
+Answer: A
