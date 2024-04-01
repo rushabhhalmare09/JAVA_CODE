@@ -1,5 +1,7 @@
 package OOP_usage;
 
+import java.util.*;
+
 public class function_1 {
 
 //Methods are used to perform certain actions, and they are also known as functions.
@@ -18,18 +20,36 @@ public class function_1 {
 		
 	}
 	
+	//Method_3
+	static void addition(int num1, int num2) {
+		
+        int sum;
+        sum = num1 + num2;
+        System.out.println("Ths sum is : - " + sum);
+		
+	}
+	
    public static void main(String [] args ) {
 	   
-	   //To call a method or function, we use only method name, if we are not creating object of it, we can call a function multiple times
+	   // Method_1 -- To call a method or function, we use only method name, if we are not creating object of it, we can call a function multiple times
 	   Method_1();
 	   
-	   //To call a Method with a parameter
+	   // Method_2 -- To call a Method with a parameter
 	   MethodParam("Tom", 12);
 	   MethodParam("Rick", 11);
 	   MethodParam("Sam",12);
 	   
+	   // Method_3 --
+	   Scanner sc = new Scanner(System.in);
+
+	   System.out.print("Enter num1 : - ");
+	   int num1 = sc.nextInt();
+	   
+	   System.out.print("Enter num2 : - ");
+	   int num2 = sc.nextInt();
+	   
+	   addition(num1, num2);
 	   
    }
-
 
 }
