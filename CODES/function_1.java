@@ -30,6 +30,21 @@ public class function_1 {
 		
 	}
 	
+	//Method_4 -- Using If-Else inside a method
+	
+    static String validateScenario(int limit) {
+        if (limit >= 35) {
+            return "Pass";
+        } else if (limit < 35) {
+            return "Fail";
+        } else {
+            return "Invalid";
+        }
+    }
+
+
+	
+	
    public static void main(String [] args ) {
 	   
 	   // Method_1 -- To call a method or function, we use only method name, if we are not creating object of it, we can call a function multiple times
@@ -52,6 +67,23 @@ public class function_1 {
 	   int summation = addition(num1, num2);
 	   
 	   System.out.println("Ths sum is : - " + summation);
+	   
+	   
+	  // Method_4 --
+	   	   
+       System.out.print("Enter marks for Subject 1: ");
+       int subject1 = sc.nextInt();
+
+       System.out.print("Enter marks for Subject 2: ");
+       int subject2 = sc.nextInt();
+
+       int total = subject1 + subject2;
+
+       // Capture the result from validateScenario
+       String result = validateScenario(total);
+
+       // Print the appropriate message based on the result
+       System.out.println("Result: " +"marks: " + total + " " + result);
 	   
    }
 
