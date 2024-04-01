@@ -41,9 +41,6 @@ public class function_1 {
             return "Invalid";
         }
     }
-
-
-	
 	
    public static void main(String [] args ) {
 	   
