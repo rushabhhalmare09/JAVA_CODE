@@ -30,7 +30,7 @@ public class function_1 {
 		
 	}
 	
-	//Method_4 -- Using If-Else inside a method
+	//Method_4.1 -- Using If-Else inside a method and with a Return Type
 	
     static String validateScenario(int limit) {
         if (limit >= 35) {
@@ -41,6 +41,23 @@ public class function_1 {
             return "Invalid";
         }
     }
+    
+    //Method_4.2 without Return Type
+    
+    static void validScenario(int limit) {
+
+        if (limit >= 35) {
+            System.out.print("Student is pass");
+        } else if (limit < 35 && limit >= 0) {
+            System.out.print("Fail");
+        } else {
+            System.out.print("Invalid");
+        }
+
+    }
+
+
+	
 	
    public static void main(String [] args ) {
 	   
@@ -66,7 +83,8 @@ public class function_1 {
 	   System.out.println("Ths sum is : - " + summation);
 	   
 	   
-	  // Method_4 --
+	  // Method_4.1-- need a return type as we are assigning validateScenario function to a String variable "Result" so if we want no issue then in our 
+	  // funtion we need to provide to use a return type here it will be String
 	   	   
        System.out.print("Enter marks for Subject 1: ");
        int subject1 = sc.nextInt();
@@ -82,6 +100,22 @@ public class function_1 {
        // Print the appropriate message based on the result
        System.out.println("Result: " +"marks: " + total + " " + result);
 	   
+       
+       //Method_4.2 -- With no return and void will work
+       System.out.print("Enter marks Subject3: - ");
+       int subject3 = sc.nextInt();
+
+       System.out.print("Enter marks Subject4: - ");
+       int subject4 = sc.nextInt();
+
+       int total1 = subject3 + subject4;
+       
+       System.out.println("Total : -  " + total1);
+
+       validScenario(total1);
+       
+       
+       
    }
 
 }
