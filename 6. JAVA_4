@@ -125,3 +125,132 @@ Which of the following declarations are valid?
  int[][] a = new int[][4];//invalid
  int[][][] a =new int[3][][];//valid
  int[][][] a =new int[][4][];//invalid
+
+
+Q>
+public class Sample
+{
+public static void main(String[] args)
+{
+int[][] a= new int[3][4];
+System.out.println(a);//[[I@...
+System.out.println(a[0]);//[I@..
+System.out.println(a[0][0]);//0
+}
+}
+Q>
+public class Sample
+{
+public static void main(String[] args)
+{
+int[][] a= new int[3][];
+System.out.println(a);//[[I@...
+System.out.println(a[0]);//null
+System.out.println(a[0][0]);//RE: NullPointerException
+}
+}
+Note: 
+ => if we try to access the array element with out of range index, then it would 
+result in "ArrayIndexOutOfBoundsException".
+ => if we try to work with the null values, then it would result in 
+"NullPointerException".
+Q> 
+Which among the following declaration is valid?
+ 1. int[] a;
+ 2. int a[];
+ 3. int []a;
+ 4. int[6] a;
+Predict the answer.
+A. 1,2,3
+B. 1,2,4
+C. 2,3,4
+D. None of the above
+Answer : A
+Q> 
+1. int[] a;
+ a=new int[5];
+2. int[] a =new int[5];
+Both the declarations are they same?
+A. yes
+B. no
+Answer: A
+3. int n[][] = {{1,3},{2,4}};
+ for(int i=n.length-1;i>=0;i--){
+for(int y:n[i])
+System.out.print(y);
+ }
+A. 1234
+B. 2313
+C. 3142
+D. 4231
+E. 2413
+Answer: E
+Q> int nums1[] = {1,2,3};
+ int nums2[] ={1,2,3,4,5};
+ nums2 = nums1;
+ for(int x:nums2)
+System.out.print(x+":");
+What is the result?
+A. 1:2:3:4:5
+B. 1:2:3:
+C. Compilation fails
+D. ArrayIndexOutOfBoundsException
+Answer:: B
+Q> int data[] = {2010,2013,2014,2015,2014};
+ int key = 2014;
+ int count=0;
+ for(int e:data){
+if(e!=key){
+continue;
+count++;
+}
+}
+System.out.println(count+" found");
+What is the result?
+A. Compilation fails
+B. 0 found
+C. 1 found
+D. 3 found
+Answer:: A
+Q> 
+class Test{
+public static void main(String[] args){
+int numbers[];
+numbers =new int[2];
+numbers[0] = 10;
+numbers[1] = 20;
+numbers = new int[4];
+numbers[2] = 30;
+numbers[3] = 40;
+for(int x: numbers)
+System.out.print(" " + x);//0 0 30 40
+}
+}
+What is the result?
+A. 10 20 30 40
+B. 0 0 30 40
+C. Compilation fails
+D. An exception is thrown at runtime
+Answer: B
+Q> 
+ int wd = 0;
+ String days[] = {"sun","mon","wed","sat"};
+ for(String s:days){
+switch(s){
+case "sat":
+case "sun":
+wd-=1;
+break;
+case "mon":
+wd++;
+case "wed":
+ wd+=2;
+}
+ }
+ System.out.println(wd);// wd = -1, 0, 2, 4 , 3
+What is the result?
+A. 3
+B. 4
+C. -1
+D. compilation fails
+Answer: A
