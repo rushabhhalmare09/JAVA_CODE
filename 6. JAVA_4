@@ -392,3 +392,45 @@ public class Three {
         System.out.println("The average of the list of numbers is: " + Three.operation(arr));
     }
 }
+
+//4. Write a Java program to find the largest of three numbers using nested if-else statements.
+
+
+public class Four {
+
+    public static void main(String[] args) {
+
+        int[] arr = {45,101,3};
+
+        //Finding the largest
+        if(arr[0] > arr[1]){
+            if(arr[0] > arr[2]) {
+                System.out.println("The largest number is: " + arr[0]);
+            }else {
+                System.out.println("The largest number is: " + arr[2]);
+            }
+        } else if (arr[1] > arr[2]) {
+            System.out.println("The largest number is: " + arr[1]);
+        }else
+            System.out.println("The largest number is: " + arr[2]);
+    }
+}
+
+
+//5. Write a Java program to declare and initialize variables of different data types (int, double, String) with appropriate identifiers.
+
+
+public class Five {
+
+    public static void main(String[] args) {
+
+                //Declaring and initializing variables of different data types
+                String name = "iNeuron";
+                int established_date = 2019;
+                double rating = 3.3;
+
+
+                // Print the values of the variables
+                System.out.println(name + " is a company " + "was established in " + established_date + " and has a playstore rating of " + rating + " .");
+            }
+        }
