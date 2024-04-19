@@ -297,3 +297,98 @@ B. 4
 C. -1
 D. compilation fails
 Answer: A
+
+
+=============
+
+//1. Write a Java program to check whether a given number is positive, negative, or zero using an if-else statement.
+
+
+import java.util.Scanner;
+
+public class One {
+
+    public static String operation(int n){
+
+        if(n == 0)
+            return "The given number is zero.";
+        else if (n < 0)
+            return "The given number is negative.";
+        else
+            return "The given number is positive.";
+
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter a number: ");
+        int number = sc.nextInt();
+
+        System.out.println(One.operation(number));
+
+
+    }
+}
+
+
+
+//2. Write a Java program to print the Fibonacci series up to a given number using a for loop.
+
+
+import java.util.Scanner;
+
+public class Two {
+
+    public static void operation(int n){
+
+        int first = 0, second = 1, sum = 0;
+
+        System.out.println("Fibonacci series up to " + n + " numbers is:");
+
+        for (int i = 1; i <= n; i++) {
+            System.out.print(first + ", ");
+
+            sum = first + second;
+            first = second;
+            second = sum;
+        }
+
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter a number: ");
+        int number = sc.nextInt();
+
+        Two.operation(number);
+    }
+}
+
+
+//3. Write a Java program to calculate the average of a list of numbers using a do-while loop.
+
+public class Three {
+
+    public static float operation(int[] narr){
+
+        int sum=0,i=0;
+        do{
+            sum += narr[i];
+            i++;
+        }while(i<=(narr.length-1));
+
+        return (sum/5f);
+    }
+
+    public static void main(String[] args) {
+
+        //list of numbers
+        int[] arr = {30,45,60,76,80};
+
+        System.out.println("The average of the list of numbers is: " + Three.operation(arr));
+    }
+}
