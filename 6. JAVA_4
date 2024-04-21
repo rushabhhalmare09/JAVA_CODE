@@ -434,3 +434,70 @@ public class Five {
                 System.out.println(name + " is a company " + "was established in " + established_date + " and has a playstore rating of " + rating + " .");
             }
         }
+
+
+====================
+//1. Write a Java program to check whether a given number is positive, negative, or zero using an if-else statement.
+
+
+import java.util.Scanner;
+
+public class One {
+
+    public static String operation(int n){
+
+        if(n == 0)
+            return "The given number is zero.";
+        else if (n < 0)
+            return "The given number is negative.";
+        else
+            return "The given number is positive.";
+
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter a number: ");
+        int number = sc.nextInt();
+
+        System.out.println(One.operation(number));
+
+
+    }
+}
+
+//2. Write a Java program to print the Fibonacci series up to a given number using a for loop.
+
+
+import java.util.Scanner;
+
+public class Two {
+
+    public static void operation(int n){
+
+        int first = 0, second = 1, sum = 0;
+
+        System.out.println("Fibonacci series up to " + n + " numbers is:");
+
+        for (int i = 1; i <= n; i++) {
+            System.out.print(first + ", ");
+
+            sum = first + second;
+            first = second;
+            second = sum;
+        }
+
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter a number: ");
+        int number = sc.nextInt();
+
+        Two.operation(number);
+    }
+}
