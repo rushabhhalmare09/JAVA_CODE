@@ -549,3 +549,64 @@ public class Four {
             System.out.println("The largest number is: " + arr[2]);
     }
 }
+
+//5. Write a Java program to declare and initialize variables of different data types (int, double, String) with appropriate identifiers.
+
+
+public class Five {
+
+    public static void main(String[] args) {
+
+                //Declaring and initializing variables of different data types
+                String name = "iNeuron";
+                int established_date = 2019;
+                double rating = 3.3;
+
+
+                // Print the values of the variables
+                System.out.println(name + " is a company " + "was established in " + established_date + " and has a playstore rating of " + rating + " .");
+            }
+        }
+
+
+class Animal{
+    public void makeSound(){
+        System.out.println("Generic sound");
+    }
+}
+
+
+class Dog extends Animal{
+    @Override
+    public void makeSound() {
+        System.out.println("Dog sound: woof woof");
+    }
+}
+
+class Cat extends Animal{
+    @Override
+    public void makeSound() {
+        System.out.println("Cat sound: meow meow");
+    }
+}
+
+class Cow extends Animal{
+    @Override
+    public void makeSound() {
+        System.out.println("Cow sound: moo moo");
+    }
+}
+
+
+public class One {
+    public static void main(String[] args) {
+        Cat c1 = new Cat();
+        Cow c2 = new Cow();
+        Dog d1 = new Dog();
+
+        c1.makeSound();
+        c2.makeSound();
+        d1.makeSound();
+
+    }
+}
