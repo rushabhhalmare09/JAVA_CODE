@@ -1,0 +1,36 @@
+Creating and Destroying Objects
+Consider static builders
+They can have any name, thus can have multiple methods with same parameters (unlike constructors)
+They can return cached objects (eg: Boolean.valueOf)
+They can return their subtype, even class objects which are not public. Eg: Collection has 32 factory methods, return type of many are non-public classes. Ofcourse, the interface they extend is public. Returning such interface backed classes, also help in returning specific type based on argument. Eg: EnumSet returns RegularEnumSet or JumboEnumSet based on the argument. In future, JDK can add more types, without client/caller knowing about them. See service interface pattern below
+They can reduce verbosity of parameterized types. Eg: Maps.newHashMap()
+Service Interface Pattern
+Here same pattern as above, where the implementation classes are not even known upfront.
+Example: JDBC connection driver classes. DriverManager.registerDriver, and DriverManager.getConnection.
+It needs to provide, registration API and then get service API
+Cannot subclass and take advantage of constructors. Though this enforces Composition instead of inheritance, so its not so bad.
+Cannot easily distinguish between constructing methods, and other methods. Need to use some convention to make it easy. Eg: newInstance, valueOf, of etc.
+Builder pattern
+When too many parameters use builders instead.
+In Builders, each parameter setting can be through a good name method. In constructor its difficult to remember.
+Can easily add optional parameter support.
+Singleton with private instance or enum
+static final variable (also provides init guarantee)
+Lazy loading (double checked)
+Enums (by default lazy, and provides init guarantee)
+Private Constructor
+Avoid creating unnecessary objects
+Eg: Sring abc = new String("some value"); instead use String abc = "some value";
+Choose primitives over boxed, check for unnecessary boxing and unboxing
+Clear memory references
+Let objects go out of scope quickly
+If not, nullify reference (eg: Stack.pop, within method, elements[size] = null)
+Check caches and message listeners, they hold references
+Avoid finalizers
+JVM does not guarantee they will be called
+If called, they can be called anytime, not immediately after object is eligible for GC
+Never release resource in finalizer, if it does not run, the resource will still be lock (or in inconsistent state)
+Hampers performance
+Instead use explicit close methods like OutputStream, java.sql.Connection etc
+These classes also use finalizers, but that is safety net
+
