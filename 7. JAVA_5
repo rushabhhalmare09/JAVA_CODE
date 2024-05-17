@@ -34,3 +34,76 @@ Hampers performance
 Instead use explicit close methods like OutputStream, java.sql.Connection etc
 These classes also use finalizers, but that is safety net
 
+Methods common to all objects
+equals
+If super class has implemented equals, then its okay to not implement (eg: Set used AbstractSet)
+Reflexive (equal to self), transitive, symmetric, consistent (unless modified)
+Maintain Liskov Substitution Principle, within equals (don't check o.getClass() == this.getClass() instead check with instanceof
+Consistent - Don't use external resources (eg: IP address)
+hashcode
+every class which overrides equals must have it
+Consistent across multiple calls
+Dont use any fields, which are not used for equals
+You can exclude redundant fields (ones which are always same for all objects)
+You can cache the hashcode and return that (like String class), but then need to track if value is modified.
+toString
+clone
+Cloneable interface. Its a mixin interface. Does not have clone method.
+Object class's clone method is protected
+Atypical - Presence of Colenable modifies behavior of Object.clone() behavior. If present it returns object which is field by field copy, and if not present, then .clone method throws CloneNotSupportedException
+Cloning is not done using constructor
+If you override clone do return super.clone(), if all classes do that up the chain, then Object.clone will be called and you will get the right copy
+This is important because spec doesnt enforce anything from Cloneable interface. So someone might override clone and not clone, nor call super.clone, causing problems
+Note: Objects.clone() creates a shallow copy
+If you override and write clone, ofcourse you cannot set final field, thus need to remove final modifiers
+Object's clone method is declared to throw CloneNotSupportedException, but overriding clone methods can omit this declaration.
+Like constructor, clone method should not call non-final methods, because super object might not be properly constructed yet, causing some data corruption
+Clone method must be synchronized in case of concurrency
+In short, you are better off, creating and using a copy-constructor
+comparable
+Opposing sign for symmetry x.compareTo(y) == -y.compareTo(x)
+If compareTo returns 0, objects should ideally be equal (but thats not in contract)
+Weird: Inserting new BigDecimal("1.0") and new BigDecimal("1.00") in HashSet stores 2 elements (they use equals), while TreeSet stores only 1 element (they use compareTo)
+Classes and Interfaces
+Accessibility
+Make fields, classes etc as much inaccessible as possible (private, protected, package, then public)
+Anything that is public is now part of API, thus difficult to make private later
+Private fields with accessor methods
+Helps in validating inputs (setters)
+Helps in returning copies in outputs (getters)
+Make fields as much immutable as possible
+Immutable objects are simple
+They are thread-safe
+They can be shared freely
+They can expose their internals
+Can take advantage of cached hashCode & lazyInit hashCode
+Only disadvantage is memory use
+Composition over inheritance
+Inheritance violates encapsulation, if super class changes sub-class behavior changes even if its not touched
+Super class can later add method, sub-class havent thought of
+In fact, it can add method which mutates the state which sub-class never promised to do.
+If you add your own methods in sub-class, and later super-class adds same name method its a problem. Either it may not compile based on return type, or contract of that method in super might be different than subclass method.
+Instead use composition and forward/delegate the calls
+Such classes are called Wrapper classes (decoration pattern)
+Only problem is library/frameworks do not know of your class type, and can't trigger message callbacks and such.
+Override in inheritance
+Constructor must not call method (which is overridden), because super() constructor will call override() of subclass, which is not yet constructed
+Same problems can occur with clone and readObject (so avoid inheritance with Cloneable and Serializable)
+Prefer interfaces to abstract classes
+Classes can be retrofitted to have more interfaces
+Interfaces allow mix-in types (markup), without need to implement any methods
+Interfaces allow cross-types (eg: SingerWriter implements Singer, Writer)
+Interfaces are not allowed methods, but Skeleton types can be created. Eg: AbstractSet, AbstractList etc. These classes help create concrete implementations by providing part of functionality
+If class cannot extend Skeletal (Abstract) class, we can implement the Interface, and have Skeletal class instance as composition field, and delegate all interface methods, to skeletal class instance. This is called, simulated multiple inheritance.
+Disadvantage: Once release, interfaces are impossible to change (all implementations need to be updated)
+Class hierarchies over tagged classes
+Lot of boilerplate in tagged classes: Enums, fields, switch statements
+Memory issue: Tagged classes can contains fields specific for one type, but object of all types will have those extra fields.
+Function objects to represent strategies
+Use classes (stateless) to represent computation. This can be passed around. Ex: StringLengthComparator
+Favor static member class over non-static
+Every non-static class object has instance of enclosing class. Takes more memory.
+Non-static class instances cannot be created without creating instances of enclosing class
+Though one valid use of non-static class is, implementing Iterator for the class
+Static classes are typically used to create Helper classes
+Defining them public or private depends on whether you want to expose it in API
