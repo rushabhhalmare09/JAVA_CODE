@@ -130,3 +130,32 @@ Prefer annotations over naming patterns
 Eg: @Test instead of all method names starting with test
 Annotations have retention policy. Eg: RetentionPolicy.RUNTIME
 Annotations have target. Eg: @Target(ElementType.METHOD)
+
+
+Methods
+Definition
+Choose method names carefully - they are part of API
+Choose parameter types as interfaces instead of implementations
+Long list of methods with identically typed parameters is wrong
+Dont have too many parameters
+Prefer Enum over boolean
+Var args
+If method needs to take 1 or more, then have 1st param, then 2nd as var..args
+Arrays.asList() was a mistake, because you can pass multiple values to it, but if you pass array to it, then it considers that as var..args with single element of type array.
+Instead it should have had Arrays.gather(T... args) and then return Arrays.asList(args)
+Return empty collections instead of null
+These return values are iterable
+General
+Avoid float and double for exact answers use BigDecimal
+Avoid boxed, (== does not work), and constant boxing-unboxing consumes CPU
+Use StringBuilder instead of direct concatenation
+Refer to objects by their interfaces
+Use checked exceptions for recoverable conditions, and runtime exceptions for programming errors
+Favor standard exception like IllegalStateException, IllegalArgumentException etc
+Prefer Executors and Tasks to threads
+Prefer concurrency classes instead of wait notify
+Use Serializable Judiciously
+Like APIs once serialized, then cant change class structure
+Increases testing burden (backwards compatible)
+Increases security loopholes, because it does not use default constructor
+Inheritance based classes should avoid serializable
