@@ -256,3 +256,42 @@ Uses Red-Black tree implementation.
 ConcurrentSkipListMap
 Thread-safe version of TreeMap.
 Navigable (floor, ceiling, higher, lower, headSet, tailSet operations).
+
+
+Queues
+LinkedList
+Implements Queue interface.
+offer, peek, poll operations.
+Use case - task queues
+ArrayBlockingQueue
+Thread-safe.
+Backed by array. Thus bounded in size.
+Adding element to full queue results in blocking.
+Polling an empty queue results in blocking.
+Use case - Producer consumer problem.
+LinkedBlockingQueue
+Thread-safe.
+Backed by linked-list.
+Optionally bounded in size. Takes maxSize as constructor argument.
+ConcurrentLinkedQueue
+Thread-safe.
+Uses CAS (Compare-And-Swap) for more throughput. Also known as lock free.
+Deque classes
+ArrayDeque - Double ended queue. Backed by array. Can throw ConcurrentModificationException.
+LinkedList - Implements Deque interface.
+LinkedBlockingDeque
+ConcurrentLinkedDeque
+PriorityQueue
+Elements sorted based on their natural order (or Comparator provided in Constructor).
+Use case - task queues where tasks can have different priorities.
+PriorityBlockingQueue
+Thread-safe.
+DelayQueue
+Elements added, are available to be removed only after their delay-time is expired.
+SynchronousQueue
+Holds single elements.
+Blocks for both producer and consumer to arrive.
+Use case - For safe/atomic transfer of objects between threads.
+equals and hashCode
+equals required for all collections.
+equals and hashCode required for Maps and Sets (which are backed by Maps).
