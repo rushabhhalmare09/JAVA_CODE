@@ -223,3 +223,36 @@ Not used anymore. Recommended to use Deque implementations.
 Vector
 Synchronized version of list.
 Not used anymore. Recommended below mentioned alternatives.
+
+
+Maps
+HashMap
+key, value pairs.
+Permits a null key, and null values.
+Iteration order not guaranteed.
+Throws ConcurrentModificationException.
+Article detailing implementation.
+HashMap implementation details
+Backed by array (buckets), array-size is known as table-size.
+Position in array = element-hash % table-size.
+If elements end up in same bucket, they are added to linked-list (or a balanced red-black tree).
+O(1) access (if hashcode properly distributes the values, else O(n) for linked-list & O(log(n)) for tree.
+Load factor - 0.75 default, decides when table-size should increase (double).
+Bigger load-factor - more space-efficient, reduced speed (due to more elements in same bucket).
+Lower load-factor - less space-efficient, more speed (less, ideally 1 element in 1 bucket).
+Initial table-size = 16.
+LinkedHashMap
+Insertion order is retained.
+Hashtable
+Thread-safe.
+Not used anymore, ConcurrentHashMap recommended.
+ConcurrentHashMap
+Thread-safe.
+Fine grained locking called striped locking (map is divided into segments, each with associated lock. Threads holding different locks don't conflict).
+Improved performance over Hashtable.
+TreeMap
+Sorted by keys.
+Uses Red-Black tree implementation.
+ConcurrentSkipListMap
+Thread-safe version of TreeMap.
+Navigable (floor, ceiling, higher, lower, headSet, tailSet operations).
