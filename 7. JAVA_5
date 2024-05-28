@@ -295,3 +295,20 @@ Use case - For safe/atomic transfer of objects between threads.
 equals and hashCode
 equals required for all collections.
 equals and hashCode required for Maps and Sets (which are backed by Maps).
+
+Collections class
+Utility methods
+sort(list, key) - guarantees stable sort
+reverse
+reverseOrder - returns Comparator for reversed order
+shuffle
+rotate(list, distance) - rotates elements by the distance specified
+binarySearch(list, key)
+list should be sorted else can get unpredictable results
+log(n) if list implements RandomAccess, else O(n)
+RandomAccess - Marker interface that says, collection supports fast random access, get(i). Typically backed by arrays.
+Methods returning wrapped instances
+empty - emptyList, emptySet, emptyMap etc.
+synchronized - synchronizedList, synchronizedSet, synchronizedMap etc.
+unmodifiable - unmodifiableList, unmodifiableSet, unmodifiableMap etc.
+singleton(t) - singleton (returns set), singletonList, singletonMap etc.
