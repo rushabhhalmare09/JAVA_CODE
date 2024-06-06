@@ -312,3 +312,39 @@ empty - emptyList, emptySet, emptyMap etc.
 synchronized - synchronizedList, synchronizedSet, synchronizedMap etc.
 unmodifiable - unmodifiableList, unmodifiableSet, unmodifiableMap etc.
 singleton(t) - singleton (returns set), singletonList, singletonMap etc.
+
+
+
+Basics
+Benefits of Threads
+Exploiting multiple processors (Resource utilization) - Increasing core counts
+Simplicity of modeling applications - Distinct tasks can have own thread, and each can be written sequentially.
+Simplified handling of asynchronous events - If thread is blocked on IO, other threads can still run. Though these days OS allow 100s of thousands of threads, so blocking is not a major issuer anymore. Thus NIO is not as crucial anymore (because its very complicated to implement).
+Even if your class doesn't use threads, these do
+
+Underlying frameworks
+RMI
+JVM (for GC + Main)
+Timer
+Servlets & JSP
+Thread safety
+Correctness means that a class conforms to its specification. A good specification defines invariants constraining an object's state and postconditions describing the effects of its operations.
+
+No set of operations performed sequentially or concurrently on instances of a thread-safe class can cause an instance to be in an invalid state.
+
+Race Condition
+A race condition occurs when the correctness of a computation depends on the relative timing or interleaving of multiple threads by the runtime
+Occurs usually with check-then-act (check stale value). Eg: Lazy initialization.
+Data races is different than race condition. Data races is when thread access (read/write) data to variable without any synchronization.
+Solutions to compound operations
+Atomic classes (if only single variable is the issue)
+Synchronized (if multiple variables are to be updated atomically)
+Synchronized
+Aka Intrinsic locks, Mutexes, monitors
+Are re-entrant
+Re-entrancy can help for overridden synchronized methods. Call to super.method() tries to re-acquire lock, and is permitted.
+Allowing Object class to act as a lock (instead of special classes) was a mistake in JVM design. JVM implementors now have to make trade offs between object size and locking performance.
+
+Liveness and Performance
+If scope of synchronized block is too large (say entire method of service). The whole performance benefit of multi-threading might be wiped off if service is accessed by lot of threads.
+Scope of synchronized block should be small enough that it covers all mutable state.
