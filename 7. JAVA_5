@@ -348,3 +348,68 @@ Allowing Object class to act as a lock (instead of special classes) was a mistak
 Liveness and Performance
 If scope of synchronized block is too large (say entire method of service). The whole performance benefit of multi-threading might be wiped off if service is accessed by lot of threads.
 Scope of synchronized block should be small enough that it covers all mutable state.
+
+
+Task Execution
+Thread Pools
+Threadpool with its bounded pool helps throttle the inputs/requests so as to not exhaust available resources.
+
+Single Threaded Executors provide synchronization guarantee that writes made by a task will be visible to subsequent tasks.
+
+Types
+
+newFixedSizeThreadPool - creates new thread, if one dies due to exception
+newCachedThreadPool - keeps increasing threads
+newSingleThreadExecutor - consumes task based on queue type (FIFO, LIFO, Priority etc), resurrects thread if dead
+newScheduledThreadPool - supports delayed and periodic execution similar to Timer
+Usually shutdown call is immediately followed by awaitTermination.
+
+Uncaught exception handlers
+Thread provides facility for UncaughtExceptionHandler. When thread dies due to some exception, JVM checks if it has exception handler, if not it checks its ThreadGroup, if not then its super ThreadGroup and so on. Final system level ThreadGroup just prints stack trace to System.err
+
+Shutdown hooks
+JVM also provides Runtime.addShutdownHook for when it attempts to shut down.
+Then it runs finalizers if runFinalizerOnExit is true
+It does not attempt to shutdown application threads, they die abruptly
+If these hooks do not complete, they hang the JVM. Thus do proper synchronization and not dead lock them.
+Daemon threads
+Daemon threads do not stop JVM to shutdown
+GC, housekeeping threads are daemon threads
+Threads inherit daemon status of the owner thread
+When JVM halts, they do not call finally for daemon, nor cleanup their stacks, nor call finalizers.
+Thus better to use them sparingly
+Finalizers
+Opportunity given by JVM to reclaim/free any resources being held up
+Not guaranteed to run
+Avoid as much as possible, catch-finally can more often do better job
+Applying Thread Pools
+Thread pool sizes
+If its too big, it can exhaust memory (& lot of overhead of creating/managing them)
+If its too small, not completely utilizing the CPU
+Usually, N (number of CPU cores) is right size of pools
+Though, if tasks do IO then, not all threads will be schedulable (tasks will be waiting for some resource), so its okay to increase size of threadpool.
+int N_CPUS = Runtime.getRuntime().availableProcessors();
+Other deciding factors: memory, file handles, socket handles, and database connections
+ThreadPoolExecutor
+Threads
+newFixedThreadPool: corePoolSize == maximumPoolSize
+newCachedThreadPool: corePoolSize = 0 and maximumPoolSize = Integer.MAX_VALUE
+Keep alive: how long to wait before unused thread is reclaimed (trade off)
+Task Queues
+newFixedThreadPool and newSingleThreadedExecutor use unbounded LinkedBlockingQueue
+Try to use bounded (LinkedBlockingQueue, ArrayBlockingQueue or PriorityQueue)
+Saturation Policy
+When bounded queue is full, what to do when task is submitted
+Abort - throw RejectedExecutionException
+Discard - discard silently
+Discard oldest - discards oldest from queue
+Caller Runs - return task to caller, so that caller thread can run it instead
+Thread Factory
+Used to create new threads
+By default new non-daemon threads are created
+Can be overridden to create special threads which do say logging
+Avoiding Liveness Hazards
+Deadlocks
+Database systems are great at handling deadlocks; they back-off certain transactions such that locks are released.
+JVM is not so kind. When threads are deadlocked, that's it, game over.
+Transfer money is classic examples (with synchronized block on from and to accounts). If 2 calls are made, where 1st case arguments are from then to, and in 2nd case, its to then from. They may deadlock. To solve, either get comparable int keys or System.identityHashcode(), and order which account to be synchronized first. So no matter what's order of arguments, you always lock same account first, avoiding deadlock.
