@@ -413,3 +413,70 @@ Deadlocks
 Database systems are great at handling deadlocks; they back-off certain transactions such that locks are released.
 JVM is not so kind. When threads are deadlocked, that's it, game over.
 Transfer money is classic examples (with synchronized block on from and to accounts). If 2 calls are made, where 1st case arguments are from then to, and in 2nd case, its to then from. They may deadlock. To solve, either get comparable int keys or System.identityHashcode(), and order which account to be synchronized first. So no matter what's order of arguments, you always lock same account first, avoiding deadlock.
+
+
+How to avoid
+
+Use only 1 locks (so no ordering issues)
+Order locks if multiple (ensure ordering is same no matter order of arguments)
+Use tryLock method of lock classes
+Starvation and LiveLock
+Starvation is when thread is stuck
+Livelock is when thread keeps running (eg: message listener throws exception, rolls back then again tries processing of same object)
+Performance and Scalability
+Amdhal's law - How much a program can be theoretically sped up.
+
+Trick is to divide into multiple tasks with their own data structures, and converge the results (this last step will be only step that will be sequential)
+
+ConcurrentLinkedQueue is twice as fast as synchronizedLinkedList, because former has only final pointer updates as sequential while latter synchronizes on whole list.
+
+Costs on performance
+Context switching
+Synchronization
+Data locality (memory cache)
+Blocking on locks
+Steps
+Reduce lock contention
+Reduce scope - get in / get out
+Reduce lock granularity (too many times in and out is not good too)
+Lock striping
+Avoid hot fields
+Non blocking (compare-and-swap)
+Say no to object pooling - Java is super fast at new allocation, but getting objects from pool requires synchronization
+Explicit Locks
+Lock and ReentrantLock
+Lock implementations must provide the same memory-visibility semantics as intrinsic locks, but can differ in their locking semantics, scheduling algorithms, ordering guarantees, and performance characteristics.
+
+Advantages of lock classes
+More flexible. Need not release lock in same block of code unlike synchronized
+"Synchronized block" threads cannot be interrupted while they are waiting for lock.
+lockInterruptibly can stop waiting for lock on interrupt
+Deadlock can be avoided by trying to acquire lock, and releasing already acquired, if cannot acquire new one.
+Intrinsic locks can't release locks on timeout
+Since Java 6, performance of intrinsic and reentrant lock is very similar. Earlier it used to be slower.
+Always do lock.unlock in finally block
+
+Locks can be fair/unfair. Fair locks implement queues to handle requests for a lock. Ofcourse, fairness comes with cost of performance.
+
+Read-Write lock
+Allows multiple concurrent readers, but only single writer
+Great for data structure with lot of reads
+More complex to implement thus slightly slower than reentrant lock
+Implementation factors
+
+Release preference - If writer is running, and readers+writers are waiting, preference to writer?
+Reader barging - If reader is running, and readers+writers are waiting, preference to reader? Good for throughput but writer can become starved
+Reentrancy - Are they reentrant
+Downgrading - what if writer lock owners wants only reader lock
+Upgrading - What if reader lock owner also wants writer lock
+Custom Synchronizer
+Conditional queues - Threads waiting for an object lock which reflects certain condition.
+
+Explicit class called Condition for implementing conditional queues (which can be implemented using intrinsic locks too).
+
+Condition is associated with single lock. Lock.newCondition()
+
+Advantages
+
+Fairness in wait
+Timeout facility (flexibility)
