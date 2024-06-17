@@ -477,6 +477,70 @@ Explicit class called Condition for implementing conditional queues (which can b
 Condition is associated with single lock. Lock.newCondition()
 
 Advantages
-
 Fairness in wait
 Timeout facility (flexibility)
+
+Consider static builders
+They can have any name, thus can have multiple methods with same parameters (unlike constructors)
+They can return cached objects (eg: Boolean.valueOf)
+They can return their subtype, even class objects which are not public. Eg: Collection has 32 factory methods, return type of many are non-public classes. Ofcourse, the interface they extend is public. Returning such interface backed classes, also help in returning specific type based on argument. Eg: EnumSet returns RegularEnumSet or JumboEnumSet based on the argument. In future, JDK can add more types, without client/caller knowing about them. See service interface pattern below
+They can reduce verbosity of parameterized types. Eg: Maps.newHashMap()
+Service Interface Pattern
+Here same pattern as above, where the implementation classes are not even known upfront.
+Example: JDBC connection driver classes. DriverManager.registerDriver, and DriverManager.getConnection.
+It needs to provide, registration API and then get service API
+Cannot subclass and take advantage of constructors. Though this enforces Composition instead of inheritance, so its not so bad.
+Cannot easily distinguish between constructing methods, and other methods. Need to use some convention to make it easy. Eg: newInstance, valueOf, of etc.
+Builder pattern
+When too many parameters use builders instead.
+In Builders, each parameter setting can be through a good name method. In constructor its difficult to remember.
+Can easily add optional parameter support.
+Singleton with private instance or enum
+static final variable (also provides init guarantee)
+Lazy loading (double checked)
+Enums (by default lazy, and provides init guarantee)
+Private Constructor
+Avoid creating unnecessary objects
+Eg: Sring abc = new String("some value"); instead use String abc = "some value";
+Choose primitives over boxed, check for unnecessary boxing and unboxing
+Clear memory references
+Let objects go out of scope quickly
+If not, nullify reference (eg: Stack.pop, within method, elements[size] = null)
+Check caches and message listeners, they hold references
+Avoid finalizers
+JVM does not guarantee they will be called
+If called, they can be called anytime, not immediately after object is eligible for GC
+Never release resource in finalizer, if it does not run, the resource will still be lock (or in inconsistent state)
+Hampers performance
+Instead use explicit close methods like OutputStream, java.sql.Connection etc
+These classes also use finalizers, but that is safety net
+Methods common to all objects
+equals
+If super class has implemented equals, then its okay to not implement (eg: Set used AbstractSet)
+Reflexive (equal to self), transitive, symmetric, consistent (unless modified)
+Maintain Liskov Substitution Principle, within equals (don't check o.getClass() == this.getClass() instead check with instanceof
+Consistent - Don't use external resources (eg: IP address)
+hashcode
+every class which overrides equals must have it
+Consistent across multiple calls
+Dont use any fields, which are not used for equals
+You can exclude redundant fields (ones which are always same for all objects)
+You can cache the hashcode and return that (like String class), but then need to track if value is modified.
+toString
+clone
+Cloneable interface. Its a mixin interface. Does not have clone method.
+Object class's clone method is protected
+Atypical - Presence of Colenable modifies behavior of Object.clone() behavior. If present it returns object which is field by field copy, and if not present, then .clone method throws CloneNotSupportedException
+Cloning is not done using constructor
+If you override clone do return super.clone(), if all classes do that up the chain, then Object.clone will be called and you will get the right copy
+This is important because spec doesnt enforce anything from Cloneable interface. So someone might override clone and not clone, nor call super.clone, causing problems
+Note: Objects.clone() creates a shallow copy
+If you override and write clone, ofcourse you cannot set final field, thus need to remove final modifiers
+Object's clone method is declared to throw CloneNotSupportedException, but overriding clone methods can omit this declaration.
+Like constructor, clone method should not call non-final methods, because super object might not be properly constructed yet, causing some data corruption
+Clone method must be synchronized in case of concurrency
+In short, you are better off, creating and using a copy-constructor
+comparable
+Opposing sign for symmetry x.compareTo(y) == -y.compareTo(x)
+If compareTo returns 0, objects should ideally be equal (but thats not in contract)
+Weird: Inserting new BigDecimal("1.0") and new BigDecimal("1.00") in HashSet stores 2 elements (they use equals), while TreeSet stores only 1 element (they use compareTo)
