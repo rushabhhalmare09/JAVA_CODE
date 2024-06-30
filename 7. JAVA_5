@@ -697,3 +697,52 @@ Favor composition over inheritance
 Encapsulate what changes
 Strive for loose coupling between objects
 Principle of least knowledge = Talk only to immediate friends
+
+
+oncepts
+Throughput - Percentage of time application runs vs GC
+Latency - Amount of pause time for application waiting for GC to complete
+Memory - Amount of memory used to store the objects aka heap (along with GC related data structures)
+Trade offs
+If memory is less, throughput is less, because JVM has to constantly do GC
+If memory is more, latency is high, because JVM has to sweep huge space to do GC
+Use cases
+For trading applications, deterministic (more average) latency is better than sudden spikes (increased worst case latency).
+For batch applications, it might be ok for increase worst case latency, if it helps gain more throughput
+Tweaks
+To large extent, more memory for GC helps in increasing throughput
+Worst case latency can be reduced by keeping heap size small (& live set small)
+Frequency of GC can be reduced by managing heap & generation sizes
+Frequency of large pauses can be reduced by running GC with application, sometimes at cost of throughput (because it runs longer due to 2 STW pauses, and one thread is used by GC which could've been used by application).
+Object lifetimes
+Infant mortality / Weak generational hypothesis - Most objects die young.
+Thus, generational GC algorithms provide magnitude-of-order better throughput.
+How? Region with newly allocated object is sparse for live objects, they can be quickly copied over and region can be wiped entirely.
+If application keeps allocating objects that live too long. The generational split becomes useless, and GC takes long time. Because old generation is too big (& not so sparse).
+Lifetime of object is recorded by JVM as number of GC cycles survived.
+Stop the World Events
+Collectors need application execution to stop for practical reasons.
+Threads are signalled to stop. Threads stop when they reach safe points of execution.
+If thread is busy (copying large array, cloning a large object), it might be few milliseconds till this point.
+‑XX:+PrintGCApplicationStoppedTime this flag is used to print the time taken to reach safe point.
+Once GC STW event is over, all threads are free to resume. An application with large number of threads can suffer scheduling pressure. It might be more efficient to use different collector then.
+Heap organization in HotSpot
+Heap is split in Young and Old (Tenured) generation
+Young generation is split in - Eden and Survivor (1,2) spaces
+PermGen is used to store effectively immortal objects (Classes, static strings etc).
+In Java 7, interned Strings were removed from PermGen.
+In Java 8, PermGen space itself is replaced by MetaSpace.
+Object allocation
+Each thread is assigned TLAB (Thread Local Allocation Buffer) to allocate new objects.
+Since there is no conflict between threads, object allocation is just a bump-the-pointer, and is faster than MALLOC in C. Roughly 10 machine instructions.
+When TLAB is exhausted new TLAB is requested from Eden. If Eden is filled, Minor GC is triggered.
+If a large object (size greater than TLAB) is to be allocated, it is done directly in Eden or Old Generation.
+-XX:PretenureSizeThreshold=<n> If this is smaller than TLAB, then small objects are still allocated in TLAB itself, not in Old generation.
+Minor Collection
+Called when Eden is full.
+Live objects are moved to one of the survivor spaces.
+If survivor space is full or object has live too long (XX:MaxTenuringThreshold=<n>) it is moved to tenured generation.
+Major cost of minor collection is in copying live objects to survivor / old generation. Thus, overall cost depends on number of objects to be copied not the size of Eden.
+Thus, if new generation size is doubled, total minor GC time is almost halved (thus increasing the throughput). Assuming number of live objects remain constant.
+Minor collections are STW events. This is becoming an issue as heaps are getting larger, with more and more live objects.
+This algorithm is called mark-and-copy
