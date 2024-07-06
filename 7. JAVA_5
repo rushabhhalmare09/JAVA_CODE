@@ -795,3 +795,44 @@ Compactions are piggybacked on Young Gen GC.
 During reference changes, cards (arrays pointing to 512 bytes of a region) are marked dirty, and source-target details are placed in dirty card queue. Depending on number of elements in queue (white, green, yellow, red) G1 starts threads which take information from queue and write to Remembered Set. More the queue is full, more G1 threads try to drain it. Remembered set will be heavily contended if all threads directly write to RS, its better if only specific G1 threads (1 or 2) write to them.
 If Young GC cannot finish within maxTargetPauseTime, then # of Eden regions are reduced to finish within the target.
 Old GC is triggered when total 45% is full, and is checked just after Young GC or after allocating humongous object.
+
+
+Comparators
+vehicles.sort(Comparator.comparing(Vehicle::getWheels)); vehicles.sort(Comparator.comparing(Vehicle::getWheels)); vehicles.sort(Comparator.comparing(Vehicle::getWheels).thenComparing(Vehicle:getColor); //chaining
+
+Concurrency
+HashMap
+
+compute
+computeIfPresent (blocking, so write smaller computations)
+computeIfAbsent (blocking, so write smaller computations)
+putIfAbsent
+merge
+getOrDefault (k, def)
+Adders/Accumulators
+
+Much more performant than AtomicLong (have single copy across threads). Accumulators, each thread has own copy tracking its own counter, and when retrieval is triggered in any thread, all threads coordinate and perform total sum of all threads’ counts.
+
+Basically no contention, during increment, decrement, add, thus much faster.
+
+LongAdder
+DoubleAdder
+LongAccumulator
+DoubleAccumulator
+Operations
+
+increment
+decrement
+add (long)
+sum // retrieves result by coordinating between threads
+reset
+CompletableFuture
+Similar to JavaScript promises. Multiple async tasks can be chained (performed one after another on separate thread). Better alternative to future where the method get is blocking (waits indefinitely for the result). In completableFuture the current thread is not blocked. Each task is executed once previous task is completed.
+
+Also, the program itself becomes more readable.
+
+ CompletableFuture.supplyAsync(() -> getStockInfo(“GOOGL”), executor)   // if executor is not passed it uses internal pool
+        .whenComplete((info, exec) -> System.out.println(info))  // triggered once previous operation is finished
+        .thenApply(Stock::getRate)   
+        .thenAccept(rate -> System.out.println(rate))  
+        .thenRun(() -> System.out.println(“done”)));  
