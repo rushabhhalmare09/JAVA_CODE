@@ -836,3 +836,29 @@ Also, the program itself becomes more readable.
         .thenApply(Stock::getRate)   
         .thenAccept(rate -> System.out.println(rate))  
         .thenRun(() -> System.out.println(“done”)));  
+
+So when you trigger this, it immediately returns the CompletableFuture instance, which can be used to check its status and such.
+
+supply method takes Supplier which returns a value
+thenApply method argument is Function which takes input and returns value
+thenAccept method argument is Consumer which takes input
+thenRun method argument is Runnable which only runs
+CompletableFuture has no control of tasks while they are running in the executor. So cancel method just sets returned value as Exceptional.
+StampedLock
+Better alternative for ReadWriteLock
+It does optimistic reads so works faster only on less contended operations
+Not re-entrant
+@Contended
+For fields shared within same cache line and if only 1 field in it is volatile, then for multiple threads, the cache line will be flushed and will be updated. Thus use of cache is of no use. To fix this, set the field to hot field by using @Contented so that JVM can pad the field so that it takes entire cache line and is not shared with other fields.
+
+Java Memory Model
+
+What is it?
+Specification deciding how JVM can reorder instructions (for performance) aka ensures guaranteed ordering of of reads and writes under certain conditions (happens-before). Every JVM has to implement this spec.
+Barriers that forbid reordering instructions (load-load, load-store, store-load, store-store)
+Variables
+volatile
+final = all writes before volatile write will be reflected when/after volatile is read (potentially by other thread). Threads need to use the same volatile variable for this to work. For double/long (which occupy multiple word spaces, word-breakdown is forbidden to ensure integrity of data).
+Methods - synchronized
+Locks - normal objects used as locks, and lock classes like ReadWriteLock.
+Threads - When a new thread is started, it is guaranteed to see all values written before thread started.
