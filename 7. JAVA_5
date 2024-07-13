@@ -902,3 +902,32 @@ Thread Affinity
 Makes the thread stick to a CPU core, even if it has no tasks left to perform. Unlike normal threads, this won't go into sleep/wait. Thread performs busy-spin. Note: This is wasting of CPU resources, and it can lead to thread starvation since other threads do not get access to that core. Thus, it needs to be used for the right applications. Helpful in latency critical applications like FX Trading.
 
 Thread affinity only works for Linux and there are Java libraries available to use the same
+
+
+Communication
+What do they look for?
+
+Problem solving skills
+
+How many clarify problem statement
+Ask questions and not make assumptions
+Mention edge cases
+Walk through the problem one thing at a time
+Code beautifully (not syntax wise though)
+Test the code once code completed and then only say it is done
+Working on large systems
+
+How will you design systems
+High QPS what will you do
+If any issue how do you go about resolving it
+System Design
+Sample Design questions
+
+Tic Tac Toe
+Minesweeper
+Web Crawler
+TinyURL
+Air Traffic Controller
+Conference Scheduler
+
+Healthcare data collection by government (Thoughtworks)
