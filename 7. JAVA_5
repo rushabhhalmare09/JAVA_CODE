@@ -956,3 +956,23 @@ No tuples (especially helpful in multiple return types which currently have to b
 In fact, just check the kotlin language list
 All pojos have to write getter, setter, equals, hash, clone/copy… kotlin fixes this
 No built-in lightweight UI framework - They failed with JavaFX, Applets, etc.
+
+
+eys
+Primary key: Uniquely identify the row. Cannot be null.
+Candidate key: Can be chosen as primary key
+Composite key: Combination of multiple columns
+Foreign key: Column referencing other table's primary key
+Indexes
+Improves speed of data retrieval.
+Primary and foreign keys are indexed by default.
+Non-clustered index: Rows are unordered (stored in heap). While index is stored separately as sorted column.
+Clustered index: The rows themselves are ordered (thus there can be only 1 clustered index per table).
+Composite index: Index on multiple columns (c1,c2,c3). Order of columns should match the where clauses for maximum efficiency.
+Cardinality: Uniqueness of rows (eg: PassportID vs Gender column values).
+Bitmap-index: Used when cardinality is very low (eg: Gender column).
+Data structures used: Bit arrays, hashmaps or B+Trees (most common).
+Queries
+Union: Merges content of 2 structurally compatible tables
+Group By: Used to aggregate (avg, sum, count) values. Aggregate column should be same as group-by column.
+Having: Adding where clauses on top of group-by.
