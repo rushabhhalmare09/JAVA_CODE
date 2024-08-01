@@ -1,0 +1,43 @@
+Find: - 
+find dir -type f Find all files in the directory
+find dir -type d File all directories within this directory
+find dir -name “a*.mp3” -print0 Find all files/directory with name like a***.mp3
+find dir -type f -name “a*.txt” Find all files (recursively) with name like a***.txt
+find dir -type f -print0 | xargs -0 grep -l "word" List file names with matching word
+find dir -type f -print0 | xargs -0 mv -t Move all files from dir tree into single directory
+
+Search: -
+grep “word” file All matching lines in the file
+grep -i “word” file All matching lines - Ignore case
+grep -r “word” dir All matching lines in (recursively) all files or directory
+grep -c “word” file Count of matching lines
+grep “word” file | wc -l Count of matching lines
+grep -v “word” file | wc -l Count of non-matching lines
+grep -o -w “word” file | wc -w Word count
+grep -l -r “word” dir List file names with matching word
+find dir -type f -print0 | xargs -0 grep -l "word" List file names with matching word
+
+Processes: -
+nohup program.sh > mylog.txt 2>&1 &
+& starts process as child process in the background
+nohup Ctrl-C or terminating session sends kill signal to all child processes, nohup catches and ignores it
+> redirect output (from left/source to right/target)
+2 error stream
+1 output stream
+2>&1 append all errors to output
+top Check CPU and memory consumption
+kill -9 processId kill the process with that pid
+kill -3 processId for a JVM process, will write thread dump to output stream
+ps -ef | grep word find process with matching word
+echo $? print output of last process
+
+File permissions: -
+chmod file Change
+chmod +x file Add execute permission
+chmod +w file Add write permission
+chmod +r file Add read permission
+chmod 755 file Change permission
+chmod -R 755 dir Change permission recursively
+chmod g+w file Add write permission at group level
+Numbers: 1=x, 2=w, 3=w+x, 4=r, 5=r+x, 6=r+w, 7=r+w+x
+References: u=user, g=group, o=others, a=all
