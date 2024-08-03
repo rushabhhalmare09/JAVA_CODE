@@ -80,3 +80,19 @@ Networking: -
 ping hostname or telnet hostname port check if remote host is alive
 scp /dir/file user@hostname:/targetdir/file copy file to different host
 netstat -a | grep "port" check host connected to machine's port
+
+Space: -
+df -h space in current drive (-h is human readable format)
+du -h . sizes of all files in current directory
+du -sh . sizes of current directory
+du /bin/* | sort -n sort all files based on size (asc)
+
+Miscellaneous: -
+lsof file list processes using the file
+rev file reverses the text in each line
+echo "string" | rev  reverses the string
+sort file sorts file lines alphabetically
+sort -n file sorts file lines numerically
+uniq file filter out adjacent duplicate lines and print
+uniq -c file print with count at the begining of each line of output
+uniq -d file print only duplicates
