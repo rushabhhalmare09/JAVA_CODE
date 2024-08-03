@@ -41,3 +41,42 @@ chmod -R 755 dir Change permission recursively
 chmod g+w file Add write permission at group level
 Numbers: 1=x, 2=w, 3=w+x, 4=r, 5=r+x, 6=r+w, 7=r+w+x
 References: u=user, g=group, o=others, a=all
+
+List files: -
+ls list files in this directory
+ls -ltr list files in this directory with more details and in reverse chronological order
+ls -ltra same as above + list hidden files (names starting with .)
+ls -ltr | grep "^l" Lists all symlinks (ls -ltr lists symlinks with l as first character of output)
+
+Symlinks: - 
+Symbolic or soft links. Pointer to a file.
+ln -s /java/jdk7 jdk create symlink jdk which points to /java/jdk7
+ln -ns /java/jdk8 jdk update symlink jdk to point to /java/jdk8
+Checking logs
+tail -f logfile output appended data as file grows (f=follow)
+less +F logfile open file, and output appended data as file grows
+
+Text manipulation: - 
+head file display first 10 lines
+head -20 file display first 20 lines
+tail file display last 10 lines
+tail -5 file display last 5 lines
+head -20 file | tail -1 display 20th line
+cut -f3 file display 3rd field for each line, tab as separator
+cut -d',' -f3 file display 3rd field for each line, , as separator
+cut -c3-6 file display characters from 3rd to 6th position for each line
+cut -c7- file display characters from 7th to end of each line
+
+Sed: - 
+sed s/unix/linux file replace first occurrence of "unix with "linux"
+sed s/unix/linux/3 file replace 3rd occurrence
+sed s/unix/linux/g file replace all occurrences
+sed s/unix/linux/3g file replace all occurrences starting from 3rd one
+sed -i '1 d' file delete header of file
+sed -i '$ d' file delete footer of file
+sed –n '10 p' file print 10th line of the file
+
+Networking: -
+ping hostname or telnet hostname port check if remote host is alive
+scp /dir/file user@hostname:/targetdir/file copy file to different host
+netstat -a | grep "port" check host connected to machine's port
