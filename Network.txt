@@ -1,0 +1,58 @@
+Resources: - 
+IP Address Basics
+HTTP Overview
+HTTP Statuses
+HTTP Caching
+
+TCP: -
+Transmission Control Protocol
+Based on connections (involves 3-way handshake)
+Guaranteed delivery of packets
+Flow/Congestion control
+'TCP Fast Open' improves connection times
+Good for sites, applications etc.
+
+UDP: -
+User Datagram Protocol
+Delivery not guaranteed
+Stateless, not connection based
+Doesn't support ordering (to be handled by application)
+Good for games, videos etc.
+HTTP Verbs
+HEAD, OPTIONS, GET, POST, PUT, DELETE
+
+HTTP Caching: -
+ETag: Fingerprint of the resource (eg: MD5 checksum), to indicate if resource is changed.
+no-cache: Cache but use only after re-validating if resource is updated.
+no-store: Do not cache, and re-download for each request.
+max-age: Amount in seconds the resource can be cached.
+must-revalidate, max-age:30: Re-use cache for 30 seconds, after that must revalidate. (This can avoid download if resource has not been changed even after 30 seconds)
+Ideal: Have html pages as no-cache, and rename all other resources with unique file name (like md5 checksum of the file).
+
+HTTP Statuses: -
+200: Ok
+400: Bad request
+401: Not authenticated
+403: Not authorized
+404: Not found
+500: Internal server error
+HTTP Statuses in a nutshell
+20x: Success
+30x: Redirection
+40x: Client Error
+50x: Server Error
+
+HTTP 2: - 
+Why?: Top sites average 100 requests per page. Browsers allow max 6 connections. Min 35ms round trip per request. 80 byte header.
+No head of line blocking.
+Binary
+Header compression. Does not send repeated headers.
+Priority based
+Prefetch
+Server Push
+
+HTTPS (TLS): -
+Transport Layer Security
+Server port 443
+Certificate: Public-Private key. Signed by Certificate Authority (Verisign, Symantec, Thawte etc). These well known CAs are shipped and managed by the browser.
+Additional handshake on top of TCP
