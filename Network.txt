@@ -56,3 +56,10 @@ Transport Layer Security
 Server port 443
 Certificate: Public-Private key. Signed by Certificate Authority (Verisign, Symantec, Thawte etc). These well known CAs are shipped and managed by the browser.
 Additional handshake on top of TCP
+
+Security: -
+Origin:- protocol + host + port
+Same Origin Policy:- JavaScript can only access same origin. Can’t access other iframes. If you request JS from other origin the response cannot be read.
+CORS (Cross Origin Resource Sharing):- Allow to get JS/CSS from other origins. Important for API providers.
+CSRF (Cross Site Request Forgery):- Request originates from cross-site (potentially malicious) site. Can be avoided by Synchronized Token Pattern:- Store token in cookie (can be read only by origin site) and pass that token along with every request as HTTP Param or Header (X-CSRF-TOKEN).
+XSS (Cross Site Scripting):- Malicious scripts are injected into the HTML/JS resources. Can be avoided by escaping injected strings etc.
