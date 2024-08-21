@@ -26,6 +26,41 @@ String pool: -
         Addresses upto 4gb untranslated.
         Addresses 4gb to 28gb, remove 3bits, because Java has 8 byte word aligned, thus 3 bits need not be stored.
         Important because Java has more references. In C++ memory layout follows struct layout.
-        Java 8 has JVM args, +XX:ObjectAlignmentInBytes=16 for heap between 32gb and 64gb.  
-  
-  
+        Java 8 has JVM args, +XX:ObjectAlignmentInBytes=16 for heap between 32gb and 64gb. 
+
+String interning: -
+Interning = storing strings in a pool and re-using them
+If you intern a set of all strings, you can compare them by == improving performance.
+It is stored internally as a hashmap (it is native C code, not Java code).
+More details - [https://java-performance.info/string-intern-in-java-6-7-8/
+                https://java-performance.info/changes-to-string-java-1-7-0_06/]
+                
+How would you implement your own string interning?
+
+private static final WeakHashMap<String, WeakReference<String>> s_manualCache
+      = new WeakHashMap<String, WeakReference<String>>(100000);
+ 
+private static String manualIntern(final String str){
+    final WeakReference<String> cached = s_manualCache.get(str);
+    if (cached != null){
+        final String value = cached.get();
+        if (value != null)
+            return value;
+    }
+    s_manualCache.put(str, new WeakReference<String>(str));
+    return str;
+}
+
+Thread Affinity: -
+Makes the thread stick to a CPU core, even if it has no tasks left to perform. Unlike normal threads, this won't go into sleep/wait. Thread performs busy-spin. Note: This is wasting of CPU resources, and it can lead to thread starvation since other threads do not get access to that core. Thus, it needs to be used for the right applications. Helpful in latency critical applications like FX Trading.
+
+Thread affinity only works for Linux and there are Java libraries available [ https://github.com/OpenHFT/Java-Thread-Affinity] to use the same.
+
+Other topics: -
+How does default hashCode method work? -- { https://varoa.net/jvm/java/openjdk/biased-locking/2017/01/30/hashCode.html}
+What is Biased locking  -- { https://blogs.oracle.com/}
+JVM Threads link with OS threads -- {https://openjdk.org/groups/hotspot/docs/RuntimeOverview.html#Thread%20Management%7Coutline}
+Class Loaders  -- {https://www.jrebel.com/blog}
+Memory consumptions of primitives and boxed variables  -- {https://java-performance.info/overview-of-memory-saving-techniques-java/}
+Hoisting variables: JVM can hoist variables out of for loops to improve performance. {example - https://stackoverflow.com/questions/9338180/why-hotspot-will-optimize-the-following-using-hoisting/9338302#9338302 }
+Escape analysis: JVM can choose to place a method local object (if it never escapes the method) in Thread-stack instead of heap. Improves performance since that object doesn't go through GC (can be just deleted once method completes).
