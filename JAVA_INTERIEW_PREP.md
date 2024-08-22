@@ -33,7 +33,7 @@ Interning = storing strings in a pool and re-using them
 If you intern a set of all strings, you can compare them by == improving performance.
 It is stored internally as a hashmap (it is native C code, not Java code).
 More details - [https://java-performance.info/string-intern-in-java-6-7-8/
-                https://java-performance.info/changes-to-string-java-1-7-0_06/]
+and   https://java-performance.info/changes-to-string-java-1-7-0_06/]
                 
 How would you implement your own string interning?
 
@@ -58,9 +58,28 @@ Thread affinity only works for Linux and there are Java libraries available [ ht
 
 Other topics: -
 How does default hashCode method work? -- { https://varoa.net/jvm/java/openjdk/biased-locking/2017/01/30/hashCode.html}
+
 What is Biased locking  -- { https://blogs.oracle.com/}
+
 JVM Threads link with OS threads -- {https://openjdk.org/groups/hotspot/docs/RuntimeOverview.html#Thread%20Management%7Coutline}
+
 Class Loaders  -- {https://www.jrebel.com/blog}
+
 Memory consumptions of primitives and boxed variables  -- {https://java-performance.info/overview-of-memory-saving-techniques-java/}
+
 Hoisting variables: JVM can hoist variables out of for loops to improve performance. {example - https://stackoverflow.com/questions/9338180/why-hotspot-will-optimize-the-following-using-hoisting/9338302#9338302 }
+
 Escape analysis: JVM can choose to place a method local object (if it never escapes the method) in Thread-stack instead of heap. Improves performance since that object doesn't go through GC (can be just deleted once method completes).
+
+Java Memory Model: - 
+  Resources - https://vimeo.com/181788144
+
+What is it? : - 
+   Specification deciding how JVM can reorder instructions (for performance) aka ensures guaranteed ordering of of reads and writes under certain conditions (happens-before). Every JVM has to implement this spec.
+   Barriers that forbid reordering instructions (load-load, load-store, store-load, store-store)
+   Variables
+   volatile
+   final = all writes before volatile write will be reflected when/after volatile is read (potentially by other thread). Threads need to use the same volatile variable for this to work. For double/long (which occupy multiple word spaces, word-breakdown is forbidden to ensure integrity of data).
+   Methods - synchronized
+   Locks - normal objects used as locks, and lock classes like ReadWriteLock.
+   Threads - When a new thread is started, it is guaranteed to see all values written before thread started.
