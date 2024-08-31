@@ -83,3 +83,45 @@ What is it? : -
    Methods - synchronized
    Locks - normal objects used as locks, and lock classes like ReadWriteLock.
    Threads - When a new thread is started, it is guaranteed to see all values written before thread started.
+
+Wrapper class pool: -
+   Boolean
+   Byte
+   Character from \u0000 to \u007f (7f is 127 in decimal)
+   Short and Integer from –128 to 127
+
+Singleton options: -
+   Using: static final variable (init guarantee)
+   Using: Lazy loading (double checked)
+   Using: Enums (by default lazy, and init guarantee)
+
+Override method rules: -
+   Same method name and parameter types
+   Same or a subset of super methods' checked exceptions
+   Any number of runtime exceptions
+   Same or covariant return type
+
+Covariant variables: -
+   Variable types which are compatible.
+   Eg: an int is covariant of long
+   Eg: an Lion class is covariant of Animal class (only if Lion extends Animal)
+   Can be used in parameters, return types or assignments
+
+Varargs, boxing, widening: -
+   Primitive Widening > Boxing > Varargs. Example.
+   Widening then Boxing not allowed.
+   Boxing then Widening allowed.
+   Widening between wrapper classes not allowed (eg: Long n = new Integer(10); not allowed)
+
+Inner classes: -
+Personally I find this part of Java to be super annoying, unnecessary and hardly ever used in real-life (especially after Java 8). Also, this topic does not come up a lot in interviews, so just skimp through.
+   Inner class: Can access enclosing class's variables (even private ones)
+   Method local inner class: Same as above. Plus, it can access final variables in encapsulating method.
+   Anonymous inner class: Just no name, otherwise same as above.
+   Static inner class: No special relationship with outer class.
+   
+Reference types: -
+   Weak reference - Eligible for GC if object not referenced by any other variables. Good for caches. Are enqueued in ReferenceQueue just before GC (object can be resurrected in finalize). Returns null once object is eligible for GC, even if object is resurrected, the weak-reference still is dead, and will return null.
+   Soft reference - Same as above, but its GC’ed only when memory is low. Excellent for caches.
+   Phantom reference - Even after GC, it references the object, until the memory is reclaimed. Enqueued in ReferenceQueue after complete reclamation. Always returns null, so that you cannot resurrect it. Can be helpful to check when memory is reclaimed so that you can load next large object.
+   WeakHashMap - Weak keys. Removes entry once key is GC’ed.
