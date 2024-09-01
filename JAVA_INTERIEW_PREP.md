@@ -1,4 +1,22 @@
-Core Java: -
+A]Core Java
+   1] Core Java
+   2] Collections
+   3] Java 8
+   4] Java Memory Model
+   5] Concurrency
+   6] Garbage Collection
+   7] JVM Internals
+B]
+C]
+D]
+E]
+
+
+
+A]Core Java: -
+
+   A.1]Core Java: -
+   
 This page focuses on oddities of Core Java from an interview perspective. For basic topics like inheritance, interfaces, etc. please read the book mentioned below.
 
 Default init values: - 
@@ -122,6 +140,60 @@ Personally I find this part of Java to be super annoying, unnecessary and hardly
    
 Reference types: -
    Weak reference - Eligible for GC if object not referenced by any other variables. Good for caches. Are enqueued in ReferenceQueue just before GC (object can be resurrected in finalize). Returns null once object is eligible for GC, even if object is resurrected, the weak-reference still is dead, and will return null.
-   Soft reference - Same as above, but its GC’ed only when memory is low. Excellent for caches.
-   Phantom reference - Even after GC, it references the object, until the memory is reclaimed. Enqueued in ReferenceQueue after complete reclamation. Always returns null, so that you cannot resurrect it. Can be helpful to check when memory is reclaimed so that you can load next large object.
-   WeakHashMap - Weak keys. Removes entry once key is GC’ed.
+
+Cloning: -
+   clone method (protected) of Object class returns shallow copy. Need to be explicitly cast back.
+   Requires class to implement Cloneable marker interface. Else returns CloneNotSupportedException
+   Singletons should override clone method and throw CloneNotSupportedException.
+     toString: -
+         clone: -
+               Cloneable interface. Its a mixin interface. Does not have clone method.
+               Object class's clone method is protected
+               Atypical - Presence of Colenable modifies behavior of Object.clone() behavior. If present it returns object which is field by field copy, and if not present, then .clone method throws 
+                          CloneNotSupportedException
+               Cloning is not done using constructor
+               If you override clone do return super.clone(), if all classes do that up the chain, then Object.clone will be called and you will get the right copy
+               This is important because spec doesnt enforce anything from Cloneable interface. So someone might override clone and not clone, nor call super.clone, causing problems
+               Note: Objects.clone() creates a shallow copy
+               If you override and write clone, ofcourse you cannot set final field, thus need to remove final modifiers
+               Object's clone method is declared to throw CloneNotSupportedException, but overriding clone methods can omit this declaration.
+               Like constructor, clone method should not call non-final methods, because super object might not be properly constructed yet, causing some data corruption
+               Clone method must be synchronized in case of concurrency
+               In short, you are better off, creating and using a copy-constructor.
+               
+======================================================================================================
+
+A.2] Collections: -
+
+Resources: -
+   OCA/OCP Java SE 7 Programmer (book) - https://www.amazon.com/Programmer-Study-1Z0-803-1Z0-804-Certification/dp/0071772006/ref=asap_bc?ie=UTF8
+   Cheat sheet (PDF)                   - http://files.zeroturnaround.com/pdf/zt_java_collections_cheat_sheet.pdf
+   Effective Java study notes         
+   
+Table of contents: -
+   Lists -
+      ArrayList
+      LinkedList
+      Stack
+      Vector
+      CopyOnWriteArrayList
+      Collections.synchronizedList
+
+Lists: -
+
+   ArrayList: -
+      Backed by array (which are co-located in memory), thus fast iteration and get(i) operation.
+      Slow inserts when the backed array is full and has to double in size.
+      Fail-fast iterators, which can throw ConcurrentModificationException.
+      Add is O(n) - When element is added to middle of list, all elements on the right have to be moved.
+      Use Case - When iterations outnumber number of read/writes.
+      
+   LinkedList: - 
+      Chain of nodes referencing each other (doubly linked list).
+      No co-location of nodes, pointers need to be chased for next element, thus slow iterations and get(i) operation.
+      Fail-fast iterators, which can throw ConcurrentModificationException.
+      Implements Queue interface, thus allows offer/pop/peek operations.
+      Add is O(1) - Adding element in middle of list is just adjusting the node pointers.
+      Internally uses references (~ to skiplist) to optimize iterations.
+      Use Case - Lot of inserts in middle of the list.
+               
