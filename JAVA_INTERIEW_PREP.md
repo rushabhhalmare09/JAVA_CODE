@@ -197,3 +197,23 @@ Lists: -
       Internally uses references (~ to skiplist) to optimize iterations.
       Use Case - Lot of inserts in middle of the list.
                
+   Stack: -
+      For stack operations push/pop/peek.
+      Not used anymore. Recommended to use Deque implementations.
+
+   Vector: -
+      Synchronized version of list.
+      Not used anymore. Recommended below mentioned alternatives.
+      
+   CopyOnWriteArrayList: -
+      Thread-safe.
+      Backed array is copied during every element insert.
+      Avoids ConcurrentModificationException since iteration can continue in original copy, and insert results in new copy.
+      High memory usage (more pressure on GC) due to the resulting copies.
+      Use case - Large number of threads for read, low number of writes.
+      
+   Collections.synchronizedList: -
+      Thread-safe.
+      Can be slow due to mutual exclusion.
+      Iterations have to be externally synchronized by developer
+      Can throw ConcurrentModificationException if (above mentioned) synchronization not done during iteration.
