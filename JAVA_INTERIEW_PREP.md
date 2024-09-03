@@ -217,3 +217,34 @@ Lists: -
       Can be slow due to mutual exclusion.
       Iterations have to be externally synchronized by developer
       Can throw ConcurrentModificationException if (above mentioned) synchronization not done during iteration.
+
+
+Sets: -
+   Collection of unique elements. No duplicates.
+
+   HashSet: -
+      Backed by HashMap.
+      Performance can vary based on hashCode implementation.
+      Constant time get/remove/add/contains (subject to above point).
+      Fail-fast iterators.
+      Insertion order not retained.
+   
+   LinkedHashSet" -
+      Insertion order is retained.
+      Uses doubly-linked list to maintain the order.
+      Iteration can be slower due to this.
+      Other features, same as HashSet above (except iteration).
+   
+   TreeSet: -
+      Elements sorted by their natural order (or Comparator passed in constructor).
+      Log(n) time for add/remove/contains operations.
+      Navigable (floor, ceiling, higher, lower, headSet, tailSet operations).
+      Fail fast iterators.
+   
+   ConcurrentSkipListSet: -
+      Thread-safe.
+      Log(n) time for add/remove/contains operations.
+      Navigable (floor, ceiling, higher, lower, headSet, tailSet operations).
+      Size method is not constant time operation.
+      Weakly consistent iterators (do not throw ConcurrentModificationException but also may not reflect concurrently added items).
+      Thus, bulk operations (addAll, removeAll, retainAll, containsAll etc) are not guaranteed to be atomic.
