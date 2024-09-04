@@ -248,3 +248,36 @@ Sets: -
       Size method is not constant time operation.
       Weakly consistent iterators (do not throw ConcurrentModificationException but also may not reflect concurrently added items).
       Thus, bulk operations (addAll, removeAll, retainAll, containsAll etc) are not guaranteed to be atomic.
+
+   CopyOnWriteArraySet: -
+      Backed by CopyOnWriteArrayList
+      Thread-safe.
+      Slow. Operations have to iterate through the array for most operations.
+      Recommended where reads vastly outnumber writes and set size is small.
+      
+   EnumSet:- 
+      To be used with Enum types.
+      Very efficient and fast (backed by bit-vectors).
+      Weakly consistent iterators.
+      Nulls not allowed.
+
+Maps: -
+   HashMap: -
+      key, value pairs.
+      Permits a null key, and null values.
+      Iteration order not guaranteed.
+      Throws ConcurrentModificationException.
+      Article for details on implementation - https://deepakvadgama.com/blog/java-hashmap-internals/
+   
+   HashMap implementation details: -
+      Backed by array (buckets), array-size is known as table-size.
+      Position in array = element-hash % table-size.
+      If elements end up in same bucket, they are added to linked-list (or a balanced red-black tree).
+      O(1) access (if hashcode properly distributes the values, else O(n) for linked-list & O(log(n)) for tree.
+      Load factor - 0.75 default, decides when table-size should increase (double).
+      Bigger load-factor - more space-efficient, reduced speed (due to more elements in same bucket).
+      Lower load-factor - less space-efficient, more speed (less, ideally 1 element in 1 bucket).
+      Initial table-size = 16.
+      
+   LinkedHashMap: -
+      Insertion order is retained.
