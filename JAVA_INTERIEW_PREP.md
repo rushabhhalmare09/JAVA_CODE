@@ -281,3 +281,20 @@ Maps: -
       
    LinkedHashMap: -
       Insertion order is retained.
+      
+   Hashtable: -
+      Thread-safe.
+      Not used anymore, ConcurrentHashMap recommended.
+      
+   ConcurrentHashMap: -
+      Thread-safe.
+      Fine grained locking called striped locking (map is divided into segments, each with associated lock. Threads holding different locks don't conflict).
+      Improved performance over Hashtable.
+      
+   TreeMap: -
+      Sorted by keys.
+      Uses Red-Black tree implementation.
+      
+   ConcurrentSkipListMap: -
+      Thread-safe version of TreeMap.
+      Navigable (floor, ceiling, higher, lower, headSet, tailSet operations).
