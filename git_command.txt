@@ -8,3 +8,16 @@ git push origin master
                        --> It is nothing but our branch  
                        --> here origin is constant, but aftrer origin we can type anything example master origin master2 origin temp2, basically this tells us in which branch our code is being pushed
 
+
+
+============
+When we push our code to Github, the name and source from where the code is pushed, it is saved in config file which we can access from "git config --global --edit" command, we will get our local machine details.
+
+    our configuration file:
+
+       git config --global --edit
+
+   After doing this, you may fix the identity used for this commit with:
+ 
+       git commit --amend --reset-author
+
