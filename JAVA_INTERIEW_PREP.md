@@ -298,3 +298,31 @@ Maps: -
    ConcurrentSkipListMap: -
       Thread-safe version of TreeMap.
       Navigable (floor, ceiling, higher, lower, headSet, tailSet operations).
+
+Queues: -
+   LinkedList: -
+      Implements Queue interface.
+      offer, peek, poll operations.
+      Use case - task queues
+      
+   ArrayBlockingQueue: -
+      Thread-safe.
+      Backed by array. Thus bounded in size.
+      Adding element to full queue results in blocking.
+      Polling an empty queue results in blocking.
+      Use case - Producer consumer problem.
+      
+   LinkedBlockingQueue: -
+      Thread-safe.
+      Backed by linked-list.
+      Optionally bounded in size. Takes maxSize as constructor argument.
+      
+   ConcurrentLinkedQueue: -
+      Thread-safe.
+      Uses CAS (Compare-And-Swap) for more throughput. Also known as lock free.
+      
+   Deque classes: -
+      ArrayDeque - Double ended queue. Backed by array. Can throw ConcurrentModificationException.
+      LinkedList - Implements Deque interface.
+      LinkedBlockingDeque
+      ConcurrentLinkedDeque
