@@ -1,13 +1,24 @@
-git clone HTTPS URL from your repo
-git status
-git add .    --- or --- git add filename
+GIT
 
-git commit -m "Added new feature"
-git push origin master 
-           --------- origin master
-                       --> It is nothing but our branch  
-                       --> here origin is constant, but aftrer origin we can type anything example master origin master2 origin temp2, basically this tells us in which branch our code is being pushed
+1] To upload in existing Repos
 
+  git clone HTTPS//:git  --URL from your repo
+  git status
+  git add .    --- or --- git add filename
+  git commit -m "Added new feature"
+  git push origin master 
+           ----- origin master
+                     --> It is nothing but our branch  
+                     --> here origin is constant, but aftrer origin we can type anything example master origin master2 origin temp2, basically this tells us in which branch our code is being pushed
+
+2]Initialize a Local Repositor and upload in data
+
+  Go to path
+  git init
+  git add . or git add filename
+  git commit -m "Added new feature"  
+  git remote add origin https://github.com/username/repo.git
+  git push -u origin master
 
 
 ============
@@ -21,3 +32,4 @@ When we push our code to Github, the name and source from where the code is push
  
        git commit --amend --reset-author
 
+================================
