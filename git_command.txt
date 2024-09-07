@@ -21,6 +21,17 @@ GIT
   git push -u origin master
 
 
+3] How and When to use GIT PULL.
+   
+  command :- git pull origin master
+
+    When to Use Each Command: -
+       git clone
+              :- Use this when you need to create a local copy of a repository for the first time.
+       
+       git pull
+              :- Use this to update your existing local repository with the latest changes from the remote repository.
+
 ============
 When we push our code to Github, the name and source from where the code is pushed, it is saved in config file which we can access from "git config --global --edit" command, we will get our local machine details.
 
