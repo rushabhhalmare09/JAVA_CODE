@@ -43,4 +43,4 @@ When we push our code to Github, the name and source from where the code is push
  
        git commit --amend --reset-author
 
-================================
+==============================
