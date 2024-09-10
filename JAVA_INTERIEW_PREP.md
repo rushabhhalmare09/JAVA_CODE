@@ -326,3 +326,23 @@ Queues: -
       LinkedList - Implements Deque interface.
       LinkedBlockingDeque
       ConcurrentLinkedDeque
+
+   PriorityQueue
+      Elements sorted based on their natural order (or Comparator provided in Constructor).
+      Use case - task queues where tasks can have different priorities.
+      
+   PriorityBlockingQueue: -
+      Thread-safe.
+      
+   DelayQueue: -
+      Elements added, are available to be removed only after their delay-time is expired.
+      
+   SynchronousQueue: - 
+      Holds single elements.
+      Blocks for both producer and consumer to arrive.
+      Use case - For safe/atomic transfer of objects between threads.
+      
+equals and hashCode: -
+   equals required for all collections.
+   equals and hashCode required for Maps and Sets (which are backed by Maps).
+
