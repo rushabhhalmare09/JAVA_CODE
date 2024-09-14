@@ -367,3 +367,9 @@ Collections class:-
       singleton(t) - singleton (returns set), singletonList, singletonMap etc.
 
 -------
+
+
+![image](https://github.com/user-attachments/assets/2089708e-763a-4798-af06-811899207baa)
+
+![image](https://github.com/user-attachments/assets/010b204a-ecb7-44cb-a0f7-854c11561495)
+
