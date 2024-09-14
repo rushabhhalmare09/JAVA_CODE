@@ -368,6 +368,7 @@ Collections class:-
 
 -------
 
+Hierarchy and classes: -
 
 ![image](https://github.com/user-attachments/assets/2089708e-763a-4798-af06-811899207baa)
 
