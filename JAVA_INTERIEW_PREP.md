@@ -1,4 +1,4 @@
-A]Core Java
+**A]Core Java
    1] Core Java
    2] Collections
    3] Java 8
@@ -9,11 +9,11 @@ A]Core Java
 B]
 C]
 D]
-E]
+E]**
 
 
 
-A]Core Java: -
+**A]Core Java: -**
 
    A.1]Core Java: -
    
@@ -163,7 +163,7 @@ Cloning: -
                
 ======================================================================================================
 
-A.2] Collections: -
+**A.2] Collections: -**
 
 Resources: -
    OCA/OCP Java SE 7 Programmer (book) - https://www.amazon.com/Programmer-Study-1Z0-803-1Z0-804-Certification/dp/0071772006/ref=asap_bc?ie=UTF8
@@ -374,3 +374,34 @@ Hierarchy and classes: -
 
 ![image](https://github.com/user-attachments/assets/010b204a-ecb7-44cb-a0f7-854c11561495)
 
+
+**A.3  Java 8**
+
+Topics in Java 8: -
+   Streams
+   Examples:
+   Comparators
+   Concurrency
+   CompletableFuture
+   StampedLock
+   @Contended
+
+**Streams: -**
+
+   Create:-
+      Stream.of(T… a)
+      IntStream.rangeClosed(start, end) + LongStream & DoubleStream
+      Arrays.stream(array)
+      list.stream()
+      list.parallelStream()
+      Files.getLines()
+      Stream.generate(() -> Math.random());
+
+Filter
+=
+findAny
+findFirst
+filter
+distinct
+limit(long)
+skip(long)
