@@ -92,7 +92,7 @@ String interning: -
 
 **Java Memory Model** : -
   - Resources - https://vimeo.com/181788144
-  - **What is it? : - **
+  - **What is it?** : -
      - Specification deciding how JVM can reorder instructions (for performance) aka ensures guaranteed ordering of of reads and writes under certain conditions (happens-before). Every JVM has to implement this spec.
      - Barriers that forbid reordering instructions (load-load, load-store, store-load, store-store)
      - Variables
@@ -149,8 +149,7 @@ String interning: -
         - clone: -
                - Cloneable interface. Its a mixin interface. Does not have clone method.
                - Object class's clone method is protected
-               - Atypical - Presence of Colenable modifies behavior of Object.clone() behavior. If present it returns object which is field by field copy, and if not present, then .clone method throws 
-                          CloneNotSupportedException
+               - Atypical - Presence of Colenable modifies behavior of Object.clone() behavior. If present it returns object which is field by field copy, and if not present, then .clone method throws CloneNotSupportedException
                - Cloning is not done using constructor
                - If you override clone do return super.clone(), if all classes do that up the chain, then Object.clone will be called and you will get the right copy
                - This is important because spec doesnt enforce anything from Cloneable interface. So someone might override clone and not clone, nor call super.clone, causing problems
@@ -165,112 +164,113 @@ String interning: -
 
 **A.2] Collections: -**
 
-Resources: -
-   OCA/OCP Java SE 7 Programmer (book) - https://www.amazon.com/Programmer-Study-1Z0-803-1Z0-804-Certification/dp/0071772006/ref=asap_bc?ie=UTF8
-   Cheat sheet (PDF)                   - http://files.zeroturnaround.com/pdf/zt_java_collections_cheat_sheet.pdf
-   Effective Java study notes         
+  Resources: -
+  - OCA/OCP Java SE 7 Programmer (book) - https://www.amazon.com/Programmer-Study-1Z0-803-1Z0-804-Certification/dp/0071772006/ref=asap_bc?ie=UTF8
+  - Cheat sheet (PDF)                   - http://files.zeroturnaround.com/pdf/zt_java_collections_cheat_sheet.pdf
+  - Effective Java study notes         
    
-Table of contents: -
-   Lists -
-      ArrayList
-      LinkedList
-      Stack
-      Vector
-      CopyOnWriteArrayList
-      Collections.synchronizedList
+  Table of contents: -
+     Lists -
+        ArrayList
+        LinkedList
+        Stack
+        Vector
+        CopyOnWriteArrayList
+        Collections.synchronizedList
 
 -------
 Lists: -
 
    ArrayList: -
-      Backed by array (which are co-located in memory), thus fast iteration and get(i) operation.
-      Slow inserts when the backed array is full and has to double in size.
-      Fail-fast iterators, which can throw ConcurrentModificationException.
-      Add is O(n) - When element is added to middle of list, all elements on the right have to be moved.
-      Use Case - When iterations outnumber number of read/writes.
+   - Backed by array (which are co-located in memory), thus fast iteration and get(i) operation.
+   - Slow inserts when the backed array is full and has to double in size.
+   - Fail-fast iterators, which can throw ConcurrentModificationException.
+   - Add is O(n) - When element is added to middle of list, all elements on the right have to be moved.
+   - Use Case - When iterations outnumber number of read/writes.
       
    LinkedList: - 
-      Chain of nodes referencing each other (doubly linked list).
-      No co-location of nodes, pointers need to be chased for next element, thus slow iterations and get(i) operation.
-      Fail-fast iterators, which can throw ConcurrentModificationException.
-      Implements Queue interface, thus allows offer/pop/peek operations.
-      Add is O(1) - Adding element in middle of list is just adjusting the node pointers.
-      Internally uses references (~ to skiplist) to optimize iterations.
-      Use Case - Lot of inserts in middle of the list.
+   - Chain of nodes referencing each other (doubly linked list).
+   - No co-location of nodes, pointers need to be chased for next element, thus slow iterations and get(i) operation.
+   - Fail-fast iterators, which can throw ConcurrentModificationException.
+   - Implements Queue interface, thus allows offer/pop/peek operations.
+   - Add is O(1) - Adding element in middle of list is just adjusting the node pointers.
+   - Internally uses references (~ to skiplist) to optimize iterations.
+   - Use Case - Lot of inserts in middle of the list.
                
    Stack: -
-      For stack operations push/pop/peek.
-      Not used anymore. Recommended to use Deque implementations.
+   - For stack operations push/pop/peek.
+   - Not used anymore. Recommended to use Deque implementations.
 
    Vector: -
-      Synchronized version of list.
-      Not used anymore. Recommended below mentioned alternatives.
+   - Synchronized version of list.
+   - Not used anymore. Recommended below mentioned alternatives.
       
    CopyOnWriteArrayList: -
-      Thread-safe.
-      Backed array is copied during every element insert.
-      Avoids ConcurrentModificationException since iteration can continue in original copy, and insert results in new copy.
-      High memory usage (more pressure on GC) due to the resulting copies.
-      Use case - Large number of threads for read, low number of writes.
+   - Thread-safe.
+   - Backed array is copied during every element insert.
+   - Avoids ConcurrentModificationException since iteration can continue in original copy, and insert results in new copy.
+   - High memory usage (more pressure on GC) due to the resulting copies.
+   - Use case - Large number of threads for read, low number of writes.
       
    Collections.synchronizedList: -
-      Thread-safe.
-      Can be slow due to mutual exclusion.
-      Iterations have to be externally synchronized by developer
-      Can throw ConcurrentModificationException if (above mentioned) synchronization not done during iteration.
+   - Thread-safe.
+   - Can be slow due to mutual exclusion.
+   - Iterations have to be externally synchronized by developer.
+   - Can throw ConcurrentModificationException if (above mentioned) synchronization not done during iteration.
 
 -------
 
 Sets: -
-   Collection of unique elements. No duplicates.
+  - Collection of unique elements. No duplicates.
 
    HashSet: -
-      Backed by HashMap.
-      Performance can vary based on hashCode implementation.
-      Constant time get/remove/add/contains (subject to above point).
-      Fail-fast iterators.
-      Insertion order not retained.
+   - Backed by HashMap.
+   - Performance can vary based on hashCode implementation.
+   - Constant time get/remove/add/contains (subject to above point).
+   - Fail-fast iterators.
+   - Insertion order not retained.
    
    LinkedHashSet" -
-      Insertion order is retained.
-      Uses doubly-linked list to maintain the order.
-      Iteration can be slower due to this.
-      Other features, same as HashSet above (except iteration).
+   - Insertion order is retained.
+   - Uses doubly-linked list to maintain the order.
+   - Iteration can be slower due to this.
+   - Other features, same as HashSet above (except iteration).
    
    TreeSet: -
-      Elements sorted by their natural order (or Comparator passed in constructor).
-      Log(n) time for add/remove/contains operations.
-      Navigable (floor, ceiling, higher, lower, headSet, tailSet operations).
-      Fail fast iterators.
+   - Elements sorted by their natural order (or Comparator passed in constructor).
+   - Log(n) time for add/remove/contains operations.
+   - Navigable (floor, ceiling, higher, lower, headSet, tailSet operations).
+   - Fail fast iterators.
    
    ConcurrentSkipListSet: -
-      Thread-safe.
-      Log(n) time for add/remove/contains operations.
-      Navigable (floor, ceiling, higher, lower, headSet, tailSet operations).
-      Size method is not constant time operation.
-      Weakly consistent iterators (do not throw ConcurrentModificationException but also may not reflect concurrently added items).
-      Thus, bulk operations (addAll, removeAll, retainAll, containsAll etc) are not guaranteed to be atomic.
+   - Thread-safe.
+   - Log(n) time for add/remove/contains operations.
+   - Navigable (floor, ceiling, higher, lower, headSet, tailSet operations).
+   - Size method is not constant time operation.
+   - Weakly consistent iterators (do not throw ConcurrentModificationException but also may not reflect concurrently added items).
+   - Thus, bulk operations (addAll, removeAll, retainAll, containsAll etc) are not guaranteed to be atomic.
 
    CopyOnWriteArraySet: -
-      Backed by CopyOnWriteArrayList
-      Thread-safe.
-      Slow. Operations have to iterate through the array for most operations.
-      Recommended where reads vastly outnumber writes and set size is small.
+   - Backed by CopyOnWriteArrayList
+   - Thread-safe.
+   - Slow. Operations have to iterate through the array for most operations.
+   - Recommended where reads vastly outnumber writes and set size is small.
       
    EnumSet:- 
-      To be used with Enum types.
-      Very efficient and fast (backed by bit-vectors).
-      Weakly consistent iterators.
-      Nulls not allowed.
+   - To be used with Enum types.
+   - Very efficient and fast (backed by bit-vectors).
+   - Weakly consistent iterators.
+   - Nulls not allowed.
       
 -------
 Maps: -
+   
    HashMap: -
-      key, value pairs.
-      Permits a null key, and null values.
-      Iteration order not guaranteed.
-      Throws ConcurrentModificationException.
-      Article for details on implementation - https://deepakvadgama.com/blog/java-hashmap-internals/
+   - key, value pairs.
+   - Permits a null key, and null values.
+   - Iteration order not guaranteed.
+   - Throws ConcurrentModificationException.
+   - Article for details on implementation - https://deepakvadgama.com/blog/java-hashmap-internals/
    
    HashMap implementation details: -
       Backed by array (buckets), array-size is known as table-size.
