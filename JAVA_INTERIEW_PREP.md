@@ -22,10 +22,10 @@ E]
 This page focuses on oddities of Core Java from an interview perspective. For basic topics like inheritance, interfaces, etc. please read the book mentioned below.
 
 Default init values: - 
-   For fields (class level variables), values are auto assigned default values.
-   Method local variables should be manually assigned.
-   Default values (references = null, primitives = 0, boolean = false)
-   Arrays initialize its elements: int[] numbers = new int[10]; will assign all ints in the array to 0.
+   - For fields (class level variables), values are auto assigned default values.
+   - Method local variables should be manually assigned.
+   - Default values (references = null, primitives = 0, boolean = false)
+   - Arrays initialize its elements: int[] numbers = new int[10]; will assign all ints in the array to 0.
 
 String pool: -
   String constants are placed in a memory pool
