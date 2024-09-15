@@ -1,20 +1,22 @@
-**A]Core Java
-   1] Core Java
+
+**A]Core Java**
+=
+   **1] Core Java
    2] Collections
    3] Java 8
    4] Java Memory Model
    5] Concurrency
    6] Garbage Collection
-   7] JVM Internals
+   7] JVM Internals**
 B]
 C]
 D]
-E]**
+E]
 
 
 
 **A]Core Java: -**
-
+=
    A.1]Core Java: -
    
 This page focuses on oddities of Core Java from an interview perspective. For basic topics like inheritance, interfaces, etc. please read the book mentioned below.
@@ -376,6 +378,7 @@ Hierarchy and classes: -
 
 
 **A.3  Java 8**
+=
 
 Topics in Java 8: -
    Streams
@@ -388,7 +391,7 @@ Topics in Java 8: -
 
 **Streams: -**
 
-   Create:-
+   **Create:-**
       Stream.of(T… a)
       IntStream.rangeClosed(start, end) + LongStream & DoubleStream
       Arrays.stream(array)
@@ -397,11 +400,10 @@ Topics in Java 8: -
       Files.getLines()
       Stream.generate(() -> Math.random());
 
-Filter
-=
-findAny
-findFirst
-filter
-distinct
-limit(long)
-skip(long)
+   **Filter**: -
+      findAny
+      findFirst
+      filter
+      distinct
+      limit(long)
+      skip(long)
