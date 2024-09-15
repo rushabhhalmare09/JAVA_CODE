@@ -181,6 +181,7 @@ Table of contents: -
       CopyOnWriteArrayList
       Collections.synchronizedList
 
+--
 Lists: -
 
    ArrayList: -
@@ -220,6 +221,7 @@ Lists: -
       Iterations have to be externally synchronized by developer
       Can throw ConcurrentModificationException if (above mentioned) synchronization not done during iteration.
 
+---------
 
 Sets: -
    Collection of unique elements. No duplicates.
@@ -262,7 +264,7 @@ Sets: -
       Very efficient and fast (backed by bit-vectors).
       Weakly consistent iterators.
       Nulls not allowed.
-
+-----
 Maps: -
    HashMap: -
       key, value pairs.
@@ -376,6 +378,7 @@ Hierarchy and classes: -
 
 ![image](https://github.com/user-attachments/assets/010b204a-ecb7-44cb-a0f7-854c11561495)
 
+-------
 
 **A.3  Java 8**
 =
