@@ -36,8 +36,8 @@ String pool: -
   - String s = new String("abc") will also place "abc" in pool, as well as allocate new memory.
 
    **JVM Internals**:-
-     - Some of the topics listed below are tricks JVM uses to improve performance. Subset of these can be exploited to further improve application performance.
-     - Note: These topics are highly unlikely to come up in an interview. Feel free to just glance through without digging deep. 
+   - Some of the topics listed below are tricks JVM uses to improve performance. Subset of these can be exploited to further improve application performance.
+   - Note: These topics are highly unlikely to come up in an interview. Feel free to just glance through without digging deep.
      - Compressed pointers: -
          - 32 bit references can address 4GB, while 64 bit can reference 2^64 bytes (though limited by OS/RAM on the machine).
          - Having 64 bit reference for every object increases memory usage. JVMs use compressed pointers to address this issue. (For more details: -> https://wiki.openjdk.java.net/display/HotSpot/CompressedOops)
