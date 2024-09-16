@@ -394,18 +394,40 @@ Topics in Java 8: -
 **Streams: -**
 
    **Create:-**
-      Stream.of(T… a)
-      IntStream.rangeClosed(start, end) + LongStream & DoubleStream
-      Arrays.stream(array)
-      list.stream()
-      list.parallelStream()
-      Files.getLines()
-      Stream.generate(() -> Math.random());
+   - Stream.of(T… a)
+   - IntStream.rangeClosed(start, end) + LongStream & DoubleStream
+   - Arrays.stream(array)
+   - list.stream()
+   - list.parallelStream()
+   - Files.getLines()
+   - Stream.generate(() -> Math.random());
 
    **Filter**: -
-      findAny
-      findFirst
-      filter
-      distinct
-      limit(long)
-      skip(long)
+   - findAny
+   - findFirst
+   - filter
+   - distinct
+   - limit(long)
+   - skip(long)
+
+  **Operations**: -
+  - sorted
+  - boxed
+  - min(comparator)
+  - max(comparator)
+  - count
+  - forEach
+  - flatMap // when each element maps to n elements
+  - toArray
+  - reduce (0, (c, e) -> c + e); // accumulator,
+  - reducer function reduce (0, Integer::sum); Collectors
+  
+  **Collectors.toList()**: -
+  - Collectors.toSet()
+  - Collectors.toMap(keyMapper, valueMapper)
+  - Collectors.toCollection(TreeSet::new)
+  - Collectors.joining(", ") // needs stream of strings, use map(Object::toString) before this
+  - Collectors.summingInt(Employee::getSalary)
+  - Collectors.averagingInt(Employee::getSalary)
+  - Collectors.summarizingInt(Employee::getSalary) [gives stats max,min,count,average]
+  - Collectors.groupingBy(Employee::getDepartment)
