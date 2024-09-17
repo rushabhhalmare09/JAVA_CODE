@@ -431,3 +431,52 @@ Topics in Java 8: -
   - Collectors.averagingInt(Employee::getSalary)
   - Collectors.summarizingInt(Employee::getSalary) [gives stats max,min,count,average]
   - Collectors.groupingBy(Employee::getDepartment)
+
+**Examples**:
+
+  **FlatMap**
+
+        Stream<String> lines = Files.lines(path, StandardCharsets.UTF_8);
+        Stream<String> words = lines.flatMap(line -> Stream.of(line.split(" +")));
+
+  **Typical**
+
+        books.stream()
+             .filter(book -> book.year > 2005)  // filter out books published in or before 2005
+             .map(Book::getAuthor)              // get the list of authors for the remaining books
+             .filter(Objects::nonNull)          // remove null authors from the list
+             .map(Author::getName)              // get the list of names for the remaining authors
+             .forEach(System.out::println);     // print the value of each remaining element
+
+  **Read Large File**: -
+    Does not load whole file in memory. Though exceptions are wrapped in UncheckedIOException.
+
+        try(Stream<String> stream : Files.lines(Paths.get(“absolute-path”))){
+           stream.forEach(System.out::println);  
+        }
+
+  **Group By**: -
+
+          Map<Person.Sex, List<Person>> byGender 
+              = roster.stream().collect(Collectors.groupingBy(Person::getGender));
+          
+          ConcurrentMap<Person.Sex, List<Person>> byGender 
+              = roster.parallelStream().collect(Collectors.groupingByConcurrent(Person::getGender))
+          
+          // Group employees by department
+          Map<Department, List<Employee>> byDept
+              = employees.stream().collect(Collectors.groupingBy(Employee::getDepartment));
+          
+          // Compute sum of salaries by department
+          Map<Department, Integer> totalByDept  
+              = employees.stream().collect(Collectors.groupingBy(Employee::getDepartment,Collectors.summingInt(Employee::getSalary)));
+          
+          // Partition students into passing and failing
+          Map<Boolean, List<Student>> passingFailing 
+              = students.stream().collect(Collectors.partitioningBy(s -> s.getGrade() >= PASS_THRESHOLD));
+
+
+**Comparators**: - 
+  vehicles.sort(Comparator.comparing(Vehicle::getWheels)); vehicles.sort(Comparator.comparing(Vehicle::getWheels)); vehicles.sort(Comparator.comparing(Vehicle::getWheels).thenComparing(Vehicle:getColor); //chaining
+
+**Concurrency**: -
