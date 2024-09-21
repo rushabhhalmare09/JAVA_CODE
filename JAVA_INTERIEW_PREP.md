@@ -480,3 +480,19 @@ Topics in Java 8: -
   vehicles.sort(Comparator.comparing(Vehicle::getWheels)); vehicles.sort(Comparator.comparing(Vehicle::getWheels)); vehicles.sort(Comparator.comparing(Vehicle::getWheels).thenComparing(Vehicle:getColor); //chaining
 
 **Concurrency**: -
+
+  **HashMap**: -
+  - compute
+  - computeIfPresent (blocking, so write smaller computations)
+  - computeIfAbsent (blocking, so write smaller computations)
+  - putIfAbsent
+  - merge
+  - getOrDefault (k, def)
+
+  **Adders/Accumulators**: -
+  - Much more performant than AtomicLong (have single copy across threads). Accumulators, each thread has own copy tracking its own counter, and when retrieval is triggered in any thread, all threads coordinate and perform total sum of all threads’ counts.
+  - Basically no contention, during increment, decrement, add, thus much faster.
+      - LongAdder
+      - DoubleAdder
+      - LongAccumulator
+      - DoubleAccumulator
