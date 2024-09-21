@@ -496,3 +496,9 @@ Topics in Java 8: -
       - DoubleAdder
       - LongAccumulator
       - DoubleAccumulator
+  - Operations
+      - increment
+      - decrement
+      - add (long)
+      - sum // retrieves result by coordinating between threads
+      - reset
