@@ -503,7 +503,7 @@ Topics in Java 8: -
       - sum // retrieves result by coordinating between threads
       - reset
 
-CompletableFuture: -
+**CompletableFuture**: -
   Similar to JavaScript promises. Multiple async tasks can be chained (performed one after another on separate thread). Better alternative to future where the method get is blocking (waits indefinitely for the result). In completableFuture the current thread is not blocked. Each task is executed once previous task is completed.
 
   Also, the program itself becomes more readable.
