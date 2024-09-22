@@ -502,3 +502,21 @@ Topics in Java 8: -
       - add (long)
       - sum // retrieves result by coordinating between threads
       - reset
+
+CompletableFuture: -
+  Similar to JavaScript promises. Multiple async tasks can be chained (performed one after another on separate thread). Better alternative to future where the method get is blocking (waits indefinitely for the result). In completableFuture the current thread is not blocked. Each task is executed once previous task is completed.
+
+  Also, the program itself becomes more readable.
+
+       CompletableFuture.supplyAsync(() -> getStockInfo(“GOOGL”), executor)   // if executor is not passed it uses internal pool
+              .whenComplete((info, exec) -> System.out.println(info))  // triggered once previous operation is finished
+              .thenApply(Stock::getRate)   
+              .thenAccept(rate -> System.out.println(rate))  
+              .thenRun(() -> System.out.println(“done”)));  
+
+So when you trigger this, it immediately returns the CompletableFuture instance, which can be used to check its status and such.
+  - supply method takes Supplier which returns a value
+  - thenApply method argument is Function which takes input and returns value
+  - thenAccept method argument is Consumer which takes input
+  - thenRun method argument is Runnable which only runs
+  - CompletableFuture has no control of tasks while they are running in the executor. So cancel method just sets returned value as Exceptional.
