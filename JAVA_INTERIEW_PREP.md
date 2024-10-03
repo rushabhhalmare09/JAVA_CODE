@@ -520,3 +520,11 @@ So when you trigger this, it immediately returns the CompletableFuture instance,
   - thenAccept method argument is Consumer which takes input
   - thenRun method argument is Runnable which only runs
   - CompletableFuture has no control of tasks while they are running in the executor. So cancel method just sets returned value as Exceptional.
+
+**StampedLock**: -
+  - Better alternative for ReadWriteLock.
+  - It does optimistic reads so works faster only on less contended operations.
+  - Not re-entrant
+    
+**@Contended**: -
+  For fields shared within same cache line and if only 1 field in it is volatile, then for multiple threads, the cache line will be flushed and will be updated. Thus use of cache is of no use. To fix this, set the field to hot field by using @Contented so that JVM can pad the field so that it takes entire cache line and is not shared with other fields.
