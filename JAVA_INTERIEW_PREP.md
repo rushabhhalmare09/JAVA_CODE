@@ -1,6 +1,6 @@
 
 **A]Core Java**
-    - **1] Core Java**
+    - 1] Core Java
     - 2] Collections
     - 3] Java 8
     - 4] Java Memory Model
