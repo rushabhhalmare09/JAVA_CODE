@@ -1,12 +1,12 @@
 
 **A]Core Java**
-    - 1] Core Java
-    - 2] Collections
-    - 3] Java 8
-    - 4] Java Memory Model
-    - 5] Concurrency
-    - 6] Garbage Collection
-    - 7] JVM Internals
+- 1] Core Java
+- 2] Collections
+- 3] Java 8
+- 4] Java Memory Model
+- 5] Concurrency
+- 6] Garbage Collection
+- 7] JVM Internals
 
 B]
 C]
