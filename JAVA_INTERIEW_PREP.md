@@ -528,3 +528,19 @@ So when you trigger this, it immediately returns the CompletableFuture instance,
     
 **@Contended**: -
   For fields shared within same cache line and if only 1 field in it is volatile, then for multiple threads, the cache line will be flushed and will be updated. Thus use of cache is of no use. To fix this, set the field to hot field by using @Contented so that JVM can pad the field so that it takes entire cache line and is not shared with other fields.
+
+
+**A.4  Java Memory Model**
+=
+
+https://vimeo.com/181788144 ---> Recommended
+
+What is it?
+- Specification deciding how JVM can reorder instructions (for performance) aka ensures guaranteed ordering of of reads and writes under certain conditions (happens-before). Every JVM has to implement this spec.
+- Barriers that forbid reordering instructions (load-load, load-store, store-load, store-store)
+- Variables
+ - volatile
+ - final = all writes before volatile write will be reflected when/after volatile is read (potentially by other thread). Threads need to use the same volatile variable for this to work. For double/long (which occupy multiple word spaces, word-breakdown is forbidden to ensure integrity of data).
+- Methods - synchronized
+- Locks - normal objects used as locks, and lock classes like ReadWriteLock.
+- Threads - When a new thread is started, it is guaranteed to see all values written before thread started.
