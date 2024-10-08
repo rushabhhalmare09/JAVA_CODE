@@ -544,3 +544,27 @@ What is it?
 - Methods - synchronized
 - Locks - normal objects used as locks, and lock classes like ReadWriteLock.
 - Threads - When a new thread is started, it is guaranteed to see all values written before thread started.
+
+
+**A.5  Java Concurrency**
+=
+
+**Resources**: - 
+   - http://jcip.net/ -> Concurrency in Practice by Brian Goetz - Highly Recommended
+
+**Table of Contents**: -
+- **Basics**
+   - Benefits of Threads
+   - Thread safety
+   - Race Condition
+   - Solutions to compound operations
+   - Synchronized
+   - Liveness and Performance
+
+- **Sharing Objects**
+   - Data Visibility
+   - Safe construction
+   - Confinement
+   - Immutability
+   - Final Fields
+   - Safe Publishing
