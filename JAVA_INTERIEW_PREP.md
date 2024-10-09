@@ -560,7 +560,6 @@ What is it?
    - Solutions to compound operations
    - Synchronized
    - Liveness and Performance
-
 - **Sharing Objects**
    - Data Visibility
    - Safe construction
@@ -568,3 +567,18 @@ What is it?
    - Immutability
    - Final Fields
    - Safe Publishing
+- **Composing Objects**: -
+   - State Ownership
+   - Unmodifiable
+   - Client-side locking
+- **Building Blocks**: -
+   - Iterators and ConcurrentModificationException
+   - Concurrent Collections
+   - InterruptedException
+   - Synchronizers
+- **Task Execution**: -
+   - Thread Pools
+   - Uncaught exception handlers
+   - Shutdown hooks
+   - Daemon threads
+   - Finalizers
