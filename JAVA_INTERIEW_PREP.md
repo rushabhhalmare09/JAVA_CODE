@@ -582,3 +582,13 @@ What is it?
    - Shutdown hooks
    - Daemon threads
    - Finalizers
+- **Applying Thread Pools**: -
+   - Thread pool sizes
+   - ThreadPoolExecutor
+   - Threads
+   - Task Queues
+   - Saturation Policy
+   - Thread Factory
+- **Avoiding Liveness Hazards**: -
+   - Deadlocks
+   - Starvation and LiveLock
