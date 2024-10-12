@@ -592,3 +592,25 @@ What is it?
 - **Avoiding Liveness Hazards**: -
    - Deadlocks
    - Starvation and LiveLock
+- **Performance and Scalability**: -
+   - Costs on performance
+   - Steps
+- **Explicit Locks**: -
+   - Lock and ReentrantLock
+   - Advantages of lock classes
+   - Read-Write lock
+   - Custom Synchronizer
+
+**Basics**: -
+
+**Benefits of Threads**: -
+- Exploiting multiple processors (Resource utilization) - Increasing core counts
+- Simplicity of modeling applications - Distinct tasks can have own thread, and each can be written sequentially.
+- Simplified handling of asynchronous events - If thread is blocked on IO, other threads can still run. Though these days OS allow 100s of thousands of threads, so blocking is not a major issuer anymore. Thus NIO is not as crucial anymore (because its very complicated to implement).
+
+Even if your class doesn't use threads, these do
+- Underlying frameworks
+- RMI
+- JVM (for GC + Main)
+- Timer
+- Servlets & JSP
