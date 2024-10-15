@@ -614,3 +614,13 @@ Even if your class doesn't use threads, these do
 - JVM (for GC + Main)
 - Timer
 - Servlets & JSP
+
+**Thread safety**: -
+Correctness means that a class conforms to its specification. A good specification defines invariants constraining an object's state and postconditions describing the effects of its operations.
+No set of operations performed sequentially or concurrently on instances of a thread-safe class can cause an instance to be in an invalid state.
+
+**Race Condition**: -
+- A race condition occurs when the correctness of a computation depends on the relative timing or interleaving of multiple threads by the runtime
+- Occurs usually with check-then-act (check stale value). Eg: Lazy initialization.
+- Data races is different than race condition. Data races is when thread access (read/write) data to variable without any synchronization.
+
