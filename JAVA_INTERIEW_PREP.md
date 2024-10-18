@@ -624,3 +624,13 @@ No set of operations performed sequentially or concurrently on instances of a th
 - Occurs usually with check-then-act (check stale value). Eg: Lazy initialization.
 - Data races is different than race condition. Data races is when thread access (read/write) data to variable without any synchronization.
 
+**Solutions to compound operations**: -
+- Atomic classes (if only single variable is the issue)
+- Synchronized (if multiple variables are to be updated atomically)
+
+**Synchronized** : -
+- Aka Intrinsic locks, Mutexes, monitors
+- Are re-entrant
+- Re-entrancy can help for overridden synchronized methods. Call to super.method() tries to re-acquire lock, and is permitted.
+Allowing Object class to act as a lock (instead of special classes) was a mistake in JVM design. JVM implementors now have to make trade offs between object size and locking performance.
+
