@@ -553,55 +553,55 @@ What is it?
    - http://jcip.net/ -> Concurrency in Practice by Brian Goetz - Highly Recommended
 
 **Table of Contents**: -
-- **Basics**
+- I]**Basics**
    - Benefits of Threads
    - Thread safety
    - Race Condition
    - Solutions to compound operations
    - Synchronized
    - Liveness and Performance
-- **Sharing Objects**
+- II] **Sharing Objects**
    - Data Visibility
    - Safe construction
    - Confinement
    - Immutability
    - Final Fields
    - Safe Publishing
-- **Composing Objects**: -
+- III] **Composing Objects**: -
    - State Ownership
    - Unmodifiable
    - Client-side locking
-- **Building Blocks**: -
+- IV] **Building Blocks**: -
    - Iterators and ConcurrentModificationException
    - Concurrent Collections
    - InterruptedException
    - Synchronizers
-- **Task Execution**: -
+- V] **Task Execution**: -
    - Thread Pools
    - Uncaught exception handlers
    - Shutdown hooks
    - Daemon threads
    - Finalizers
-- **Applying Thread Pools**: -
+- VI] **Applying Thread Pools**: -
    - Thread pool sizes
    - ThreadPoolExecutor
    - Threads
    - Task Queues
    - Saturation Policy
    - Thread Factory
-- **Avoiding Liveness Hazards**: -
+- VII] **Avoiding Liveness Hazards**: -
    - Deadlocks
    - Starvation and LiveLock
-- **Performance and Scalability**: -
+- VIII] **Performance and Scalability**: -
    - Costs on performance
    - Steps
-- **Explicit Locks**: -
+- IX] **Explicit Locks**: -
    - Lock and ReentrantLock
    - Advantages of lock classes
    - Read-Write lock
    - Custom Synchronizer
 
-**Basics**: -
+I] **Basics**: -
 
 **Benefits of Threads**: -
 - Exploiting multiple processors (Resource utilization) - Increasing core counts
@@ -633,4 +633,23 @@ No set of operations performed sequentially or concurrently on instances of a th
 - Are re-entrant
 - Re-entrancy can help for overridden synchronized methods. Call to super.method() tries to re-acquire lock, and is permitted.
 Allowing Object class to act as a lock (instead of special classes) was a mistake in JVM design. JVM implementors now have to make trade offs between object size and locking performance.
+
+**Liveness and Performance**: -
+- If scope of synchronized block is too large (say entire method of service). The whole performance benefit of multi-threading might be wiped off if service is accessed by lot of threads.
+- Scope of synchronized block should be small enough that it covers all mutable state.
+
+II] **Sharing Objects** : -
+
+**Data Visibility** : -
+- When data is not synchronized, other thread might read stale data (due to caching of variables in CPU registers and L1, L2)
+- 64-bit operations can be treated as 2 32-bit operations, thus need to be synchronized
+- Synchronized keyword ensures other thread reads latest data
+- Volatile keyword does the same
+- Semantics of volatile does not guarantee atomic increment!! Thus use volatile generally as status flags and such.
+Debugging tip: --server argument can hoist variables out of if condition (due to heavier optimization), while client JVM may not. Thus don't just think, if it works in client it works on server.
+
+**Safe construction**: -
+- Do not let this reference escape the constructor. Even if it is last statement of constructor, the escaped reference of this, may not be pointing to completed object.
+- Thus instead of constructors, listeners use setListener factory methods.
+
 
