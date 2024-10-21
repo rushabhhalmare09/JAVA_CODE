@@ -652,4 +652,18 @@ Debugging tip: --server argument can hoist variables out of if condition (due to
 - Do not let this reference escape the constructor. Even if it is last statement of constructor, the escaped reference of this, may not be pointing to completed object.
 - Thus instead of constructors, listeners use setListener factory methods.
 
+**Confinement**: -
+- Confining variables within method is best. For primitives its easy, but for objects, have to ensure its reference is not escaping. Thus Java has Collections.unmodifiableCollection and such.
+- Note: unmodifiableCollection doesn't allow references to be updated, but objects' can still be updated if they are mutable. Eg: Map<String, Vehicle>.. Vehicle object can still be updated.
+- ThreadLocal can also be used if its instance variable, but has to be thread-confined.
 
+**Immutability** : -
+- Simple. Objects that cannot be modified, there are no threading issues.
+
+**Final Fields**: -
+- Guarantee initialization safety.
+
+      public Holder holder;
+      public void initialize() {
+           holder = new Holder(42);   // not guarantee to be done atomically, unless variable is final
+      }
