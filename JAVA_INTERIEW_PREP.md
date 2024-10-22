@@ -667,3 +667,15 @@ Debugging tip: --server argument can hoist variables out of if condition (due to
       public void initialize() {
            holder = new Holder(42);   // not guarantee to be done atomically, unless variable is final
       }
+
+**Safe Publishing** : -
+- Placing a key or value in a Hashtable, synchronizedMap, or Concurrent- Map safely publishes it to any thread that retrieves it from the Map (whether directly or via an iterator);
+- Placing an element in a Vector, CopyOnWriteArrayList, CopyOnWriteArraySet, synchronizedList, or synchronizedSet safely publishes it to any thread that retrieves it from the collection;
+- Placing an element on a BlockingQueue or a ConcurrentLinkedQueue safely publishes it to any thread that retrieves it from the queue.
+
+Using a static initializer is often the easiest and safest way to publish objects that can be statically constructed: public static Holder holder = new Holder(42);
+
+**Composing Objects**: -
+- Making a class thread-safe means ensuring that its invariants hold under concurrent access; this requires reasoning about its state. Objects and variables have a state space: the range of possible states they can take on. The smaller this state space, the easier it is to reason about.
+- By using final fields wherever practical, you make it simpler to analyze the possible states an object can be in. (In the extreme case, immutable objects can only be in a single state.)
+
