@@ -679,3 +679,21 @@ Using a static initializer is often the easiest and safest way to publish object
 - Making a class thread-safe means ensuring that its invariants hold under concurrent access; this requires reasoning about its state. Objects and variables have a state space: the range of possible states they can take on. The smaller this state space, the easier it is to reason about.
 - By using final fields wherever practical, you make it simpler to analyze the possible states an object can be in. (In the extreme case, immutable objects can only be in a single state.)
 
+
+**State Ownership**: - 
+ - Owner of the state can help reason about the mutable access. In Java, there can be shared ownership or transferred ownership (since objects are passed as reference).
+
+**Unmodifiable**: -
+- unmodifiableCollection doesn't allow references to be updated, but values themselves can still be updated if they are mutable. Eg: Map<String, Vehicle>.. Vehicle object can still be updated.
+- locations = new ConcurrentHashMap<String, Point>(points);
+- unmodifiableMap = Collections.unmodifiableMap(locations);
+- unmodifiableMap stores "live" view of the locations map (i.e. any update to locations are reflected in unmodifiableMap).
+- To just give static view (non-live view) wrap it in new HashMap instance and then in unmodifiable.
+- Collections.unmodifiableMap(new HashMap<String, Point>(locations));}
+
+**Client-side locking**: -
+- It can be difficult, because client has to lock on same object which the ThreadSafeClass uses. For example creating a putIfAbsent method in List class
+   - Cannot be achieved through having separate lock.
+   - Can be achieved using same lock as the list. But here locks are spreads over 2 classes (this and List)
+   - Best is to use composition, where you extend list, and ask clients to use this class.
+
