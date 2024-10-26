@@ -675,7 +675,7 @@ Debugging tip: --server argument can hoist variables out of if condition (due to
 
 Using a static initializer is often the easiest and safest way to publish objects that can be statically constructed: public static Holder holder = new Holder(42);
 
-**Composing Objects**: -
+III] **Composing Objects**: -
 - Making a class thread-safe means ensuring that its invariants hold under concurrent access; this requires reasoning about its state. Objects and variables have a state space: the range of possible states they can take on. The smaller this state space, the easier it is to reason about.
 - By using final fields wherever practical, you make it simpler to analyze the possible states an object can be in. (In the extreme case, immutable objects can only be in a single state.)
 
@@ -697,3 +697,39 @@ Using a static initializer is often the easiest and safest way to publish object
    - Can be achieved using same lock as the list. But here locks are spreads over 2 classes (this and List)
    - Best is to use composition, where you extend list, and ask clients to use this class.
 
+IV] **Building Blocks**: -
+   **Iterators and ConcurrentModificationException**: -
+      - Iterators are implemented by associating a modification count with the collection: if the modification count changes during iteration, hasNext or next throws ConcurrentModificationException. However, this check is done without synchronization, so there is a risk of seeing a stale value of the modification count and therefore that the iterator does not realize a modification has been made. This was a deliberate design tradeoff to reduce the performance impact of the concurrent modification detection code.
+      - Easiest way to avoid this, is to hold lock on the list/collection during iteration (in client code). This will come at a cost of scalability. This again, can be avoided, by making copy of entire collection (by wrapping in a lock), and then without locking iterating over that cloned collection. But this comes with increased cost of memory & speed (copying collection every time).
+      - There are also hidden iterators, like when you do toString on collection it internally iterates over all elements appending to StringBuilder. In such cases, on client side use the Collection.synchronizedSet() and then perform all operations.
+
+   **Concurrent Collections**: -
+      **Java 5**
+      - ConcurrentHashMap instead of synchronizedMap (with operations put-if-absent, conditional remove, replace)
+      - CopyOnWriteArrayList instead of synchronizedList
+      - CopyOnWriteArraySet instead of synchronizedSet
+      - Queue & BlockingQueue along with ConcurrentLinkedQueue
+      - PriorityQueue (non concurrent)
+
+      **Java 6**: -
+      - ConcurrentSkipListMap instead of synchronized TreeMap
+      - ConcurrentSkipListSet instead of synchronized TreeSet
+      
+      **ConcurrentHashMap** : -
+      - Lock striping
+      - Concurrent readers and writers, thus high throughput
+      - Weakly consistent iterators instead of fail-fast
+      - Weakly consistent size and isEmpty too
+      - Cannot lock at client side using map object, because internally it uses different locks
+      - Due to above reason, we cannot exclusively lock map and thus cannot write our own put-if-absent
+      - Thus this map provides such operations put-if-absent, conditional remove, replace
+
+      **CopyOnWriteArrayList & CopyOnWriteArraySet**: -
+      - Do not throw ConcurrentModificationException
+      - Copy underlying data during, modification
+      - No locking needed during iteration
+
+      **Other classes**: -
+      - ArrayBlockingQueue & LinkedBlockingQueue
+      - SynchronousQueue
+      - ArrayDeque & LinkedBlockingDeque (work stealing: each consumer has its own deque and it steals from other consumer's deque's tail if its own is empty)
