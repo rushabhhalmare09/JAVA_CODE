@@ -705,32 +705,52 @@ IV] **Building Blocks**: -
       - There are also hidden iterators, like when you do toString on collection it internally iterates over all elements appending to StringBuilder. In such cases, on client side use the Collection.synchronizedSet() and then perform all operations.
 
    **Concurrent Collections**: -
-      **Java 5**: -
-         - ConcurrentHashMap instead of synchronizedMap (with operations put-if-absent, conditional remove, replace)
-         - CopyOnWriteArrayList instead of synchronizedList
-         - CopyOnWriteArraySet instead of synchronizedSet
-         - Queue & BlockingQueue along with ConcurrentLinkedQueue
-         - PriorityQueue (non concurrent)
+   
+   **Java 5**: -
+   - ConcurrentHashMap instead of synchronizedMap (with operations put-if-absent, conditional remove, replace)
+   - CopyOnWriteArrayList instead of synchronizedList
+   - CopyOnWriteArraySet instead of synchronizedSet
+   - Queue & BlockingQueue along with ConcurrentLinkedQueue
+   - PriorityQueue (non concurrent)
 
-      **Java 6** : -
-         - ConcurrentSkipListMap instead of synchronized TreeMap
-         - ConcurrentSkipListSet instead of synchronized TreeSet
+   **Java 6** : -
+   - ConcurrentSkipListMap instead of synchronized TreeMap
+   - ConcurrentSkipListSet instead of synchronized TreeSet
          
-      **ConcurrentHashMap** : -
-         - Lock striping
-         - Concurrent readers and writers, thus high throughput
-         - Weakly consistent iterators instead of fail-fast
-         - Weakly consistent size and isEmpty too
-         - Cannot lock at client side using map object, because internally it uses different locks
-         - Due to above reason, we cannot exclusively lock map and thus cannot write our own put-if-absent
-         - Thus this map provides such operations put-if-absent, conditional remove, replace
+   **ConcurrentHashMap** : -
+   - Lock striping
+   - Concurrent readers and writers, thus high throughput
+   - Weakly consistent iterators instead of fail-fast
+   - Weakly consistent size and isEmpty too
+   - Cannot lock at client side using map object, because internally it uses different locks
+   - Due to above reason, we cannot exclusively lock map and thus cannot write our own put-if-absent
+   - Thus this map provides such operations put-if-absent, conditional remove, replace
 
-      **CopyOnWriteArrayList & CopyOnWriteArraySet**: -
-         - Do not throw ConcurrentModificationException
-         - Copy underlying data during, modification
-         - No locking needed during iteration
+   **CopyOnWriteArrayList & CopyOnWriteArraySet**: -
+   - Do not throw ConcurrentModificationException.
+   - Copy underlying data during, modification
+   - No locking needed during iteration
 
-      **Other classes**: -
-         - ArrayBlockingQueue & LinkedBlockingQueue
-         - SynchronousQueue
-         - ArrayDeque & LinkedBlockingDeque (work stealing: each consumer has its own deque and it steals from other consumer's deque's tail if its own is empty)
+   **Other classes**: -
+   - ArrayBlockingQueue & LinkedBlockingQueue.
+   - SynchronousQueue
+   - ArrayDeque & LinkedBlockingDeque (work stealing: each consumer has its own deque and it steals from other consumer's deque's tail if its own is empty)
+
+   **InterruptedException**: -
+   - Threads waiting in blocked state can be interrupted, using interrupt method. It has boolean flag for setting this.
+   - Good for cancelling long waiting tasks.
+   - If your code calls method which throws InterruptedException then:
+   - Choice 1 - Throw InterruptedException when called
+   - Choice 2 - Catch it, and restore the interrupted flag
+
+   **Synchronizers**: -
+   - **Latches**: -
+      - Can act as a gate, where all threads stop at the gate, and allowed once gate is opened.
+      - This binary closed-open action is good for implementing 'Resource is initialized, now dependent actions can begin'
+      - Eg: Wait for all dependent services to init, wait for all players to arrive, wait until all worker threads finish etc.
+      - CountDownLatch: await method, thread waits till count decrements to zero, or is interrupted or wait times out
+      - FutureTask can also act as latch. future.get() method waits until task is completed and returns results.
+   - **Semaphores**: -
+     - Permits (acquire and release)
+     - Useful in creating bounded collections
+     - Can instead use BlockingQueue, if resources themselves are to be tracked. Eg: Object pool
