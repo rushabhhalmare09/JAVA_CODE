@@ -754,3 +754,16 @@ IV] **Building Blocks**: -
      - Permits (acquire and release)
      - Useful in creating bounded collections
      - Can instead use BlockingQueue, if resources themselves are to be tracked. Eg: Object pool
+   - **Barriers**: -
+      - Similar to Latches with key difference.
+      - Latches are waiting for events, barriers are waiting for other threads
+      - CyclicBarrier waits for fixed number of threads arrive at a point, repeatedly.
+      - If all threads reach barrier point, barrier is passed and it resets.
+      - await call returns arrival index to each thread, which can be used to "elect"
+      - CyclicBarrier constructor accepts count (of threads) and Runnable (to run when threads reach this point).
+      - Excellent for assigning sub-problems to threads and merging all results when barrier is reached.
+   - **Exchanger**: -
+      - Similar to Barrier that both wait until other arrives at same point.
+      - Once reached they can exchange an object.
+      - This is transfer of ownership of object (safe publication)
+      - Example: Consumer exchanging an empty buffer with the producer, for a full buffer.
