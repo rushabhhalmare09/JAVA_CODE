@@ -751,7 +751,8 @@ IV] **Building Blocks**: -
       - CountDownLatch: await method, thread waits till count decrements to zero, or is interrupted or wait times out
       - FutureTask can also act as latch. future.get() method waits until task is completed and returns results.
    - **Semaphores**: -
-     - Permits (acquire and release)
+     - Permits (ac
+     - quire and release)
      - Useful in creating bounded collections
      - Can instead use BlockingQueue, if resources themselves are to be tracked. Eg: Object pool
    - **Barriers**: -
@@ -767,3 +768,21 @@ IV] **Building Blocks**: -
       - Once reached they can exchange an object.
       - This is transfer of ownership of object (safe publication)
       - Example: Consumer exchanging an empty buffer with the producer, for a full buffer.
+        
+V] **Task Execution**: -
+
+  - **Thread Pools**:
+       - Threadpool with its bounded pool helps throttle the inputs/requests so as to not exhaust available resources.
+       - Single Threaded Executors provide synchronization guarantee that writes made by a task will be visible to subsequent tasks.
+      **Types**
+      - newFixedSizeThreadPool - creates new thread, if one dies due to exception
+      - newCachedThreadPool - keeps increasing threads
+      - newSingleThreadExecutor - consumes task based on queue type (FIFO, LIFO, Priority etc), resurrects thread if dead
+      - newScheduledThreadPool - supports delayed and periodic execution similar to Timer
+      - Usually shutdown call is immediately followed by awaitTermination.
+
+ - **Uncaught exception handlers**: -
+      - Thread provides facility for UncaughtExceptionHandler. When thread dies due to some exception, JVM checks if it has exception handler, if not it checks its ThreadGroup, if not then its super ThreadGroup and so on. Final system level ThreadGroup just prints stack trace to System.err
+
+
+  
