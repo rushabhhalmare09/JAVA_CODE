@@ -783,6 +783,21 @@ V] **Task Execution**: -
 
  - **Uncaught exception handlers**: -
       - Thread provides facility for UncaughtExceptionHandler. When thread dies due to some exception, JVM checks if it has exception handler, if not it checks its ThreadGroup, if not then its super ThreadGroup and so on. Final system level ThreadGroup just prints stack trace to System.err
-
-
   
+ - **Shutdown hooks**: -
+      - JVM also provides Runtime.addShutdownHook for when it attempts to shut down.
+      - Then it runs finalizers if runFinalizerOnExit is true
+      - It does not attempt to shutdown application threads, they die abruptly
+      - If these hooks do not complete, they hang the JVM. Thus do proper synchronization and not dead lock them.
+
+ - **Daemon threads**: -
+      - Daemon threads do not stop JVM to shutdown
+      - GC, housekeeping threads are daemon threads
+      - Threads inherit daemon status of the owner thread
+      - When JVM halts, they do not call finally for daemon, nor cleanup their stacks, nor call finalizers.
+      - Thus better to use them sparingly
+
+ - **Finalizers**: -
+      - Opportunity given by JVM to reclaim/free any resources being held up
+      - Not guaranteed to run
+      - Avoid as much as possible, catch-finally can more often do better job
