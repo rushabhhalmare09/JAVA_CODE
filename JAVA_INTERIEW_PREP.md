@@ -801,3 +801,20 @@ V] **Task Execution**: -
       - Opportunity given by JVM to reclaim/free any resources being held up
       - Not guaranteed to run
       - Avoid as much as possible, catch-finally can more often do better job
+
+VI] **Applying Thread Pools**: -
+
+   - **Thread pool sizes**: -
+      - If its too big, it can exhaust memory (& lot of overhead of creating/managing them)
+      - If its too small, not completely utilizing the CPU
+      - Usually, N (number of CPU cores) is right size of pools
+      - Though, if tasks do IO then, not all threads will be schedulable (tasks will be waiting for some resource), so its okay to increase size of threadpool.
+      - int N_CPUS = Runtime.getRuntime().availableProcessors();
+      - Other deciding factors: memory, file handles, socket handles, and database connections
+   
+   - **ThreadPoolExecutor**: -
+     - **Threads**: -
+        - newFixedThreadPool: corePoolSize == maximumPoolSize
+        - newCachedThreadPool: corePoolSize = 0 and maximumPoolSize = Integer.MAX_VALUE
+        - Keep alive: how long to wait before unused thread is reclaimed (trade off)
+
