@@ -817,4 +817,13 @@ VI] **Applying Thread Pools**: -
         - newFixedThreadPool: corePoolSize == maximumPoolSize
         - newCachedThreadPool: corePoolSize = 0 and maximumPoolSize = Integer.MAX_VALUE
         - Keep alive: how long to wait before unused thread is reclaimed (trade off)
+     - **Task Queues**: -
+        - newFixedThreadPool and newSingleThreadedExecutor use unbounded LinkedBlockingQueue
+        - Try to use bounded (LinkedBlockingQueue, ArrayBlockingQueue or PriorityQueue)
+     - **Saturation Policy**: -
+        - When bounded queue is full, what to do when task is submitted
+        - Abort - throw RejectedExecutionException
+        - Discard - discard silently
+        - Discard oldest - discards oldest from queue
+        - Caller Runs - return task to caller, so that caller thread can run it instead
 
