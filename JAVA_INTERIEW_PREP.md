@@ -827,3 +827,21 @@ VI] **Applying Thread Pools**: -
         - Discard oldest - discards oldest from queue
         - Caller Runs - return task to caller, so that caller thread can run it instead
 
+VII] **Thread Factory** : -
+        - Used to create new threads
+        - By default new non-daemon threads are created
+        - Can be overridden to create special threads which do say logging
+
+VII] **Avoiding Liveness Hazards**: -
+   - **Deadlocks**: -
+        - Database systems are great at handling deadlocks; they back-off certain transactions such that locks are released.
+        - JVM is not so kind. When threads are deadlocked, that's it, game over.
+     Transfer money is classic examples (with synchronized block on from and to accounts). If 2 calls are made, where 1st case arguments are from then to, and in 2nd case, its to then from. They may deadlock. To solve, either get comparable int keys or System.identityHashcode(), and order which account to be synchronized first. So no matter what's order of arguments, you always lock same account first, avoiding deadlock.
+           - **How to avoid**
+               - Use only 1 locks (so no ordering issues)
+               - Order locks if multiple (ensure ordering is same no matter order of arguments)
+               - Use tryLock method of lock classes
+        
+   - **Starvation and LiveLock** : -
+      - Starvation is when thread is stuck
+      - Livelock is when thread keeps running (eg: message listener throws exception, rolls back then again tries processing of same object)
