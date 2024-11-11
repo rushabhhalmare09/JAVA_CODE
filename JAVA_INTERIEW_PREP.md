@@ -845,3 +845,26 @@ VII] **Avoiding Liveness Hazards**: -
    - **Starvation and LiveLock** : -
       - Starvation is when thread is stuck
       - Livelock is when thread keeps running (eg: message listener throws exception, rolls back then again tries processing of same object)
+
+VIII] **Performance and Scalability**: -
+   - Amdhal's law - How much a program can be theoretically sped up.
+   - Trick is to divide into multiple tasks with their own data structures, and converge the results (this last step will be only step that will be sequential)
+   - ConcurrentLinkedQueue is twice as fast as synchronizedLinkedList, because former has only final pointer updates as sequential while latter synchronizes on whole list.
+
+     - **Costs on performance**: -
+        - Context switching
+        - Synchronization
+        - Data locality (memory cache)
+        - Blocking on locks
+    - **Steps**: -
+        - Reduce lock contention
+        - Reduce scope - get in / get out
+        - Reduce lock granularity (too many times in and out is not good too)
+        - Lock striping
+        - Avoid hot fields
+        - Non blocking (compare-and-swap)
+        - Say no to object pooling - Java is super fast at new allocation, but getting objects from pool requires synchronization
+
+IX] **Explicit Locks**: -
+   - **Lock and ReentrantLock**: -
+     
