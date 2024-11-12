@@ -867,4 +867,18 @@ VIII] **Performance and Scalability**: -
 
 IX] **Explicit Locks**: -
    - **Lock and ReentrantLock**: -
+      - Lock implementations must provide the same memory-visibility semantics as intrinsic locks, but can differ in their locking semantics, scheduling algorithms, ordering guarantees, and performance characteristics.
+
+   **Advantages of lock classes**: -
+   - More flexible. Need not release lock in same block of code unlike synchronized
+   - "Synchronized block" threads cannot be interrupted while they are waiting for lock.
+   - lockInterruptibly can stop waiting for lock on interrupt
+   - Deadlock can be avoided by trying to acquire lock, and releasing already acquired, if cannot acquire new one.
+   - Intrinsic locks can't release locks on timeout
+   - Since Java 6, performance of intrinsic and reentrant lock is very similar. Earlier it used to be slower.
+
+- Always do lock.unlock in finally block
+- Locks can be fair/unfair. Fair locks implement queues to handle requests for a lock. Ofcourse, fairness comes with cost of performance.
+
+
      
