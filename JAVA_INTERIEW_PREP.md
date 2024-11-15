@@ -880,5 +880,9 @@ IX] **Explicit Locks**: -
 - Always do lock.unlock in finally block
 - Locks can be fair/unfair. Fair locks implement queues to handle requests for a lock. Ofcourse, fairness comes with cost of performance.
 
+   **Read-Write lock**: -
+   - Allows multiple concurrent readers, but only single writer
+   - Great for data structure with lot of reads
+   - More complex to implement thus slightly slower than reentrant lock
 
      
