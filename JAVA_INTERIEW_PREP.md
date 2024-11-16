@@ -885,4 +885,9 @@ IX] **Explicit Locks**: -
    - Great for data structure with lot of reads
    - More complex to implement thus slightly slower than reentrant lock
 
-     
+   **Implementation factors**: -
+   - Release preference - If writer is running, and readers+writers are waiting, preference to writer?
+   - Reader barging - If reader is running, and readers+writers are waiting, preference to reader? Good for throughput but writer can become starved
+   - Reentrancy - Are they reentrant
+   - Downgrading - what if writer lock owners wants only reader lock
+   - Upgrading - What if reader lock owner also wants writer lock
