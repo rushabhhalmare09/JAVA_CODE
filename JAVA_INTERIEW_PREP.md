@@ -891,3 +891,11 @@ IX] **Explicit Locks**: -
    - Reentrancy - Are they reentrant
    - Downgrading - what if writer lock owners wants only reader lock
    - Upgrading - What if reader lock owner also wants writer lock
+
+   **Custom Synchronizer**: -
+   - Conditional queues - Threads waiting for an object lock which reflects certain condition.
+   - Explicit class called Condition for implementing conditional queues (which can be implemented using intrinsic locks too).
+   - Condition is associated with single lock. Lock.newCondition()
+   **Advantages**: -
+   - Fairness in wait
+   - Timeout facility (flexibility)
