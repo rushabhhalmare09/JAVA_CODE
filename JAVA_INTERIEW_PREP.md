@@ -899,3 +899,27 @@ IX] **Explicit Locks**: -
    **Advantages**: -
    - Fairness in wait
    - Timeout facility (flexibility)
+
+**6] Garbage Collection**: -
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+**Concepts**: -
+- Throughput - Percentage of time application runs vs GC
+- Latency - Amount of pause time for application waiting for GC to complete
+- Memory - Amount of memory used to store the objects aka heap (along with GC related data structures)
+
+**Trade offs**: -
+- If memory is less, throughput is less, because JVM has to constantly do GC
+- If memory is more, latency is high, because JVM has to sweep huge space to do GC
