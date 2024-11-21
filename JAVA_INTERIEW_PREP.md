@@ -923,3 +923,13 @@ IX] **Explicit Locks**: -
 **Trade offs**: -
 - If memory is less, throughput is less, because JVM has to constantly do GC
 - If memory is more, latency is high, because JVM has to sweep huge space to do GC
+
+**Use cases**: -
+- For trading applications, deterministic (more average) latency is better than sudden spikes (increased worst case latency).
+- For batch applications, it might be ok for increase worst case latency, if it helps gain more throughput
+
+**Tweaks**: -
+- To large extent, more memory for GC helps in increasing throughput
+- Worst case latency can be reduced by keeping heap size small (& live set small)
+- Frequency of GC can be reduced by managing heap & generation sizes
+- Frequency of large pauses can be reduced by running GC with application, sometimes at cost of throughput (because it runs longer due to 2 S
