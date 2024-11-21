@@ -932,4 +932,11 @@ IX] **Explicit Locks**: -
 - To large extent, more memory for GC helps in increasing throughput
 - Worst case latency can be reduced by keeping heap size small (& live set small)
 - Frequency of GC can be reduced by managing heap & generation sizes
-- Frequency of large pauses can be reduced by running GC with application, sometimes at cost of throughput (because it runs longer due to 2 S
+- Frequency of large pauses can be reduced by running GC with application, sometimes at cost of throughput (because it runs longer due to 2 STW pauses, and one thread is used by GC which could've been used by application).
+
+**Object lifetimes**: -
+- Infant mortality / Weak generational hypothesis - Most objects die young.
+- Thus, generational GC algorithms provide magnitude-of-order better throughput.
+- How? Region with newly allocated object is sparse for live objects, they can be quickly copied over and region can be wiped entirely.
+- If application keeps allocating objects that live too long. The generational split becomes useless, and GC takes long time. Because old generation is too big (& not so sparse).
+- Lifetime of object is recorded by JVM as number of GC cycles survived.
