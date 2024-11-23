@@ -940,3 +940,17 @@ IX] **Explicit Locks**: -
 - How? Region with newly allocated object is sparse for live objects, they can be quickly copied over and region can be wiped entirely.
 - If application keeps allocating objects that live too long. The generational split becomes useless, and GC takes long time. Because old generation is too big (& not so sparse).
 - Lifetime of object is recorded by JVM as number of GC cycles survived.
+
+**Stop the World Events**: -
+- Collectors need application execution to stop for practical reasons.
+- Threads are signalled to stop. Threads stop when they reach safe points of execution.
+- If thread is busy (copying large array, cloning a large object), it might be few milliseconds till this point.
+- ‑XX:+PrintGCApplicationStoppedTime this flag is used to print the time taken to reach safe point.
+- Once GC STW event is over, all threads are free to resume. An application with large number of threads can suffer scheduling pressure. It might be more efficient to use different collector then.
+
+**Heap organization in HotSpot**: -
+- Heap is split in Young and Old (Tenured) generation
+- Young generation is split in - Eden and Survivor (1,2) spaces
+- PermGen is used to store effectively immortal objects (Classes, static strings etc).
+- In Java 7, interned Strings were removed from PermGen.
+- In Java 8, PermGen space itself is replaced by MetaSpace.
