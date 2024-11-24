@@ -954,3 +954,21 @@ IX] **Explicit Locks**: -
 - PermGen is used to store effectively immortal objects (Classes, static strings etc).
 - In Java 7, interned Strings were removed from PermGen.
 - In Java 8, PermGen space itself is replaced by MetaSpace.
+
+**Object allocation**: -
+- Each thread is assigned TLAB (Thread Local Allocation Buffer) to allocate new objects.
+- Since there is no conflict between threads, object allocation is just a bump-the-pointer, and is faster than MALLOC in C. Roughly 10 machine instructions.
+- When TLAB is exhausted new TLAB is requested from Eden. If Eden is filled, Minor GC is triggered.
+- If a large object (size greater than TLAB) is to be allocated, it is done directly in Eden or Old Generation.
+- -XX:PretenureSizeThreshold=<n> If this is smaller than TLAB, then small objects are still allocated in TLAB itself, not in Old generation.
+
+**Minor Collection**: -
+- Called when Eden is full.
+- Live objects are moved to one of the survivor spaces.
+- If survivor space is full or object has live too long (XX:MaxTenuringThreshold=<n>) it is moved to tenured generation.
+- Major cost of minor collection is in copying live objects to survivor / old generation. Thus, overall cost depends on number of objects to be copied not the size of Eden.
+- Thus, if new generation size is doubled, total minor GC time is almost halved (thus increasing the throughput). Assuming number of live objects remain constant.
+- Minor collections are STW events. This is becoming an issue as heaps are getting larger, with more and more live objects.
+- This algorithm is called mark-and-copy
+
+
