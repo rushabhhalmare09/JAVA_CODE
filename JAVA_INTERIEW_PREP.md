@@ -971,4 +971,16 @@ IX] **Explicit Locks**: -
 - Minor collections are STW events. This is becoming an issue as heaps are getting larger, with more and more live objects.
 - This algorithm is called mark-and-copy
 
+**Marking Live Objects**: -
+- All objects in graph starting from GC Roots
+- GC roots = references from application, JVM internal static fields and thread stack-frames
+- References from old generation to young generation (aka cross generational references) are also tracked
+- Card tables are used for this. Card tables are array of bytes. Each byte represents 512 bytes of old gen. If byte is set, it means corresponding 512 bytes of old gen has reference to young gen objects.
+- During minor collection, all such cards are checked, then all those 512 byte regions are checked for references. Thus, minor collection latency also depends on number of old gen to young gen references.
 
+**Major Collection**: -
+- JVM tries to predict, set % threshold and start collection when threshold is passed.
+- When object cannot be promoted from younger gen due to lack of space in old gen, then FullGC is triggered.
+- FullGC = minor collection + major collection (including compaction).
+- FullGC is also triggered when old gen size needs to be changed. This can be avoided by keeping Xms same as Xmx
+- Compaction is likely to cause largest STW
