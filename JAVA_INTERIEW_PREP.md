@@ -984,3 +984,20 @@ IX] **Explicit Locks**: -
 - FullGC = minor collection + major collection (including compaction).
 - FullGC is also triggered when old gen size needs to be changed. This can be avoided by keeping Xms same as Xmx
 - Compaction is likely to cause largest STW
+
+**Serial Collector**
+- Smallest footprint of any collectors
+- Uses single thread for both minor and major collections.
+- Objects in old gen are allocated with simple bump the pointer technique
+- Major GC is triggered when old gen is full
+
+**Parallel Collector**
+- Parallel Collector - Multiple threads for minor GC, and single thread for major GC.
+- Parallel Old Collector - Multiple threads for both minor and major GC. Default since Java 7u4
+- Doesn't run with the application.
+- Greatest throughput in multi-processor systems. Great for batch applications.
+- Cost of Old GC, is proportional to number of objects, thus doubling old gen size can help in increasing throughput (larger but fewer GC pauses).
+- Minor GCs are fast because promotion in old gen is just bump-the-pointer.
+- Major GC takes 1-5 seconds per live data
+- Allows for -XX:+UseNUMA to allocate Eden space per CPU socket (can increase performance)
+
