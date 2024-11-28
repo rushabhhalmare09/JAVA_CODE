@@ -1001,3 +1001,21 @@ IX] **Explicit Locks**: -
 - Major GC takes 1-5 seconds per live data
 - Allows for -XX:+UseNUMA to allocate Eden space per CPU socket (can increase performance)
 
+**Concurrent Mark and Sweep**
+- Parallel (multiple threads) for Minor GC
+- Runs with application to try to avoid promotion failure. Promotion failure causes FullGC.
+- CMS =
+   - Initial mark = Find GC roots
+   - Concurrent mark = mark all objects from GC root
+   - Concurrent pre-clean = check for updated object references & promoted objects during mark (Card Marking technique)
+   - Re-mark = mark all objects in pre-clean
+   - Concurrent sweep = reclaim memory and update free-lists
+   - Concurrent reset = reset data structures used
+- During concurrent sweep, promotions can occur, but those are in free-lists which are not being swept anyways. So there is not conflict.
+- Minor GCs can keep happening while Major GC is happening! Thus the pre-clean phase.
+- Slower minor GCs during promotion. Cost of promotion is higher since, free-lists have to be checked for suitable sized hole.
+- CMS is not compacting collector, so when object promotion fails due to not having enough space in free-lists. CMS is followed by compaction. This latency can be worse than Parallel Old collector.
+- Decreases latency, but less throughput. Avg ¼ GC threads per 1 CPU core.
+- Throughput reduction between 20-40% compared to parallel collector (& based on object allocation rate).
+- 20% more space required.
+- "Concurrent mode failure" - When CMS cannot keep up with high promotion rates. Increasing heap makes it even worse, because sweeping will take even more time.
