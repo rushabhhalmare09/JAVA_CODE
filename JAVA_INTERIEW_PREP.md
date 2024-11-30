@@ -1019,3 +1019,20 @@ IX] **Explicit Locks**: -
 - Throughput reduction between 20-40% compared to parallel collector (& based on object allocation rate).
 - 20% more space required.
 - "Concurrent mode failure" - When CMS cannot keep up with high promotion rates. Increasing heap makes it even worse, because sweeping will take even more time.
+
+**G1 Garbage First** 
+- Soft real-time targets. Spend x milliseconds in GC out of y milliseconds.
+- Divides heap into large regions ~2048
+- Categorizes regions in Eden, Survivor and Old gen spaces.
+- Minor GC is triggered, when all Eden regions are filled.
+- Selects closest set of nearly free regions (called Collection Set), to move live objects, essentially causing regions to be empty. Thus it approaches problem incrementally, as opposed to CMS which has to perform on entire Old gen.
+- Objects larger than 50% of region are saved in "humungous region"
+- Regions can have objects being referenced from multiple other regions. These are tracked using Reference Sets. Thus, while moving live objects, all the references to such objects need to be updated. Thus, even minor collections can potentially be longer than Parallel or CMS collector.
+- It avoids collecting (moving) from regions which have high references. Unless it has no other option.
+- G1 is target driven on latency –XX:MaxGCPauseMillis=<n>, default value = 200ms
+- G1 reduces worst case latency, at the cost of higher average latency.
+- Compactions are piggybacked on Young Gen GC.
+- During reference changes, cards (arrays pointing to 512 bytes of a region) are marked dirty, and source-target details are placed in dirty card queue. Depending on number of elements in queue (white, green, yellow, red) G1 starts threads which take information from queue and write to Remembered Set. More the queue is full, more G1 threads try to drain it. Remembered set will be heavily contended if all threads directly write to RS, its better if only specific G1 threads (1 or 2) write to them.
+- If Young GC cannot finish within maxTargetPauseTime, then # of Eden regions are reduced to finish within the target.
+- Old GC is triggered when total 45% is full, and is checked just after Young GC or after allocating humongous object.
+- VID - https://www.youtube.com/watch?v=Gee7QfoY8ys
