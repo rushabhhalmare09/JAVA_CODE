@@ -1036,3 +1036,19 @@ IX] **Explicit Locks**: -
 - If Young GC cannot finish within maxTargetPauseTime, then # of Eden regions are reduced to finish within the target.
 - Old GC is triggered when total 45% is full, and is checked just after Young GC or after allocating humongous object.
 - VID - https://www.youtube.com/watch?v=Gee7QfoY8ys
+
+**Shenandoah**
+- 10% hit in throughput, but 7x more responsive.
+- Avg Pause 5x better - 60ms (vs 600ms in G1).
+- Max Pause 3x better - 500ms (vs 1700ms). Lot of headroom.
+- Target - 10ms average, and max 100ms.
+- Region based like G1 (remembered sets, collection sets)
+- Concurrent mark and sweep same as CMS and G1
+- It does compaction though + concurrently while threads are running
+- Trick is to create indirection pointer to objects, and after copying live objects, atomically update the indirection pointer to copied version of the objects.
+- Not Generational. Claim is, Weak Generational Hypothesis is no longer applicable.
+
+**Other pauses not related to GC**
+- Networking, Disk read/writes, Waiting for DBs
+- OS interrupts (~5ms), this doesn't show up in logs
+- Lock contention
