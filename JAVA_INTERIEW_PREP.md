@@ -1068,3 +1068,10 @@ Note: These topics are highly unlikely to come up in an interview. Feel free to 
 - Addresses 4gb to 28gb, remove 3bits, because Java has 8 byte word aligned, thus 3 bits need not be stored.
 - Important because Java has more references. In C++ memory layout follows struct layout.
 - Java 8 has JVM args, +XX:ObjectAlignmentInBytes=16 for heap between 32gb and 64gb.
+
+**String interning**
+- Interning = storing strings in a pool and re-using them
+- If you intern a set of all strings, you can compare them by == improving performance.
+- It is stored internally as a hashmap (it is native C code, not Java code).
+- More details here and here
+- How would you implement your own string interning?
