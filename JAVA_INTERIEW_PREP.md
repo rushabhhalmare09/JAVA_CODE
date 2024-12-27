@@ -1075,3 +1075,24 @@ Note: These topics are highly unlikely to come up in an interview. Feel free to 
 - It is stored internally as a hashmap (it is native C code, not Java code).
 - More details here and here
 - How would you implement your own string interning?
+
+
+         private static final WeakHashMap<String, WeakReference<String>> s_manualCache
+               = new WeakHashMap<String, WeakReference<String>>(100000);
+          
+         private static String manualIntern(final String str){
+             final WeakReference<String> cached = s_manualCache.get(str);
+             if (cached != null){
+                 final String value = cached.get();
+                 if (value != null)
+                     return value;
+             }
+             s_manualCache.put(str, new WeakReference<String>(str));
+             return str;
+         }
+
+**Thread Affinity**: -
+- Makes the thread stick to a CPU core, even if it has no tasks left to perform. Unlike normal threads, this won't go into sleep/wait.
+- Thread performs busy-spin. Note: This is wasting of CPU resources, and it can lead to thread starvation since other threads do not get access to that core.
+- Thus, it needs to be used for the right applications. Helpful in latency critical applications like FX Trading.
+- Thread affinity only works for Linux and there are Java libraries available (https://github.com/OpenHFT/Java-Thread-Affinity) to use the same
