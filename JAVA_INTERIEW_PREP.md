@@ -1111,7 +1111,8 @@ Note: These topics are highly unlikely to come up in an interview. Feel free to 
 --------------------------------
 
 **Table of Contents**
-1] Creating and Destroying Objects
+
+**- 1] Creating and Destroying Objects**
 - Consider static builders
 - Service Interface Pattern
 - Builder pattern
@@ -1120,13 +1121,13 @@ Note: These topics are highly unlikely to come up in an interview. Feel free to 
 - Avoid creating unnecessary objects
 - Clear memory references
 - Avoid finalizers
-2] Methods common to all objects
+**- 2] Methods common to all objects**
 - equals
 - hashcode
 - toString
 - clone
 - comparable
-3] Classes and Interfaces
+**- 3] Classes and Interfaces**
 - Accessibility
 - Private fields with accessor methods
 - Make fields as much immutable as possible
@@ -1136,15 +1137,15 @@ Note: These topics are highly unlikely to come up in an interview. Feel free to 
 - Class hierarchies over tagged classes
 - Function objects to represent strategies
 - Favor static member class over non-static
-4] Generics
+**- 4] Generics**
 - Don't use Raw types
 - Prefer Lists to arrays
-5] Enums and Annotations
+**- 5] Enums and Annotations**
 - Enums instead of int constants
 - Prefer annotations over naming patterns
-6] Methods
+**- 6] Methods**
 - Definition
 - Var args
 - Return empty collections instead of null
-7] General
+**- 7] General**
 - Use Serializable Judiciously
