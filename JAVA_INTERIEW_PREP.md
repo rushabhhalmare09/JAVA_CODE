@@ -1105,3 +1105,46 @@ Note: These topics are highly unlikely to come up in an interview. Feel free to 
 - Memory consumptions of primitives and boxed variables (http://java-performance.info/overview-of-memory-saving-techniques-java/)
 - Hoisting variables: JVM can hoist variables out of for loops to improve performance. example(http://stackoverflow.com/a/9338302/3494368)
 - Escape analysis: JVM can choose to place a method local object (if it never escapes the method) in Thread-stack instead of heap. Improves performance since that object doesn't go through GC (can be just deleted once method completes).
+
+
+
+--------------------------------
+
+**Table of Contents**
+1] Creating and Destroying Objects
+- Consider static builders
+- Service Interface Pattern
+- Builder pattern
+- Singleton with private instance or enum
+- Private Constructor
+- Avoid creating unnecessary objects
+- Clear memory references
+- Avoid finalizers
+2] Methods common to all objects
+- equals
+- hashcode
+- toString
+- clone
+- comparable
+3] Classes and Interfaces
+- Accessibility
+- Private fields with accessor methods
+- Make fields as much immutable as possible
+- Composition over inheritance
+- Override in inheritance
+- Prefer interfaces to abstract classes
+- Class hierarchies over tagged classes
+- Function objects to represent strategies
+- Favor static member class over non-static
+4] Generics
+- Don't use Raw types
+- Prefer Lists to arrays
+5] Enums and Annotations
+- Enums instead of int constants
+- Prefer annotations over naming patterns
+6] Methods
+- Definition
+- Var args
+- Return empty collections instead of null
+7] General
+- Use Serializable Judiciously
