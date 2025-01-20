@@ -1149,3 +1149,11 @@ Note: These topics are highly unlikely to come up in an interview. Feel free to 
 - Return empty collections instead of null
 **- 7] General**
 - Use Serializable Judiciously
+
+
+- **Creating and Destroying Objects**
+- **Consider static builders**: -
+- They can have any name, thus can have multiple methods with same parameters (unlike constructors)
+- They can return cached objects (eg: Boolean.valueOf)
+- They can return their subtype, even class objects which are not public. Eg: Collection has 32 factory methods, return type of many are non-public classes. Ofcourse, the interface they extend is public. Returning such interface backed classes, also help in returning specific type based on argument. Eg: EnumSet returns RegularEnumSet or JumboEnumSet based on the argument. In future, JDK can add more types, without client/caller knowing about them. See service interface pattern below
+- They can reduce verbosity of parameterized types. Eg: Maps.newHashMap()
