@@ -1157,3 +1157,15 @@ Note: These topics are highly unlikely to come up in an interview. Feel free to 
 - They can return cached objects (eg: Boolean.valueOf)
 - They can return their subtype, even class objects which are not public. Eg: Collection has 32 factory methods, return type of many are non-public classes. Ofcourse, the interface they extend is public. Returning such interface backed classes, also help in returning specific type based on argument. Eg: EnumSet returns RegularEnumSet or JumboEnumSet based on the argument. In future, JDK can add more types, without client/caller knowing about them. See service interface pattern below
 - They can reduce verbosity of parameterized types. Eg: Maps.newHashMap()
+
+**Service Interface Pattern**
+- Here same pattern as above, where the implementation classes are not even known upfront.
+- Example: JDBC connection driver classes. DriverManager.registerDriver, and DriverManager.getConnection.
+- It needs to provide, registration API and then get service API
+- Cannot subclass and take advantage of constructors. Though this enforces Composition instead of inheritance, so its not so bad.
+- Cannot easily distinguish between constructing methods, and other methods. Need to use some convention to make it easy. Eg: newInstance, valueOf, of etc.
+
+**Builder pattern**
+- When too many parameters use builders instead.
+- In Builders, each parameter setting can be through a good name method. In constructor its difficult to remember.
+- Can easily add optional parameter support.
