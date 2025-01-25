@@ -1176,3 +1176,6 @@ Note: These topics are highly unlikely to come up in an interview. Feel free to 
 - Enums (by default lazy, and provides init guarantee)
 
 **Private Constructor**: -
+Avoid creating unnecessary objects
+Eg: Sring abc = new String("some value"); instead use String abc = "some value";
+Choose primitives over boxed, check for unnecessary boxing and unboxing
