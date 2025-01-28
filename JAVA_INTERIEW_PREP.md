@@ -1151,7 +1151,7 @@ Note: These topics are highly unlikely to come up in an interview. Feel free to 
 - Use Serializable Judiciously
 
 
-**Creating and Destroying Objects**
+**1] Creating and Destroying Objects**
 **Consider static builders**: -
 - They can have any name, thus can have multiple methods with same parameters (unlike constructors)
 - They can return cached objects (eg: Boolean.valueOf)
@@ -1176,6 +1176,19 @@ Note: These topics are highly unlikely to come up in an interview. Feel free to 
 - Enums (by default lazy, and provides init guarantee)
 
 **Private Constructor**: -
-Avoid creating unnecessary objects
-Eg: Sring abc = new String("some value"); instead use String abc = "some value";
-Choose primitives over boxed, check for unnecessary boxing and unboxing
+**Avoid creating unnecessary objects**: -
+- Eg: Sring abc = new String("some value"); instead use String abc = "some value"
+- Choose primitives over boxed, check for unnecessary boxing and unboxing
+
+**Clear memory references**: -
+- Let objects go out of scope quickly
+- If not, nullify reference (eg: Stack.pop, within method, elements[size] = null)
+- Check caches and message listeners, they hold references
+
+**Avoid finalizers**: -
+- JVM does not guarantee they will be called
+- If called, they can be called anytime, not immediately after object is eligible for GC
+- Never release resource in finalizer, if it does not run, the resource will still be lock (or in inconsistent state)
+- Hampers performance
+- Instead use explicit close methods like OutputStream, java.sql.Connection etc
+- These classes also use finalizers, but that is safety net
