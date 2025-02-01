@@ -1192,3 +1192,17 @@ Note: These topics are highly unlikely to come up in an interview. Feel free to 
 - Hampers performance
 - Instead use explicit close methods like OutputStream, java.sql.Connection etc
 - These classes also use finalizers, but that is safety net
+
+**Methods common to all objects**: -
+**equals**: -
+- If super class has implemented equals, then its okay to not implement (eg: Set used AbstractSet)
+- Reflexive (equal to self), transitive, symmetric, consistent (unless modified)
+- Maintain Liskov Substitution Principle, within equals (don't check o.getClass() == this.getClass() instead check with instanceof
+- Consistent - Don't use external resources (eg: IP address)
+
+**hashcode**: -
+- every class which overrides equals must have it
+- Consistent across multiple calls
+- Dont use any fields, which are not used for equals
+- You can exclude redundant fields (ones which are always same for all objects)
+- You can cache the hashcode and return that (like String class), but then need to track if value is modified.
