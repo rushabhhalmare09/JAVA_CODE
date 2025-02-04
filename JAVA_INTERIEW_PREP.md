@@ -1206,3 +1206,18 @@ Note: These topics are highly unlikely to come up in an interview. Feel free to 
 - Dont use any fields, which are not used for equals
 - You can exclude redundant fields (ones which are always same for all objects)
 - You can cache the hashcode and return that (like String class), but then need to track if value is modified.
+
+**toString**: -
+**clone**: -
+- Cloneable interface. Its a mixin interface. Does not have clone method.
+- Object class's clone method is protected
+- Atypical - Presence of Colenable modifies behavior of Object.clone() behavior. If present it returns object which is field by field copy, and if not present, then .clone method throws CloneNotSupportedException
+- Cloning is not done using constructor
+- If you override clone do return super.clone(), if all classes do that up the chain, then Object.clone will be called and you will get the right copy
+- This is important because spec doesnt enforce anything from Cloneable interface. So someone might override clone and not clone, nor call super.clone, causing problems
+- Note: Objects.clone() creates a shallow copy
+- If you override and write clone, ofcourse you cannot set final field, thus need to remove final modifiers
+- Object's clone method is declared to throw CloneNotSupportedException, but overriding clone methods can omit this declaration.
+- Like constructor, clone method should not call non-final methods, because super object might not be properly constructed yet, causing some data corruption
+- Clone method must be synchronized in case of concurrency
+- In short, you are better off, creating and using a copy-constructor
