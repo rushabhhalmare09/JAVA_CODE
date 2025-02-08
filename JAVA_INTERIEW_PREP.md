@@ -1221,3 +1221,13 @@ Note: These topics are highly unlikely to come up in an interview. Feel free to 
 - Like constructor, clone method should not call non-final methods, because super object might not be properly constructed yet, causing some data corruption
 - Clone method must be synchronized in case of concurrency
 - In short, you are better off, creating and using a copy-constructor
+
+**comparable**:- 
+- Opposing sign for symmetry x.compareTo(y) == -y.compareTo(x)
+- If compareTo returns 0, objects should ideally be equal (but thats not in contract)
+- Weird: Inserting new BigDecimal("1.0") and new BigDecimal("1.00") in HashSet stores 2 elements (they use equals), while TreeSet stores only 1 element (they use compareTo)
+
+**Classes and Interfaces** : -
+**Accessibility**: - 
+- Make fields, classes etc as much inaccessible as possible (private, protected, package, then public)
+- Anything that is public is now part of API, thus difficult to make private later
