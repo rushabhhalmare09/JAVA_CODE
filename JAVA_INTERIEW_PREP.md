@@ -1231,3 +1231,15 @@ Note: These topics are highly unlikely to come up in an interview. Feel free to 
 **Accessibility**: - 
 - Make fields, classes etc as much inaccessible as possible (private, protected, package, then public)
 - Anything that is public is now part of API, thus difficult to make private later
+
+**Private fields with accessor methods**: -
+- Helps in validating inputs (setters)
+- Helps in returning copies in outputs (getters)
+- Make fields as much immutable as possible
+
+**Immutable objects are simple**: -
+- They are thread-safe
+- They can be shared freely
+- They can expose their internals
+- Can take advantage of cached hashCode & lazyInit hashCode
+- Only disadvantage is memory use
